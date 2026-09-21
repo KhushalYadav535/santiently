@@ -1,0 +1,158 @@
+"use client";
+
+import React, { useState } from "react";
+import { Send, CheckCircle2, Sparkles, Mail, Building, Phone } from "lucide-react";
+import { soundFX } from "@/utils/audio";
+
+export default function ContactSection() {
+  const [submitted, setSubmitted] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    company: "",
+    productInterest: "VoCred (Voice AI)",
+    message: ""
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    soundFX.playPulse();
+    setSubmitted(true);
+  };
+
+  return (
+    <section id="contact" className="relative py-24 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto z-10">
+      <div className="bg-[#0a0b14] border border-purple-500/30 rounded-3xl p-8 sm:p-12 backdrop-blur-2xl shadow-2xl shadow-purple-950/30 relative overflow-hidden">
+        {/* Glow */}
+        <div className="absolute -top-24 -right-24 w-64 h-64 bg-purple-600/20 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-start">
+          {/* Left Info */}
+          <div className="md:col-span-5 space-y-4 text-left">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-300 text-xs font-mono">
+              <Sparkles className="w-3.5 h-3.5 text-purple-400" />
+              <span>LET&apos;S BUILD THE FUTURE</span>
+            </div>
+
+            <h3 className="text-3xl font-black text-white tracking-tight">
+              Ready to ship real AI into production?
+            </h3>
+
+            <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
+              Whether you need 10,000 concurrent VoCred voice agents, automated document extraction with TextMitra, or an enterprise intelligence stack—our engineering team is ready.
+            </p>
+
+            <div className="pt-4 space-y-3 text-xs text-zinc-300 font-mono">
+              <div className="flex items-center gap-3">
+                <Mail className="w-4 h-4 text-purple-400" />
+                <span>innovations@sentiently.com</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <Building className="w-4 h-4 text-cyan-400" />
+                <span>Bangalore &bull; Gurgaon &bull; Global Remote</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <Phone className="w-4 h-4 text-emerald-400" />
+                <span>Enterprise SLA: 99.99% Uptime</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Form */}
+          <div className="md:col-span-7">
+            {submitted ? (
+              <div className="p-8 rounded-2xl bg-emerald-950/20 border border-emerald-500/30 text-center space-y-3 animate-fade-in">
+                <CheckCircle2 className="w-12 h-12 text-emerald-400 mx-auto" />
+                <h4 className="text-lg font-bold text-white font-mono">Message Received</h4>
+                <p className="text-xs text-zinc-300 max-w-sm mx-auto leading-relaxed">
+                  Thank you, {formData.name}. An AI solutions architect from Sentiently Innovations will reach out within 4 business hours.
+                </p>
+                <button
+                  onClick={() => setSubmitted(false)}
+                  className="text-xs text-purple-400 underline pt-2"
+                >
+                  Send another inquiry
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-4 text-left">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-[11px] font-mono text-zinc-400 mb-1">YOUR NAME</label>
+                    <input
+                      type="text"
+                      required
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      placeholder="Vikram Malhotra"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-white/[0.04] border border-white/10 text-white text-xs focus:outline-none focus:border-purple-500 transition-colors"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[11px] font-mono text-zinc-400 mb-1">WORK EMAIL</label>
+                    <input
+                      type="email"
+                      required
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      placeholder="vikram@enterprise.com"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-white/[0.04] border border-white/10 text-white text-xs focus:outline-none focus:border-purple-500 transition-colors"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-[11px] font-mono text-zinc-400 mb-1">COMPANY</label>
+                    <input
+                      type="text"
+                      required
+                      value={formData.company}
+                      onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                      placeholder="Acme Corp"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-white/[0.04] border border-white/10 text-white text-xs focus:outline-none focus:border-purple-500 transition-colors"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[11px] font-mono text-zinc-400 mb-1">PRIMARY PRODUCT INTEREST</label>
+                    <select
+                      value={formData.productInterest}
+                      onChange={(e) => setFormData({ ...formData, productInterest: e.target.value })}
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#11121d] border border-white/10 text-white text-xs focus:outline-none focus:border-purple-500 transition-colors"
+                    >
+                      <option value="VoCred (Voice AI)">VoCred (Real-time Voice AI)</option>
+                      <option value="TextMitra (Document AI)">TextMitra (OCR & Document AI)</option>
+                      <option value="AI-Native HRMS">AI-Native HRMS</option>
+                      <option value="Trading Intelligence">Trading Intelligence</option>
+                      <option value="Custom Agent Architecture">Custom Agent Swarm / Architecture</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-[11px] font-mono text-zinc-400 mb-1">PROJECT DETAILS / USE CASE</label>
+                  <textarea
+                    rows={3}
+                    required
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    placeholder="We want to automate 50,000 monthly voice support calls with sub-400ms latency..."
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-white/[0.04] border border-white/10 text-white text-xs focus:outline-none focus:border-purple-500 transition-colors"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full py-3.5 rounded-xl text-xs sm:text-sm font-semibold text-white bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 shadow-lg shadow-purple-600/25 border border-purple-400/30 flex items-center justify-center gap-2 transition-all hover:scale-[1.01] active:scale-[0.99]"
+                >
+                  <Send className="w-4 h-4" />
+                  <span>DISPATCH INQUIRY TO ARCHITECTURE TEAM</span>
+                </button>
+              </form>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
