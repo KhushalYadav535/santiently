@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import HeroConstellationCanvas from "./HeroConstellationCanvas";
 import { InventionMode } from "@/types/hero";
 
 interface HeroCanvasProps {
@@ -102,10 +101,7 @@ export default function HeroCanvas({ activeMode = "ACOUSTIC" }: HeroCanvasProps)
         <div className="absolute right-6 sm:right-10 bottom-16 w-5 h-5 border-r border-b border-black/25" />
       </div>
 
-      {/* 5. Interactive neural constellation */}
-      <div className="absolute inset-0">
-        <HeroConstellationCanvas activeMode={activeMode} />
-      </div>
+      {/* 5. Constellation layer removed — clean studio backdrop */}
 
       {/* 6. Bottom fade */}
       <div className="absolute bottom-0 left-0 right-0 h-44 bg-gradient-to-t from-[#f4f2ed] via-[#f4f2ed]/70 to-transparent pointer-events-none" />
