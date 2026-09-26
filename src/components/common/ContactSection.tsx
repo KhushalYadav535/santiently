@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import { Send, CheckCircle2, Sparkles, Mail, Building, Phone } from "lucide-react";
 import { soundFX } from "@/utils/audio";
 
+import confetti from "canvas-confetti";
+
 export default function ContactSection() {
   const [submitted, setSubmitted] = useState(false);
   const [formData, setFormData] = useState({
@@ -16,7 +18,17 @@ export default function ContactSection() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    soundFX.playPulse();
+    soundFX.playSuccess();
+    try {
+      confetti({
+        particleCount: 45,
+        spread: 60,
+        origin: { y: 0.8 },
+        colors: ["#2563EB", "#7C3AED", "#10B981"],
+      });
+    } catch {
+      // Ignore
+    }
     setSubmitted(true);
   };
 

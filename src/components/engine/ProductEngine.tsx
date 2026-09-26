@@ -3,6 +3,7 @@
 import React from "react";
 import { Search, FlaskConical, Code2, Rocket, TrendingUp, CheckCircle, ShieldCheck } from "lucide-react";
 import { soundFX } from "@/utils/audio";
+import Tilt3DCard from "@/components/ui/Tilt3DCard";
 
 const PIPELINE_STEPS = [
   {
@@ -63,37 +64,43 @@ export default function ProductEngine() {
         {PIPELINE_STEPS.map((item, index) => {
           const Icon = item.icon;
           return (
-            <div
+            <Tilt3DCard
               key={item.step}
-              className="relative p-5 rounded-2xl bg-white border border-gray-200 shadow-xs hover:border-blue-400 hover:shadow-md transition-all duration-300 group flex flex-col justify-between"
-              onMouseEnter={() => soundFX.playHover()}
+              maxTilt={7}
+              scale={1.03}
+              className="rounded-2xl"
             >
-              <div>
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-xs font-mono font-bold text-neutral-500">
-                    PHASE {item.step}
-                  </span>
-                  <div
-                    className="w-8 h-8 rounded-lg flex items-center justify-center transition-transform group-hover:scale-110"
-                    style={{ backgroundColor: `${item.color}15`, color: item.color }}
-                  >
-                    <Icon className="w-4 h-4" />
+              <div
+                className="relative p-5 rounded-2xl bg-white border border-gray-200 shadow-xs hover:border-blue-400 hover:shadow-md transition-all duration-300 group flex flex-col justify-between h-full"
+                onMouseEnter={() => soundFX.playHover()}
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-xs font-mono font-bold text-neutral-500">
+                      PHASE {item.step}
+                    </span>
+                    <div
+                      className="w-8 h-8 rounded-lg flex items-center justify-center transition-transform group-hover:scale-110"
+                      style={{ backgroundColor: `${item.color}15`, color: item.color }}
+                    >
+                      <Icon className="w-4 h-4" />
+                    </div>
                   </div>
+
+                  <h3 className="text-base font-bold text-neutral-900 mb-2 font-mono">
+                    {item.title}
+                  </h3>
+                  <p className="text-xs text-neutral-600 leading-relaxed">
+                    {item.desc}
+                  </p>
                 </div>
 
-                <h3 className="text-base font-bold text-neutral-900 mb-2 font-mono">
-                  {item.title}
-                </h3>
-                <p className="text-xs text-neutral-600 leading-relaxed">
-                  {item.desc}
-                </p>
+                <div className="mt-4 pt-3 border-t border-gray-100 flex items-center gap-1.5 text-[10px] font-mono text-neutral-500">
+                  <span>GATEWAY {index + 1} VERIFIED</span>
+                  <CheckCircle className="w-3 h-3 text-emerald-600" />
+                </div>
               </div>
-
-              <div className="mt-4 pt-3 border-t border-gray-100 flex items-center gap-1.5 text-[10px] font-mono text-neutral-500">
-                <span>GATEWAY {index + 1} VERIFIED</span>
-                <CheckCircle className="w-3 h-3 text-emerald-600" />
-              </div>
-            </div>
+            </Tilt3DCard>
           );
         })}
       </div>

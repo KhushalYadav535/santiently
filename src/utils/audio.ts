@@ -263,6 +263,53 @@ class SoundFX {
     }
   }
 
+  playQuantumSurge() {
+    if (!this.enabled) return;
+    try {
+      const ctx = this.getContext();
+      if (!ctx) return;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(120, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.35);
+      osc.frequency.exponentialRampToValueAtTime(440, ctx.currentTime + 0.6);
+
+      gain.gain.setValueAtTime(0.06, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.6);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start();
+      osc.stop(ctx.currentTime + 0.6);
+    } catch {
+      // Ignore
+    }
+  }
+
+  playModeShift() {
+    if (!this.enabled) return;
+    try {
+      const ctx = this.getContext();
+      if (!ctx) return;
+      [220, 440, 660].forEach((freq, idx) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(freq, ctx.currentTime + idx * 0.05);
+        gain.gain.setValueAtTime(0.03, ctx.currentTime + idx * 0.05);
+        gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + idx * 0.05 + 0.18);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(ctx.currentTime + idx * 0.05);
+        osc.stop(ctx.currentTime + idx * 0.05 + 0.18);
+      });
+    } catch {
+      // Ignore
+    }
+  }
+
   // Real Speech Synthesis Engine
   speakText(
     text: string,
@@ -334,6 +381,10 @@ class SoundFX {
         // Ignore
       }
     }
+  }
+
+  stopSpeaking() {
+    this.stopSpeech();
   }
 }
 

@@ -4,9 +4,20 @@ import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { soundFX } from "@/utils/audio";
 
-export default function HeroThreeCanvas() {
+export type InventionMode = "ACOUSTIC" | "SPATIAL" | "QUANTUM";
+
+interface HeroThreeCanvasProps {
+  activeMode?: InventionMode;
+  onModeChange?: (mode: InventionMode) => void;
+}
+
+export default function HeroThreeCanvas({ activeMode = "ACOUSTIC" }: HeroThreeCanvasProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const [fps, setFps] = useState(60);
   const [isInteracting, setIsInteracting] = useState(false);
+
+  const modeRef = useRef<InventionMode>(activeMode);
+  modeRef.current = activeMode;
 
   useEffect(() => {
     const container = containerRef.current;
@@ -15,10 +26,10 @@ export default function HeroThreeCanvas() {
     let width = container.clientWidth || window.innerWidth;
     let height = container.clientHeight || window.innerHeight;
 
-    // 1. Scene, Camera, Renderer
+    // 1. Scene, Camera & High-Performance WebGL Renderer
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
-    camera.position.z = 24;
+    const camera = new THREE.PerspectiveCamera(42, width / height, 0.1, 1000);
+    camera.position.set(0, 0, 25);
 
     const renderer = new THREE.WebGLRenderer({
       alpha: true,
@@ -27,145 +38,194 @@ export default function HeroThreeCanvas() {
     });
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-    renderer.setClearColor(0x000000, 0); // Pure transparent
+    renderer.setClearColor(0x000000, 0); // Transparent to blend seamlessly with light theme
     container.appendChild(renderer.domElement);
 
-    // Group holding the entire neural core
-    const coreGroup = new THREE.Group();
-    scene.add(coreGroup);
+    // Root Group for the Architectural 3D Sculpture
+    const sculptureGroup = new THREE.Group();
+    scene.add(sculptureGroup);
 
-    // 2. Color Palette for Particles (Google Labs & DeepMind palette)
-    const palette = [
-      new THREE.Color("#4285F4"), // Google Blue
-      new THREE.Color("#7C3AED"), // Violet
-      new THREE.Color("#06B6D4"), // Soft Cyan
-      new THREE.Color("#FBBC05"), // Warm Gold
-      new THREE.Color("#EC4899"), // Rose
-      new THREE.Color("#10B981"), // Emerald
+    // 2. Lighting Setup for Light Theme (Sculpted highlights & specular reflections)
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
+    scene.add(ambientLight);
+
+    const keyLight = new THREE.DirectionalLight(0x4f46e5, 1.8);
+    keyLight.position.set(15, 20, 20);
+    scene.add(keyLight);
+
+    const fillLight = new THREE.DirectionalLight(0x06b6d4, 1.4);
+    fillLight.position.set(-15, -10, 15);
+    scene.add(fillLight);
+
+    const rimLight = new THREE.PointLight(0xa855f7, 2.0, 50);
+    rimLight.position.set(0, 15, -10);
+    scene.add(rimLight);
+
+    // 3. Central Architectural Frosted Crystal (Icosahedron & Dodecahedron)
+    const coreGeo = new THREE.IcosahedronGeometry(4.8, 1);
+    const coreEdges = new THREE.EdgesGeometry(coreGeo);
+    const coreLineMat = new THREE.LineBasicMaterial({
+      color: 0x4f46e5,
+      transparent: true,
+      opacity: 0.55,
+      linewidth: 1.5,
+    });
+    const coreMesh = new THREE.LineSegments(coreEdges, coreLineMat);
+    sculptureGroup.add(coreMesh);
+
+    // Inner glowing geometric lattice
+    const innerGeo = new THREE.OctahedronGeometry(2.8, 0);
+    const innerEdges = new THREE.EdgesGeometry(innerGeo);
+    const innerLineMat = new THREE.LineBasicMaterial({
+      color: 0x06b6d4,
+      transparent: true,
+      opacity: 0.75,
+    });
+    const innerMesh = new THREE.LineSegments(innerEdges, innerLineMat);
+    sculptureGroup.add(innerMesh);
+
+    // 4. Spline-like Precision Gyroscopic Gimbal Rings (3 concentric titanium loops)
+    const ringGroup = new THREE.Group();
+    sculptureGroup.add(ringGroup);
+
+    const ringData = [
+      { radius: 7.2, tube: 0.045, rx: Math.PI / 4, ry: 0, color: 0x2563eb },
+      { radius: 8.4, tube: 0.04, rx: -Math.PI / 3, ry: Math.PI / 6, color: 0x7c3aed },
+      { radius: 9.6, tube: 0.035, rx: Math.PI / 6, ry: -Math.PI / 4, color: 0x0891b2 },
     ];
 
-    // 3. Neural Particle Cloud (1,400 particles)
-    const particleCount = 1400;
-    const positions = new Float32Array(particleCount * 3);
-    const colors = new Float32Array(particleCount * 3);
-    const basePositions = new Float32Array(particleCount * 3);
-    const phases = new Float32Array(particleCount);
-    const speeds = new Float32Array(particleCount);
+    const rings: THREE.Mesh[] = [];
 
-    const radius = 6.8;
+    ringData.forEach((d) => {
+      const geo = new THREE.TorusGeometry(d.radius, d.tube, 16, 120);
+      const mat = new THREE.MeshStandardMaterial({
+        color: d.color,
+        roughness: 0.3,
+        metalness: 0.85,
+        transparent: true,
+        opacity: 0.65,
+      });
+      const ring = new THREE.Mesh(geo, mat);
+      ring.rotation.x = d.rx;
+      ring.rotation.y = d.ry;
+      ringGroup.add(ring);
+      rings.push(ring);
+    });
 
-    for (let i = 0; i < particleCount; i++) {
-      // Golden spiral distribution on sphere
-      const phi = Math.acos(-1 + (2 * i) / particleCount);
-      const theta = Math.sqrt(particleCount * Math.PI) * phi;
-      const r = radius + (Math.random() - 0.5) * 1.8;
+    // 5. Precision Coordinate Survey Nodes (1,200 architectural point nodes)
+    const nodeCount = 1200;
+    const nodePositions = new Float32Array(nodeCount * 3);
+    const baseNodePositions = new Float32Array(nodeCount * 3);
+    const nodeColors = new Float32Array(nodeCount * 3);
+    const nodePhases = new Float32Array(nodeCount);
+    const nodeSpeeds = new Float32Array(nodeCount);
+
+    const palette = [
+      new THREE.Color("#2563EB"), // Crisp Royal Blue
+      new THREE.Color("#7C3AED"), // Modern Violet
+      new THREE.Color("#0284C7"), // Sky Cyan
+      new THREE.Color("#059669"), // Precision Emerald
+      new THREE.Color("#D97706"), // Warm Amber
+    ];
+
+    for (let i = 0; i < nodeCount; i++) {
+      const phi = Math.acos(-1 + (2 * i) / nodeCount);
+      const theta = Math.sqrt(nodeCount * Math.PI) * phi;
+      const r = 6.2 + (Math.random() - 0.5) * 2.8;
 
       const x = r * Math.sin(phi) * Math.cos(theta);
       const y = r * Math.sin(phi) * Math.sin(theta);
       const z = r * Math.cos(phi);
 
-      positions[i * 3] = x;
-      positions[i * 3 + 1] = y;
-      positions[i * 3 + 2] = z;
+      nodePositions[i * 3] = x;
+      nodePositions[i * 3 + 1] = y;
+      nodePositions[i * 3 + 2] = z;
 
-      basePositions[i * 3] = x;
-      basePositions[i * 3 + 1] = y;
-      basePositions[i * 3 + 2] = z;
+      baseNodePositions[i * 3] = x;
+      baseNodePositions[i * 3 + 1] = y;
+      baseNodePositions[i * 3 + 2] = z;
 
-      phases[i] = Math.random() * Math.PI * 2;
-      speeds[i] = 0.5 + Math.random() * 1.2;
+      nodePhases[i] = Math.random() * Math.PI * 2;
+      nodeSpeeds[i] = 0.6 + Math.random() * 1.2;
 
-      // Assign palette color
-      const color = palette[Math.floor(Math.random() * palette.length)];
-      colors[i * 3] = color.r;
-      colors[i * 3 + 1] = color.g;
-      colors[i * 3 + 2] = color.b;
+      const color = palette[i % palette.length];
+      nodeColors[i * 3] = color.r;
+      nodeColors[i * 3 + 1] = color.g;
+      nodeColors[i * 3 + 2] = color.b;
     }
 
-    const particleGeometry = new THREE.BufferGeometry();
-    particleGeometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
-    particleGeometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
+    const nodeGeometry = new THREE.BufferGeometry();
+    nodeGeometry.setAttribute("position", new THREE.BufferAttribute(nodePositions, 3));
+    nodeGeometry.setAttribute("color", new THREE.BufferAttribute(nodeColors, 3));
 
-    // Custom circle texture for soft round particles
-    const canvas = document.createElement("canvas");
-    canvas.width = 32;
-    canvas.height = 32;
-    const ctx = canvas.getContext("2d");
-    if (ctx) {
-      const grad = ctx.createRadialGradient(16, 16, 0, 16, 16, 16);
-      grad.addColorStop(0, "rgba(255,255,255,1)");
-      grad.addColorStop(0.4, "rgba(255,255,255,0.8)");
-      grad.addColorStop(1, "rgba(255,255,255,0)");
-      ctx.fillStyle = grad;
-      ctx.beginPath();
-      ctx.arc(16, 16, 16, 0, Math.PI * 2);
-      ctx.fill();
+    // Custom Crisp Circular Dot Texture
+    const dotCanvas = document.createElement("canvas");
+    dotCanvas.width = 32;
+    dotCanvas.height = 32;
+    const dotCtx = dotCanvas.getContext("2d");
+    if (dotCtx) {
+      dotCtx.beginPath();
+      dotCtx.arc(16, 16, 12, 0, Math.PI * 2);
+      dotCtx.fillStyle = "#FFFFFF";
+      dotCtx.fill();
     }
-    const particleTexture = new THREE.CanvasTexture(canvas);
+    const dotTexture = new THREE.CanvasTexture(dotCanvas);
 
-    const particleMaterial = new THREE.PointsMaterial({
-      size: 0.38,
+    const nodeMaterial = new THREE.PointsMaterial({
+      size: 0.32,
       vertexColors: true,
-      map: particleTexture,
+      map: dotTexture,
       transparent: true,
       opacity: 0.85,
-      blending: THREE.AdditiveBlending,
       depthWrite: false,
     });
 
-    const particles = new THREE.Points(particleGeometry, particleMaterial);
-    coreGroup.add(particles);
+    const nodePoints = new THREE.Points(nodeGeometry, nodeMaterial);
+    sculptureGroup.add(nodePoints);
 
-    // 4. Outer Holographic Wireframe Icosahedron
-    const icoGeometry = new THREE.IcosahedronGeometry(7.6, 2);
-    const wireframe = new THREE.WireframeGeometry(icoGeometry);
-    const lineMaterial = new THREE.LineBasicMaterial({
-      color: new THREE.Color("#4F46E5"),
-      transparent: true,
-      opacity: 0.12,
-      blending: THREE.AdditiveBlending,
-    });
-    const icosahedronLines = new THREE.LineSegments(wireframe, lineMaterial);
-    coreGroup.add(icosahedronLines);
-
-    // 5. Inner Core Glow Orb (subtle inner sphere)
-    const innerGeometry = new THREE.SphereGeometry(3.2, 24, 24);
-    const innerMaterial = new THREE.MeshBasicMaterial({
-      color: new THREE.Color("#6366F1"),
-      wireframe: true,
-      transparent: true,
-      opacity: 0.08,
-    });
-    const innerMesh = new THREE.Mesh(innerGeometry, innerMaterial);
-    coreGroup.add(innerMesh);
-
-    // 6. Interactive Mouse & Inertia Tracking
+    // 6. Interactive Physics & Orbit Mechanics
     const mouse = {
       x: 0,
       y: 0,
       targetX: 0,
       targetY: 0,
       isDown: false,
-      clickRipple: 0,
+      downX: 0,
+      downY: 0,
+      rotX: 0,
+      rotY: 0,
+      velX: 0,
+      velY: 0,
+      shockwave: 0,
     };
 
-    const handleMouseMove = (e: MouseEvent) => {
-      // Normalize to -1 to 1
+    const handlePointerMove = (e: MouseEvent) => {
       const rect = container.getBoundingClientRect();
-      const clientX = e.clientX - rect.left;
-      const clientY = e.clientY - rect.top;
-      mouse.targetX = (clientX / width) * 2 - 1;
-      mouse.targetY = -(clientY / height) * 2 + 1;
+      const normX = ((e.clientX - rect.left) / width) * 2 - 1;
+      const normY = -(((e.clientY - rect.top) / height) * 2 - 1);
+      mouse.targetX = normX;
+      mouse.targetY = normY;
+
+      if (mouse.isDown) {
+        const deltaX = e.clientX - mouse.downX;
+        const deltaY = e.clientY - mouse.downY;
+        mouse.downX = e.clientX;
+        mouse.downY = e.clientY;
+        mouse.velX = deltaX * 0.005;
+        mouse.velY = deltaY * 0.005;
+      }
     };
 
-    const handleMouseDown = () => {
+    const handlePointerDown = (e: MouseEvent) => {
       mouse.isDown = true;
-      mouse.clickRipple = 1.0;
-      soundFX.playPulse();
+      mouse.downX = e.clientX;
+      mouse.downY = e.clientY;
+      mouse.shockwave = 1.0;
       setIsInteracting(true);
+      soundFX.playPulse();
     };
 
-    const handleMouseUp = () => {
+    const handlePointerUp = () => {
       mouse.isDown = false;
       setIsInteracting(false);
     };
@@ -180,60 +240,89 @@ export default function HeroThreeCanvas() {
     };
 
     window.addEventListener("resize", handleResize);
-    window.addEventListener("mousemove", handleMouseMove);
-    container.addEventListener("mousedown", handleMouseDown);
-    window.addEventListener("mouseup", handleMouseUp);
+    window.addEventListener("mousemove", handlePointerMove);
+    container.addEventListener("mousedown", handlePointerDown);
+    window.addEventListener("mouseup", handlePointerUp);
 
-    // 7. Animation Loop with Sine Wave Undulation and Shockwave Physics
-    let clock = new THREE.Clock();
+    // 7. Animation Loop with GSAP-like Harmonic Interpolation
+    const clock = new THREE.Clock();
     let animId: number;
+    let frameCount = 0;
+    let lastTime = performance.now();
 
     const animate = () => {
-      const delta = clock.getDelta();
       const time = clock.getElapsedTime();
+      const mode = modeRef.current;
+
+      // Track FPS
+      frameCount++;
+      if (performance.now() - lastTime >= 500) {
+        setFps(Math.round((frameCount * 1000) / (performance.now() - lastTime)));
+        frameCount = 0;
+        lastTime = performance.now();
+      }
 
       // Smooth mouse lerp
       mouse.x += (mouse.targetX - mouse.x) * 0.05;
       mouse.y += (mouse.targetY - mouse.y) * 0.05;
 
-      // Group rotation
-      coreGroup.rotation.y = time * 0.12 + mouse.x * 0.45;
-      coreGroup.rotation.x = -mouse.y * 0.35 + Math.sin(time * 0.2) * 0.08;
-      icosahedronLines.rotation.y = -time * 0.08;
-      icosahedronLines.rotation.z = time * 0.05;
-      innerMesh.rotation.y = time * 0.2;
+      // Apply drag rotation with friction decay
+      mouse.rotY += mouse.velX;
+      mouse.rotX += mouse.velY;
+      mouse.velX *= 0.94;
+      mouse.velY *= 0.94;
 
-      // Camera parallax
-      camera.position.x = mouse.x * 1.5;
-      camera.position.y = mouse.y * 1.5;
-      camera.lookAt(0, 0, 0);
-
-      // Particle wave undulation
-      const posAttr = particleGeometry.attributes.position as THREE.BufferAttribute;
-      const posArray = posAttr.array as Float32Array;
-
-      // Decay click ripple
-      if (mouse.clickRipple > 0.01) {
-        mouse.clickRipple *= 0.94;
+      if (mouse.shockwave > 0.01) {
+        mouse.shockwave *= 0.93;
       } else {
-        mouse.clickRipple = 0;
+        mouse.shockwave = 0;
       }
 
-      for (let i = 0; i < particleCount; i++) {
-        const bx = basePositions[i * 3];
-        const by = basePositions[i * 3 + 1];
-        const bz = basePositions[i * 3 + 2];
-        const phase = phases[i];
-        const speed = speeds[i];
+      // Gyroscopic Ring Continuous Rotations
+      rings[0].rotation.z = time * 0.12 + mouse.rotY * 0.3;
+      rings[1].rotation.x = -time * 0.10 + mouse.rotX * 0.3;
+      rings[2].rotation.y = time * 0.15;
 
-        // Harmonic breath
-        const wave = Math.sin(time * speed + phase) * 0.25;
-        const ripple = mouse.clickRipple * Math.sin(time * 10 - i * 0.05) * 1.4;
-        const expansion = 1 + wave / radius + ripple;
+      // Main Core Rotation
+      sculptureGroup.rotation.y = time * 0.06 + mouse.rotY + mouse.x * 0.35;
+      sculptureGroup.rotation.x = -mouse.y * 0.25 + mouse.rotX;
+      innerMesh.rotation.y = -time * 0.2;
+      coreMesh.rotation.z = time * 0.04;
 
-        posArray[i * 3] = bx * expansion;
-        posArray[i * 3 + 1] = by * expansion;
-        posArray[i * 3 + 2] = bz * expansion;
+      // Camera Parallax Depth
+      camera.position.x = mouse.x * 1.4;
+      camera.position.y = mouse.y * 1.4;
+      camera.lookAt(0, 0, 0);
+
+      // Node Oscillations based on Invention Mode
+      const posAttr = nodeGeometry.attributes.position as THREE.BufferAttribute;
+      const posArr = posAttr.array as Float32Array;
+
+      for (let i = 0; i < nodeCount; i++) {
+        const bx = baseNodePositions[i * 3];
+        const by = baseNodePositions[i * 3 + 1];
+        const bz = baseNodePositions[i * 3 + 2];
+        const ph = nodePhases[i];
+        const sp = nodeSpeeds[i];
+
+        let wave = 0;
+        if (mode === "ACOUSTIC") {
+          // Streaming Voice Acoustic Wave
+          wave = Math.sin(time * 5 + bx * 0.5) * 0.6;
+        } else if (mode === "SPATIAL") {
+          // Precise coordinate grid pulse
+          wave = Math.sin(time * 3 + Math.floor(bx)) * 0.3;
+        } else {
+          // High-frequency quantum pulse
+          wave = Math.sin(time * 8 + ph) * 0.5;
+        }
+
+        const shock = mouse.shockwave * Math.sin(time * 10 - i * 0.02) * 1.2;
+        const scale = 1 + wave / 6.2 + shock;
+
+        posArr[i * 3] = bx * scale;
+        posArr[i * 3 + 1] = by * scale;
+        posArr[i * 3 + 2] = bz * scale;
       }
       posAttr.needsUpdate = true;
 
@@ -246,19 +335,24 @@ export default function HeroThreeCanvas() {
     return () => {
       cancelAnimationFrame(animId);
       window.removeEventListener("resize", handleResize);
-      window.removeEventListener("mousemove", handleMouseMove);
-      container.removeEventListener("mousedown", handleMouseDown);
-      window.removeEventListener("mouseup", handleMouseUp);
+      window.removeEventListener("mousemove", handlePointerMove);
+      container.removeEventListener("mousedown", handlePointerDown);
+      window.removeEventListener("mouseup", handlePointerUp);
 
-      // Clean up Three.js resources
-      particleGeometry.dispose();
-      particleMaterial.dispose();
-      particleTexture.dispose();
-      icoGeometry.dispose();
-      wireframe.dispose();
-      lineMaterial.dispose();
-      innerGeometry.dispose();
-      innerMaterial.dispose();
+      coreGeo.dispose();
+      coreEdges.dispose();
+      coreLineMat.dispose();
+      innerGeo.dispose();
+      innerEdges.dispose();
+      innerLineMat.dispose();
+      nodeGeometry.dispose();
+      nodeMaterial.dispose();
+      dotTexture.dispose();
+      rings.forEach((r) => {
+        r.geometry.dispose();
+        if (Array.isArray(r.material)) r.material.forEach((m) => m.dispose());
+        else r.material.dispose();
+      });
       renderer.dispose();
       if (renderer.domElement && container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
@@ -269,17 +363,29 @@ export default function HeroThreeCanvas() {
   return (
     <div
       ref={containerRef}
-      data-cursor-label="3D ORBIT"
-      className="absolute inset-0 pointer-events-auto z-0 overflow-hidden flex items-center justify-center cursor-grab active:cursor-grabbing"
+      data-cursor-label={isInteracting ? "ORBITING" : "3D DRAG"}
+      className="absolute inset-0 pointer-events-auto z-0 overflow-hidden flex items-center justify-center cursor-grab active:cursor-grabbing select-none"
     >
-      {/* Interactive Hint Pill in the corner */}
-      <div className="absolute bottom-6 right-6 hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/75 backdrop-blur-md border border-gray-200/80 shadow-2xs text-[11px] font-mono text-neutral-600 pointer-events-none z-10 transition-opacity">
-        <span className={`w-2 h-2 rounded-full ${isInteracting ? "bg-emerald-500 animate-ping" : "bg-blue-600 animate-pulse"}`} />
-        <span>THREE.JS 3D NEURAL CORE &bull; CLICK TO PULSE</span>
+      {/* Precision Light-Theme Telemetry HUD - Left Top */}
+      <div className="absolute top-28 left-6 hidden lg:flex flex-col gap-1 p-3.5 rounded-2xl bg-white/85 backdrop-blur-xl border border-gray-200/80 text-[10px] font-mono text-neutral-600 pointer-events-none z-10 shadow-xs">
+        <div className="flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
+          <span className="font-bold text-neutral-900 tracking-wider">3D SCULPTURE // WEBGL</span>
+        </div>
+        <div className="text-[10px] text-neutral-500 space-y-0.5 pt-0.5">
+          <div>GYROSCOPE: 3 TITANIUM RINGS</div>
+          <div>SURVEY NODES: 1,200 VECTORS</div>
+          <div>FPS: {fps} // ZERO JITTER</div>
+        </div>
       </div>
 
-      {/* Subtle overlay gradient to preserve high text contrast in center */}
-      <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-[#f8f9fa] pointer-events-none z-1" />
+      {/* Interactive Orbit Hint - Bottom Center */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 hidden sm:flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/90 backdrop-blur-xl border border-gray-200/90 text-[11px] font-mono text-neutral-700 pointer-events-none z-10 shadow-sm">
+        <span className="w-1.5 h-1.5 rounded-full bg-blue-600" />
+        <span className="font-semibold uppercase tracking-wider">
+          {isInteracting ? "ROTATING 3D INVENTIONS" : "CLICK & DRAG TO ROTATE SCULPTURE IN 360°"}
+        </span>
+      </div>
     </div>
   );
 }

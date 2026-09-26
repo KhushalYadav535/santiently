@@ -40,9 +40,8 @@ export default function Footer() {
           
           <div className="flex flex-wrap gap-x-12 gap-y-4 text-[10px] sm:text-[11px] font-medium text-[#5f6368] tracking-[0.15em] uppercase">
             <Link href="/about" className="hover:text-[#202124] transition-colors" onMouseEnter={() => soundFX.playHover()}>About Sentiently</Link>
-            <Link href="/products" className="hover:text-[#202124] transition-colors" onMouseEnter={() => soundFX.playHover()}>Sentiently Products</Link>
-            <Link href="/privacy" className="hover:text-[#202124] transition-colors" onMouseEnter={() => soundFX.playHover()}>Privacy</Link>
-            <Link href="/terms" className="hover:text-[#202124] transition-colors" onMouseEnter={() => soundFX.playHover()}>Terms</Link>
+            <Link href="/#products" className="hover:text-[#202124] transition-colors" onMouseEnter={() => soundFX.playHover()}>Sentiently Products</Link>
+            <Link href="/#contact" className="hover:text-[#202124] transition-colors" onMouseEnter={() => soundFX.playHover()}>Contact</Link>
           </div>
         </div>
 

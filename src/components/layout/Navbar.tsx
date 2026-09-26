@@ -31,6 +31,7 @@ export default function Navbar() {
 
   const navLinks = [
     { name: "Experiments", href: "/#products" },
+    { name: "Sandbox", href: "/#playground" },
     { name: "Spotlight", href: "/#vocred" },
     { name: "Architecture", href: "/#architecture" },
     { name: "The Lab", href: "/lab" },
@@ -42,13 +43,13 @@ export default function Navbar() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 animate-reveal-1 ${
         scrolled
-          ? "bg-white/85 backdrop-blur-xl border-b border-gray-200/90 shadow-sm py-3"
-          : "bg-white/60 backdrop-blur-md py-4 border-b border-gray-200/40"
+          ? "bg-white/95 backdrop-blur-2xl border-b border-gray-200/90 shadow-xs py-3 text-neutral-900"
+          : "bg-white/80 backdrop-blur-xl py-3.5 border-b border-gray-200/60 text-neutral-900 shadow-2xs"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          {/* Brand Logo - Google Labs Inspired */}
+          {/* Brand Logo */}
           <Link
             href="/"
             className="flex items-center gap-2.5 group"
@@ -56,17 +57,17 @@ export default function Navbar() {
             onClick={() => soundFX.playClick()}
           >
             <div className="relative w-8 h-8 rounded-xl bg-gradient-to-tr from-blue-600 via-indigo-500 to-purple-600 p-[1px] shadow-sm transition-transform duration-300 group-hover:scale-105">
-              <div className="w-full h-full bg-white rounded-[11px] flex items-center justify-center">
+              <div className="w-full h-full rounded-[11px] bg-white flex items-center justify-center transition-colors">
                 <FlaskConical className="w-4 h-4 text-blue-600 group-hover:text-purple-600 transition-colors" />
               </div>
-              <div className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-blue-500 ring-2 ring-white" />
+              <div className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-blue-600 ring-2 ring-white" />
             </div>
 
             <div className="flex items-center gap-1.5">
-              <span className="text-base font-bold tracking-tight text-neutral-900 font-sans">
+              <span className="text-base font-bold tracking-tight font-sans text-neutral-900">
                 Sentiently
               </span>
-              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-700 border border-blue-200/70 tracking-tight">
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold tracking-tight bg-blue-50 text-blue-700 border border-blue-200/70">
                 <Sparkles className="w-2.5 h-2.5 text-blue-600" />
                 Labs
               </span>
@@ -74,7 +75,7 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Nav Links */}
-          <nav className="hidden md:flex items-center gap-1 bg-gray-100/90 border border-gray-200/70 rounded-full px-2 py-1 backdrop-blur-md">
+          <nav className="hidden md:flex items-center gap-1 rounded-full px-2 py-1 bg-gray-100/90 border border-gray-200/70 backdrop-blur-md">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
@@ -120,7 +121,7 @@ export default function Navbar() {
               )}
             </button>
 
-            {/* Google Labs Style Dark Pill CTA */}
+            {/* Google Labs Style Pill CTA */}
             <Link
               href="/lab"
               className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-medium bg-neutral-900 hover:bg-black text-white shadow-xs transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
@@ -137,7 +138,7 @@ export default function Navbar() {
           <div className="flex md:hidden items-center gap-2">
             <button
               onClick={toggleAudio}
-              className="p-2 text-neutral-600 hover:text-neutral-900"
+              className="p-2 text-neutral-700 hover:text-neutral-900"
               aria-label="Toggle SFX"
             >
               {audioActive ? <Volume2 className="w-4 h-4 text-blue-600" /> : <VolumeX className="w-4 h-4 text-neutral-400" />}

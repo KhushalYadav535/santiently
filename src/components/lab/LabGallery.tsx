@@ -5,6 +5,7 @@ import Link from "next/link";
 import { FlaskConical, ArrowUpRight, X, ChevronRight, Terminal } from "lucide-react";
 import { LAB_EXPERIMENTS, Experiment } from "@/data/experiments";
 import { soundFX } from "@/utils/audio";
+import Tilt3DCard from "@/components/ui/Tilt3DCard";
 
 export default function LabGallery({ isFullPage = false }: { isFullPage?: boolean }) {
   const [selectedExp, setSelectedExp] = useState<Experiment | null>(null);
@@ -57,51 +58,59 @@ export default function LabGallery({ isFullPage = false }: { isFullPage?: boolea
       {/* Experiments Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {displayedExperiments.map((exp) => (
-          <div
+          <Tilt3DCard
             key={exp.id}
-            onClick={() => {
-              setSelectedExp(exp);
-              soundFX.playClick();
-            }}
-            onMouseEnter={() => soundFX.playHover()}
-            className="group relative rounded-2xl bg-white border border-gray-200/90 p-6 sm:p-8 shadow-xs transition-all duration-300 hover:border-blue-400 hover:-translate-y-1 hover:shadow-lg cursor-pointer overflow-hidden"
+            maxTilt={6}
+            scale={1.02}
+            className="rounded-2xl"
           >
-            {/* Top Code & Status */}
-            <div className="flex items-center justify-between gap-2 pb-4 border-b border-gray-100">
-              <div className="flex items-center gap-2 font-mono text-xs text-blue-700">
-                <Terminal className="w-3.5 h-3.5" />
-                <span className="font-semibold">{exp.code}</span>
-                <span className="text-neutral-300">&bull;</span>
-                <span className="text-neutral-500">{exp.category}</span>
+            <div
+              onClick={() => {
+                setSelectedExp(exp);
+                soundFX.playClick();
+              }}
+              onMouseEnter={() => soundFX.playHover()}
+              className="group relative rounded-2xl bg-white border border-gray-200/90 p-6 sm:p-8 shadow-xs transition-all duration-300 hover:border-blue-400 hover:shadow-lg cursor-pointer overflow-hidden h-full flex flex-col justify-between"
+            >
+              {/* Top Code & Status */}
+              <div>
+                <div className="flex items-center justify-between gap-2 pb-4 border-b border-gray-100">
+                  <div className="flex items-center gap-2 font-mono text-xs text-blue-700">
+                    <Terminal className="w-3.5 h-3.5" />
+                    <span className="font-semibold">{exp.code}</span>
+                    <span className="text-neutral-300">&bull;</span>
+                    <span className="text-neutral-500">{exp.category}</span>
+                  </div>
+                  <span className={`text-[10px] font-mono px-2.5 py-0.5 rounded-full border font-semibold ${getStatusColor(exp.status)}`}>
+                    {exp.status}
+                  </span>
+                </div>
+
+                {/* Title & Summary */}
+                <div className="pt-4 space-y-2">
+                  <h3 className="text-xl font-bold text-neutral-900 group-hover:text-blue-600 transition-colors flex items-center justify-between">
+                    <span>{exp.title}</span>
+                    <ChevronRight className="w-5 h-5 text-neutral-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-all" />
+                  </h3>
+                  <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed">
+                    {exp.summary}
+                  </p>
+                </div>
               </div>
-              <span className={`text-[10px] font-mono px-2.5 py-0.5 rounded-full border font-semibold ${getStatusColor(exp.status)}`}>
-                {exp.status}
-              </span>
-            </div>
 
-            {/* Title & Summary */}
-            <div className="pt-4 space-y-2">
-              <h3 className="text-xl font-bold text-neutral-900 group-hover:text-blue-600 transition-colors flex items-center justify-between">
-                <span>{exp.title}</span>
-                <ChevronRight className="w-5 h-5 text-neutral-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-all" />
-              </h3>
-              <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed">
-                {exp.summary}
-              </p>
+              {/* Tags */}
+              <div className="flex flex-wrap gap-1.5 pt-6">
+                {exp.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-gray-100 text-neutral-600 border border-gray-200/60"
+                  >
+                    #{tag}
+                  </span>
+                ))}
+              </div>
             </div>
-
-            {/* Tags */}
-            <div className="flex flex-wrap gap-1.5 pt-6">
-              {exp.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-gray-100 text-neutral-600 border border-gray-200/60"
-                >
-                  #{tag}
-                </span>
-              ))}
-            </div>
-          </div>
+          </Tilt3DCard>
         ))}
       </div>
 
