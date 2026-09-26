@@ -41,7 +41,7 @@ export default function Footer() {
       {/* CTA */}
       <div className="px-5 sm:px-10 pt-24 sm:pt-32 pb-10 max-w-[1600px] mx-auto">
         <p className="font-jbmono text-[11px] tracking-[0.3em] uppercase text-black/40">
-          <span className="text-[#4d7c0f] font-bold">12</span>
+          <span className="text-[#4d7c0f] font-bold">15</span>
           <span className="mx-3 text-black/20">—</span> Final transmission
         </p>
         <Link href="mailto:hello@sentiently.ai" data-cursor-label="SAY HELLO">

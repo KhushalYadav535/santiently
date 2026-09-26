@@ -492,6 +492,10 @@ html.lenis, html.lenis body { height: auto; }
   border-radius: 6px;
 }
 
+.ticker-pause:hover > div {
+  animation-play-state: paused;
+}
+
 /* Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .animate-aww-marquee,

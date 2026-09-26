@@ -35,7 +35,7 @@ export default function ContactSection() {
   return (
     <section id="contact" className="relative py-24 sm:py-32 px-5 sm:px-10 max-w-6xl mx-auto">
       <div className="flex items-center gap-3 font-jbmono text-[11px] tracking-[0.3em] uppercase text-black/40 mb-8">
-        <span className="text-[#4d7c0f] font-bold">11</span>
+        <span className="text-[#4d7c0f] font-bold">14</span>
         <span className="h-px w-10 bg-black/20" />
         <span>Dispatch — let&apos;s build together</span>
       </div>

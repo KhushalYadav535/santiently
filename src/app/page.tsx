@@ -6,6 +6,9 @@ import SmoothScroll from "@/components/awwwards/SmoothScroll";
 import Marquee from "@/components/awwwards/Marquee";
 import Manifesto from "@/components/awwwards/Manifesto";
 import InventionIndex from "@/components/awwwards/InventionIndex";
+import StatsBand from "@/components/awwwards/StatsBand";
+import VoicesMarquee from "@/components/awwwards/VoicesMarquee";
+import FaqSection from "@/components/awwwards/FaqSection";
 import SectionHeading from "@/components/awwwards/SectionHeading";
 import { FadeUp } from "@/components/awwwards/Reveal";
 import Navbar from "@/components/layout/Navbar";
@@ -77,6 +80,14 @@ export default function Home() {
           <PerceiveReasonAct />
           <LabGallery />
           <ProductEngine />
+          <StatsBand />
+        </main>
+
+        {/* ── VOICES TICKER BREAK ── */}
+        <VoicesMarquee />
+
+        <main className="relative">
+          <FaqSection />
           <ContactSection />
         </main>
 
