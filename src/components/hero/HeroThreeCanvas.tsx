@@ -4,7 +4,8 @@ import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { soundFX } from "@/utils/audio";
 
-export type InventionMode = "ACOUSTIC" | "SPATIAL" | "QUANTUM";
+import { InventionMode } from "@/types/hero";
+export type { InventionMode };
 
 interface HeroThreeCanvasProps {
   activeMode?: InventionMode;
