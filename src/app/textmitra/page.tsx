@@ -6,6 +6,7 @@ import { ArrowLeft, FileText, CheckCircle2, Scan, RefreshCw, Cpu, Database, Eye 
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import CustomCursor from "@/components/layout/CustomCursor";
+import SmoothScroll from "@/components/awwwards/SmoothScroll";
 import { soundFX } from "@/utils/audio";
 
 export default function TextMitraPage() {
@@ -45,11 +46,13 @@ export default function TextMitraPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f8f9fa] text-[#111827] selection:bg-blue-500/20 selection:text-blue-900">
+    <div className="min-h-screen bg-[#f4f2ed] text-[#0b0b0f]">
+      <div className="noise-overlay" />
       <CustomCursor />
       <Navbar />
+      <SmoothScroll />
 
-      <main className="pt-28 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative">
+      <main className="pt-28 pb-20 px-5 sm:px-10 max-w-[1600px] mx-auto relative">
         {/* Back Link */}
         <div className="mb-8">
           <Link
@@ -64,14 +67,14 @@ export default function TextMitraPage() {
 
         {/* Hero Section */}
         <div className="text-center max-w-4xl mx-auto space-y-6 pt-6 pb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border border-gray-200 text-blue-700 text-xs font-mono shadow-2xs">
-            <FileText className="w-3.5 h-3.5 text-blue-600" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0b0b0f] text-[#d8ff3e] text-xs font-jbmono font-bold">
+            <FileText className="w-3.5 h-3.5 text-[#d8ff3e]" />
             <span>TEXTMITRA // DOCUMENT INTELLIGENCE &amp; OCR</span>
           </div>
 
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-neutral-900">
+          <h1 className="font-display text-4xl sm:text-6xl md:text-7xl font-bold tracking-[-0.035em] text-neutral-900 leading-[1.0]">
             Turn unstructured documents <br />
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600">
+            <span className="font-serif-it font-normal text-[#0e7490]">
               into verified data.
             </span>
           </h1>
@@ -80,33 +83,33 @@ export default function TextMitraPage() {
             Multi-modal vision OCR and semantic comprehension engine that converts PDFs, skewed receipts, and complex tax invoices into structured, validated JSON payloads.
           </p>
 
-          <div className="flex flex-wrap justify-center gap-2.5 pt-2 font-mono text-xs">
-            <span className="px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 font-medium">
-              🎯 99.4% Extraction Precision
+          <div className="flex flex-wrap justify-center gap-2.5 pt-2 font-jbmono text-[11px] font-bold">
+            <span className="px-3 py-1 rounded-full bg-white border border-black/10 text-black/60">
+              ◆ 99.4% Extraction Precision
             </span>
-            <span className="px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 font-medium">
-              ⚡ 0.8s Parse Speed
+            <span className="px-3 py-1 rounded-full bg-white border border-black/10 text-black/60">
+              ◆ 0.8s Parse Speed
             </span>
-            <span className="px-3 py-1 rounded-full bg-purple-50 border border-purple-200 text-purple-700 font-medium">
-              📐 Spatial Coordinate Tokens
+            <span className="px-3 py-1 rounded-full bg-white border border-black/10 text-black/60">
+              ◆ Spatial Coordinate Tokens
             </span>
-            <span className="px-3 py-1 rounded-full bg-amber-50 border border-amber-200 text-amber-700 font-medium">
-              🛡 Built-in Forgery Detection
+            <span className="px-3 py-1 rounded-full bg-[#0b0b0f] text-[#d8ff3e]">
+              ◆ Built-in Forgery Detection
             </span>
           </div>
         </div>
 
         {/* Interactive OCR & JSON Extraction Playground */}
-        <div className="bg-white border border-gray-200 rounded-3xl p-6 sm:p-10 shadow-sm mb-24">
-          <div className="flex items-center justify-between pb-6 border-b border-gray-100">
-            <div className="flex items-center gap-2 text-xs font-mono text-blue-700 font-bold">
+        <div className="bg-white border border-black/10 rounded-[24px] p-6 sm:p-10 shadow-[0_24px_64px_-24px_rgba(11,11,15,0.22)] mb-24">
+          <div className="flex items-center justify-between pb-6 border-b border-black/10">
+            <div className="flex items-center gap-2 text-xs font-mono text-[#4d7c0f] font-bold">
               <Scan className="w-4 h-4" />
               <span>LIVE DOCUMENT EXTRACTION ENGINE</span>
             </div>
             <button
               onClick={triggerScan}
               disabled={isScanning}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neutral-900 hover:bg-black text-white text-xs font-mono transition-all shadow-xs"
+              className="btn-shine inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0b0b0f] hover:bg-[#4d7c0f] hover:text-white text-[#d8ff3e] text-xs font-mono font-bold transition-all"
             >
               {isScanning ? (
                 <>
@@ -236,17 +239,17 @@ export default function TextMitraPage() {
         </div>
 
         {/* CTA */}
-        <div className="p-8 sm:p-12 rounded-3xl bg-blue-50/70 border border-blue-200 text-center max-w-3xl mx-auto space-y-6 shadow-xs">
-          <h3 className="text-2xl sm:text-4xl font-black text-neutral-900">
-            Automate your document workflows today.
+        <div className="p-8 sm:p-12 rounded-[24px] bg-[#0b0b0f] text-[#f4f2ed] text-center max-w-3xl mx-auto space-y-6 shadow-[0_24px_64px_-24px_rgba(11,11,15,0.5)]">
+          <h3 className="font-display text-2xl sm:text-4xl font-bold tracking-tight">
+            Automate your <span className="font-serif-it font-normal text-[#d8ff3e]">document workflows</span> today.
           </h3>
-          <p className="text-xs sm:text-sm text-neutral-600 max-w-lg mx-auto">
+          <p className="text-xs sm:text-sm text-white/60 max-w-lg mx-auto">
             Integrate TextMitra into your ERP, accounting, or KYC pipelines with our drop-in REST APIs and webhook dispatchers.
           </p>
           <div className="flex justify-center gap-4">
             <Link
               href="/#contact"
-              className="px-8 py-3.5 rounded-full text-xs sm:text-sm font-semibold bg-neutral-900 text-white hover:bg-black transition-all shadow-xs"
+              className="btn-shine px-8 py-3.5 rounded-full text-xs sm:text-sm font-bold bg-[#d8ff3e] text-black hover:bg-white transition-all"
             >
               Get TextMitra API Keys
             </Link>

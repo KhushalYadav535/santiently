@@ -6,15 +6,18 @@ import { ArrowLeft, Cpu } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import CustomCursor from "@/components/layout/CustomCursor";
+import SmoothScroll from "@/components/awwwards/SmoothScroll";
 import { soundFX } from "@/utils/audio";
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-[#f8f9fa] text-[#111827] selection:bg-blue-500/20 selection:text-blue-900">
+    <div className="min-h-screen bg-[#f4f2ed] text-[#0b0b0f]">
+      <div className="noise-overlay" />
       <CustomCursor />
       <Navbar />
+      <SmoothScroll />
 
-      <main className="pt-28 pb-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto relative">
+      <main className="pt-28 pb-20 px-5 sm:px-10 max-w-6xl mx-auto relative">
         <div className="mb-8">
           <Link
             href="/"
@@ -28,29 +31,31 @@ export default function AboutPage() {
 
         {/* Hero */}
         <div className="space-y-6 pt-6 pb-16 text-left">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border border-gray-200 text-blue-700 text-xs font-mono shadow-2xs">
-            <Cpu className="w-3.5 h-3.5 text-blue-600" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0b0b0f] text-[#d8ff3e] text-xs font-jbmono font-bold">
+            <Cpu className="w-3.5 h-3.5 text-[#d8ff3e]" />
             <span>SENTIENTLY LABS // MANIFESTO</span>
           </div>
 
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-neutral-900 leading-tight">
-            We are building the next generation of software.
+          <h1 className="font-display text-4xl sm:text-6xl md:text-7xl font-bold tracking-[-0.035em] text-neutral-900 leading-[1.02]">
+            We are building the{" "}
+            <span className="font-serif-it font-normal text-[#4d7c0f]">next generation</span>{" "}
+            of software.
           </h1>
 
           <p className="text-lg sm:text-2xl text-neutral-600 font-light leading-relaxed">
             Sentiently Innovations is an AI-native product company focused on building intelligent software for the real world.
           </p>
 
-          <div className="flex flex-wrap gap-2 pt-2 font-mono text-xs text-blue-700 font-medium">
-            <span className="px-3 py-1 rounded-full bg-blue-50 border border-blue-200">PRODUCT</span>
-            <span className="px-3 py-1 rounded-full bg-purple-50 border border-purple-200">ENGINEERING</span>
-            <span className="px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200">AI RESEARCH</span>
-            <span className="px-3 py-1 rounded-full bg-amber-50 border border-amber-200">SYSTEM DESIGN</span>
+          <div className="flex flex-wrap gap-2 pt-2 font-jbmono text-[11px] font-bold">
+            <span className="px-3 py-1 rounded-full bg-white border border-black/10 text-black/60">PRODUCT</span>
+            <span className="px-3 py-1 rounded-full bg-white border border-black/10 text-black/60">ENGINEERING</span>
+            <span className="px-3 py-1 rounded-full bg-white border border-black/10 text-black/60">AI RESEARCH</span>
+            <span className="px-3 py-1 rounded-full bg-[#0b0b0f] text-[#d8ff3e]">SYSTEM DESIGN</span>
           </div>
         </div>
 
         {/* Narrative & Beliefs */}
-        <div className="space-y-12 text-sm sm:text-base text-neutral-700 leading-relaxed border-t border-gray-200 pt-12">
+        <div className="space-y-12 text-sm sm:text-base text-neutral-700 leading-relaxed border-t border-black/10 pt-12">
           <div className="space-y-4">
             <h2 className="text-2xl sm:text-3xl font-bold text-neutral-900 font-mono">
               01 / Why We Exist
@@ -75,23 +80,23 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="p-8 rounded-3xl bg-white border border-gray-200 shadow-sm space-y-4">
+          <div className="p-8 rounded-[24px] bg-white border border-black/10 shadow-[0_16px_48px_-20px_rgba(11,11,15,0.2)] space-y-4">
             <h3 className="text-xl font-bold text-neutral-900">Our Engineering Principles</h3>
             <ul className="space-y-2.5 text-xs sm:text-sm text-neutral-700 font-mono">
               <li className="flex items-center gap-2">
-                <span className="text-blue-600 font-bold">&gt;</span>
+                <span className="text-[#4d7c0f] font-bold">&gt;</span>
                 60fps and sub-280ms latency over vanity 3D bloat
               </li>
               <li className="flex items-center gap-2">
-                <span className="text-blue-600 font-bold">&gt;</span>
+                <span className="text-[#4d7c0f] font-bold">&gt;</span>
                 Deterministic state verification before probabilistic tool execution
               </li>
               <li className="flex items-center gap-2">
-                <span className="text-blue-600 font-bold">&gt;</span>
+                <span className="text-[#4d7c0f] font-bold">&gt;</span>
                 Privacy by design: ephemeral audio streams and zero unauthorized data leakage
               </li>
               <li className="flex items-center gap-2">
-                <span className="text-blue-600 font-bold">&gt;</span>
+                <span className="text-[#4d7c0f] font-bold">&gt;</span>
                 Turn frontier research into usable, scalable products
               </li>
             </ul>

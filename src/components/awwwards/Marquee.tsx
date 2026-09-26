@@ -18,7 +18,7 @@ export default function Marquee({
 }) {
   const row = [...items, ...items, ...items, ...items];
   return (
-    <div className={`relative overflow-hidden whitespace-nowrap ${className}`}>
+    <div className={`relative overflow-hidden whitespace-nowrap tick-fade ${className}`}>
       <div className={fast ? "animate-aww-marquee-fast" : "animate-aww-marquee"}>
         {[0, 1].map((half) => (
           <div key={half} className="flex shrink-0 items-center">

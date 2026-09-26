@@ -6,15 +6,18 @@ import { ArrowLeft, Users, MessageSquare, Shield, Clock, Brain, Sparkles } from 
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import CustomCursor from "@/components/layout/CustomCursor";
+import SmoothScroll from "@/components/awwwards/SmoothScroll";
 import { soundFX } from "@/utils/audio";
 
 export default function AIHrmsPage() {
   return (
-    <div className="min-h-screen bg-[#f8f9fa] text-[#111827] selection:bg-blue-500/20 selection:text-blue-900">
+    <div className="min-h-screen bg-[#f4f2ed] text-[#0b0b0f]">
+      <div className="noise-overlay" />
       <CustomCursor />
       <Navbar />
+      <SmoothScroll />
 
-      <main className="pt-28 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative">
+      <main className="pt-28 pb-20 px-5 sm:px-10 max-w-[1600px] mx-auto relative">
         <div className="mb-8">
           <Link
             href="/"
@@ -28,14 +31,14 @@ export default function AIHrmsPage() {
 
         {/* Hero */}
         <div className="text-center max-w-4xl mx-auto space-y-6 pt-6 pb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border border-gray-200 text-emerald-700 text-xs font-mono shadow-2xs">
-            <Users className="w-3.5 h-3.5 text-emerald-600" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0b0b0f] text-[#d8ff3e] text-xs font-jbmono font-bold">
+            <Users className="w-3.5 h-3.5 text-[#d8ff3e]" />
             <span>AI-NATIVE HRMS // WORKFORCE INTELLIGENCE</span>
           </div>
 
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-neutral-900">
+          <h1 className="font-display text-4xl sm:text-6xl md:text-7xl font-bold tracking-[-0.035em] text-neutral-900 leading-[1.0]">
             HR software that <br />
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 via-teal-600 to-blue-600">
+            <span className="font-serif-it font-normal text-[#047857]">
               thinks alongside you.
             </span>
           </h1>
@@ -46,8 +49,8 @@ export default function AIHrmsPage() {
         </div>
 
         {/* Interactive Simulated Slack / Agent Dialogue */}
-        <div className="max-w-3xl mx-auto bg-white border border-gray-200 rounded-3xl p-6 sm:p-8 shadow-sm space-y-4 mb-20 font-sans">
-          <div className="flex items-center justify-between pb-4 border-b border-gray-100 text-xs font-mono text-neutral-500">
+        <div className="max-w-3xl mx-auto bg-white border border-black/10 rounded-[24px] p-6 sm:p-8 shadow-[0_24px_64px_-24px_rgba(11,11,15,0.22)] space-y-4 mb-20 font-sans">
+          <div className="flex items-center justify-between pb-4 border-b border-black/10 text-xs font-mono text-neutral-500">
             <span className="text-emerald-700 font-semibold flex items-center gap-2">
               <MessageSquare className="w-4 h-4 text-emerald-600" />
               <span>HR ASSISTANT COPILOT (SLACK / TEAMS EMBEDDED)</span>
@@ -82,7 +85,7 @@ export default function AIHrmsPage() {
 
         {/* Feature Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
-          <div className="p-6 rounded-2xl bg-white border border-gray-200 shadow-xs space-y-3">
+          <div className="p-6 rounded-2xl bg-white border border-black/10 shadow-xs space-y-3 hover:border-black/25 hover:-translate-y-1 transition-all">
             <div className="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600">
               <Clock className="w-5 h-5" />
             </div>
@@ -92,7 +95,7 @@ export default function AIHrmsPage() {
             </p>
           </div>
 
-          <div className="p-6 rounded-2xl bg-white border border-gray-200 shadow-xs space-y-3">
+          <div className="p-6 rounded-2xl bg-white border border-black/10 shadow-xs space-y-3 hover:border-black/25 hover:-translate-y-1 transition-all">
             <div className="w-10 h-10 rounded-xl bg-teal-50 border border-teal-200 flex items-center justify-center text-teal-600">
               <Shield className="w-5 h-5" />
             </div>
@@ -102,7 +105,7 @@ export default function AIHrmsPage() {
             </p>
           </div>
 
-          <div className="p-6 rounded-2xl bg-white border border-gray-200 shadow-xs space-y-3">
+          <div className="p-6 rounded-2xl bg-white border border-black/10 shadow-xs space-y-3 hover:border-black/25 hover:-translate-y-1 transition-all">
             <div className="w-10 h-10 rounded-xl bg-purple-50 border border-purple-200 flex items-center justify-center text-purple-600">
               <Sparkles className="w-5 h-5" />
             </div>

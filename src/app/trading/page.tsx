@@ -6,15 +6,18 @@ import { ArrowLeft, TrendingUp, Activity } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import CustomCursor from "@/components/layout/CustomCursor";
+import SmoothScroll from "@/components/awwwards/SmoothScroll";
 import { soundFX } from "@/utils/audio";
 
 export default function TradingPage() {
   return (
-    <div className="min-h-screen bg-[#f8f9fa] text-[#111827] selection:bg-blue-500/20 selection:text-blue-900">
+    <div className="min-h-screen bg-[#f4f2ed] text-[#0b0b0f]">
+      <div className="noise-overlay" />
       <CustomCursor />
       <Navbar />
+      <SmoothScroll />
 
-      <main className="pt-28 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative">
+      <main className="pt-28 pb-20 px-5 sm:px-10 max-w-[1600px] mx-auto relative">
         <div className="mb-8">
           <Link
             href="/"
@@ -28,14 +31,14 @@ export default function TradingPage() {
 
         {/* Hero */}
         <div className="text-center max-w-4xl mx-auto space-y-6 pt-6 pb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border border-gray-200 text-amber-700 text-xs font-mono shadow-2xs">
-            <TrendingUp className="w-3.5 h-3.5 text-amber-600" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0b0b0f] text-[#d8ff3e] text-xs font-jbmono font-bold">
+            <TrendingUp className="w-3.5 h-3.5 text-[#d8ff3e]" />
             <span>TRADING INTELLIGENCE // FINTECH DECISION SUPPORT</span>
           </div>
 
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-neutral-900">
+          <h1 className="font-display text-4xl sm:text-6xl md:text-7xl font-bold tracking-[-0.035em] text-neutral-900 leading-[1.0]">
             High-throughput intelligence for <br />
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-600 via-orange-600 to-rose-600">
+            <span className="font-serif-it font-normal text-[#b45309]">
               financial workflows.
             </span>
           </h1>
@@ -44,22 +47,22 @@ export default function TradingPage() {
             Real-time algorithmic reasoning analyzing macroeconomic headlines, regulatory announcements, and order book telemetry with deterministic risk thresholds.
           </p>
 
-          <div className="flex flex-wrap justify-center gap-2.5 pt-2 font-mono text-xs">
-            <span className="px-3 py-1 rounded-full bg-amber-50 border border-amber-200 text-amber-700 font-medium">
-              ⚡ 42ms Signal Latency
+          <div className="flex flex-wrap justify-center gap-2.5 pt-2 font-jbmono text-[11px] font-bold">
+            <span className="px-3 py-1 rounded-full bg-white border border-black/10 text-black/60">
+              ◆ 42ms Signal Latency
             </span>
-            <span className="px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 font-medium">
-              🛡 Zero-Hallucination Risk Rails
+            <span className="px-3 py-1 rounded-full bg-white border border-black/10 text-black/60">
+              ◆ Zero-Hallucination Risk Rails
             </span>
-            <span className="px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 font-medium">
-              📊 Multi-Exchange Normalized Feed
+            <span className="px-3 py-1 rounded-full bg-[#0b0b0f] text-[#d8ff3e]">
+              ◆ Multi-Exchange Normalized Feed
             </span>
           </div>
         </div>
 
         {/* Signal Stream Monitor */}
-        <div className="max-w-4xl mx-auto bg-white border border-gray-200 rounded-3xl p-6 sm:p-8 shadow-sm space-y-4 mb-20 font-mono text-xs">
-          <div className="flex items-center justify-between pb-4 border-b border-gray-100">
+        <div className="max-w-4xl mx-auto bg-white border border-black/10 rounded-[24px] p-6 sm:p-8 shadow-[0_24px_64px_-24px_rgba(11,11,15,0.22)] space-y-4 mb-20 font-mono text-xs">
+          <div className="flex items-center justify-between pb-4 border-b border-black/10">
             <span className="text-amber-800 font-semibold flex items-center gap-2">
               <Activity className="w-4 h-4 text-amber-600" />
               <span>LIVE REASONING &amp; SIGNAL ENGINE (SIMULATED STREAM)</span>

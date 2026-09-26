@@ -9,11 +9,18 @@ import Magnetic from "@/components/awwwards/Magnetic";
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [progress, setProgress] = useState(0);
   const [time, setTime] = useState("");
   const pathname = usePathname();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 40);
+      const h = document.documentElement;
+      const max = h.scrollHeight - h.clientHeight;
+      setProgress(max > 0 ? Math.min(1, window.scrollY / max) : 0);
+    };
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -113,6 +120,14 @@ export default function Navbar() {
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
+        </div>
+
+        {/* Scroll spine — lime progress hairline */}
+        <div className="mx-5 sm:mx-8 h-[2px] rounded-full bg-black/[0.06] overflow-hidden">
+          <div
+            className="h-full rounded-full bg-gradient-to-r from-[#4d7c0f] via-[#4d7c0f] to-[#6d28d9] transition-[width] duration-100"
+            style={{ width: `${progress * 100}%` }}
+          />
         </div>
 
         {/* Mobile drawer */}

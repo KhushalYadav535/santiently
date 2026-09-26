@@ -11,7 +11,7 @@ gsap.registerPlugin(ScrollTrigger);
  * Lenis smooth scroll + GSAP ScrollTrigger sync.
  * Wraps the whole page once.
  */
-export default function SmoothScroll({ children }: { children: React.ReactNode }) {
+export default function SmoothScroll({ children }: { children?: React.ReactNode }) {
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.15,

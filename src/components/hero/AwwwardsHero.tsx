@@ -3,10 +3,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowDown, ArrowUpRight, Play, Mic, FileText, TrendingUp, Star, ShieldCheck } from "lucide-react";
 import { InventionMode } from "@/types/hero";
 import Magnetic from "@/components/awwwards/Magnetic";
+import CountUp from "@/components/awwwards/CountUp";
 import HeroInventionDeck from "./HeroInventionDeck";
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface Props {
   activeMode?: InventionMode;
@@ -29,21 +33,39 @@ export default function AwwwardsHero({ activeMode = "ACOUSTIC", onModeChange, st
     const el = rootRef.current;
     if (!el) return;
     const ctx = gsap.context(() => {
+      // type-in-motion: chars stretch up with a flicker of rotation
+      gsap.fromTo(
+        el.querySelectorAll(".hero-char"),
+        { yPercent: 118, rotate: 5 },
+        { yPercent: 0, rotate: 0, duration: 1.1, ease: "power4.out", stagger: 0.04, delay: 0.1 }
+      );
       gsap.fromTo(
         el.querySelectorAll(".hero-line"),
         { yPercent: 115 },
-        { yPercent: 0, duration: 1.25, ease: "power4.out", stagger: 0.1, delay: 0.1 }
+        { yPercent: 0, duration: 1.2, ease: "power4.out", stagger: 0.1, delay: 0.45 }
       );
       gsap.fromTo(
         el.querySelectorAll(".hero-fade"),
         { y: 24, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.9, ease: "power3.out", stagger: 0.08, delay: 0.55 }
+        { y: 0, opacity: 1, duration: 0.9, ease: "power3.out", stagger: 0.08, delay: 0.7 }
       );
       gsap.fromTo(
         el.querySelectorAll(".hero-ghost"),
         { opacity: 0, x: 60 },
         { opacity: 1, x: 0, duration: 1.6, ease: "power3.out", delay: 0.4 }
       );
+      // scroll spine: ghost drifts, content lifts as you travel
+      gsap.to(el.querySelector(".hero-ghost"), {
+        yPercent: 34,
+        ease: "none",
+        scrollTrigger: { trigger: el, start: "top top", end: "bottom top", scrub: true },
+      });
+      gsap.to(el.querySelector(".hero-content"), {
+        y: -70,
+        opacity: 0.25,
+        ease: "none",
+        scrollTrigger: { trigger: el, start: "top top", end: "bottom 30%", scrub: true },
+      });
     }, el);
     return () => ctx.revert();
   }, [started]);
@@ -71,7 +93,7 @@ export default function AwwwardsHero({ activeMode = "ACOUSTIC", onModeChange, st
       </div>
 
       {/* Giant type */}
-      <div className="relative z-10 select-none">
+      <div className="hero-content relative z-10 select-none">
         <div className="hero-fade mb-5 flex flex-wrap items-center gap-3">
           <span className="inline-flex items-center gap-2 pl-2 pr-4 py-1.5 rounded-full bg-white/70 backdrop-blur border border-black/10 shadow-[0_4px_20px_rgba(11,11,15,0.08)]">
             <span className="px-2.5 py-1 rounded-full bg-[#0b0b0f] text-[#d8ff3e] text-[10px] font-bold tracking-[0.14em] uppercase">
@@ -88,7 +110,13 @@ export default function AwwwardsHero({ activeMode = "ACOUSTIC", onModeChange, st
 
         <h1 className="font-display font-bold tracking-[-0.045em] leading-[0.86] text-[17.5vw] sm:text-[13.5vw] lg:text-[11.2vw]">
           <span className="block overflow-hidden pb-1">
-            <span className="hero-line block">MACHINES</span>
+            <span className="block" aria-label="MACHINES">
+              {"MACHINES".split("").map((c, i) => (
+                <span key={i} className="hero-char inline-block will-change-transform">
+                  {c}
+                </span>
+              ))}
+            </span>
           </span>
           <span className="block overflow-hidden pb-3">
             <span className="hero-line block">
@@ -178,17 +206,30 @@ export default function AwwwardsHero({ activeMode = "ACOUSTIC", onModeChange, st
 
         {/* bottom stats bar */}
         <div className="hero-fade mt-10 pt-5 border-t border-black/10 grid grid-cols-2 md:grid-cols-4 gap-5">
-          {[
-            { k: "<280ms", v: "Voice glass-to-glass" },
-            { k: "99.4%", v: "Spatial OCR precision" },
-            { k: "42ms", v: "LPU tick execution" },
-            { k: "07", v: "Production AI systems" },
-          ].map((s, i) => (
-            <div key={s.v} className={`flex items-baseline gap-3 ${i > 0 ? "md:border-l md:border-black/10 md:pl-5" : ""}`}>
-              <span className="font-display font-bold text-2xl sm:text-3xl tracking-tight text-black tabular-nums">{s.k}</span>
-              <span className="font-jbmono text-[10px] tracking-[0.2em] uppercase text-black/40">{s.v}</span>
-            </div>
-          ))}
+          <div className="flex items-baseline gap-3">
+            <span className="font-display font-bold text-2xl sm:text-3xl tracking-tight text-black">
+              <CountUp to={280} prefix="<" suffix="ms" />
+            </span>
+            <span className="font-jbmono text-[10px] tracking-[0.2em] uppercase text-black/40">Voice glass-to-glass</span>
+          </div>
+          <div className="flex items-baseline gap-3 md:border-l md:border-black/10 md:pl-5">
+            <span className="font-display font-bold text-2xl sm:text-3xl tracking-tight text-black">
+              <CountUp to={99.4} decimals={1} suffix="%" />
+            </span>
+            <span className="font-jbmono text-[10px] tracking-[0.2em] uppercase text-black/40">Spatial OCR precision</span>
+          </div>
+          <div className="flex items-baseline gap-3 md:border-l md:border-black/10 md:pl-5">
+            <span className="font-display font-bold text-2xl sm:text-3xl tracking-tight text-black">
+              <CountUp to={42} suffix="ms" />
+            </span>
+            <span className="font-jbmono text-[10px] tracking-[0.2em] uppercase text-black/40">LPU tick execution</span>
+          </div>
+          <div className="flex items-baseline gap-3 md:border-l md:border-black/10 md:pl-5">
+            <span className="font-display font-bold text-2xl sm:text-3xl tracking-tight text-black">
+              <CountUp to={7} pad={2} />
+            </span>
+            <span className="font-jbmono text-[10px] tracking-[0.2em] uppercase text-black/40">Production AI systems</span>
+          </div>
         </div>
 
         {/* capability trust strip */}
