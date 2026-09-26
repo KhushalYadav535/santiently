@@ -178,7 +178,7 @@ export default function HeroInventionDeck({
               onClick={() => handleSelectMode("ACOUSTIC")}
               className={`flex items-center gap-1.5 px-3 py-1 rounded-xl text-xs font-mono font-medium transition-all ${
                 activeMode === "ACOUSTIC"
-                  ? "bg-white text-blue-700 shadow-xs border border-blue-200"
+                  ? "bg-[#0b0b0f] text-[#d8ff3e] shadow-xs border border-[#0b0b0f]"
                   : "text-neutral-600 hover:text-neutral-900"
               }`}
             >
@@ -190,7 +190,7 @@ export default function HeroInventionDeck({
               onClick={() => handleSelectMode("SPATIAL")}
               className={`flex items-center gap-1.5 px-3 py-1 rounded-xl text-xs font-mono font-medium transition-all ${
                 activeMode === "SPATIAL"
-                  ? "bg-white text-cyan-800 shadow-xs border border-cyan-200"
+                  ? "bg-[#0b0b0f] text-[#d8ff3e] shadow-xs border border-[#0b0b0f]"
                   : "text-neutral-600 hover:text-neutral-900"
               }`}
             >
@@ -202,7 +202,7 @@ export default function HeroInventionDeck({
               onClick={() => handleSelectMode("QUANTUM")}
               className={`flex items-center gap-1.5 px-3 py-1 rounded-xl text-xs font-mono font-medium transition-all ${
                 activeMode === "QUANTUM"
-                  ? "bg-white text-amber-800 shadow-xs border border-amber-200"
+                  ? "bg-[#0b0b0f] text-[#d8ff3e] shadow-xs border border-[#0b0b0f]"
                   : "text-neutral-600 hover:text-neutral-900"
               }`}
             >
@@ -220,10 +220,10 @@ export default function HeroInventionDeck({
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-mono font-bold text-blue-700 uppercase tracking-wider">
+                    <span className="text-xs font-mono font-bold text-[#4d7c0f] uppercase tracking-wider">
                       ACOUSTIC NEURAL PROSODY // STREAMING TELEPHONY
                     </span>
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200 font-semibold">
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-[#d8ff3e]/25 text-[#33520a] border border-[#4d7c0f]/40 font-semibold">
                       SUB-280MS
                     </span>
                   </div>
@@ -241,7 +241,7 @@ export default function HeroInventionDeck({
                     }}
                     className={`px-2.5 py-1 rounded-lg transition-colors ${
                       selectedLanguage === "HINDI_ENG"
-                        ? "bg-white font-bold text-blue-700 shadow-2xs"
+                        ? "bg-[#0b0b0f] font-bold text-[#d8ff3e] shadow-2xs"
                         : "text-neutral-600 hover:text-neutral-900"
                     }`}
                   >
@@ -254,7 +254,7 @@ export default function HeroInventionDeck({
                     }}
                     className={`px-2.5 py-1 rounded-lg transition-colors ${
                       selectedLanguage === "ENG"
-                        ? "bg-white font-bold text-blue-700 shadow-2xs"
+                        ? "bg-[#0b0b0f] font-bold text-[#d8ff3e] shadow-2xs"
                         : "text-neutral-600 hover:text-neutral-900"
                     }`}
                   >
@@ -267,7 +267,7 @@ export default function HeroInventionDeck({
                     }}
                     className={`px-2.5 py-1 rounded-lg transition-colors ${
                       selectedLanguage === "BENGALI"
-                        ? "bg-white font-bold text-blue-700 shadow-2xs"
+                        ? "bg-[#0b0b0f] font-bold text-[#d8ff3e] shadow-2xs"
                         : "text-neutral-600 hover:text-neutral-900"
                     }`}
                   >
@@ -314,7 +314,7 @@ export default function HeroInventionDeck({
                 <div className="md:col-span-2 p-3.5 rounded-2xl bg-gray-50 border border-gray-200/90 font-mono text-xs flex flex-col justify-center">
                   <div className="text-[10px] text-neutral-600 uppercase font-semibold mb-1 flex items-center justify-between">
                     <span>LIVE DECODED TRANSCRIPT</span>
-                    {isPlayingVoice && <span className="text-blue-700 animate-pulse">STREAMING...</span>}
+                    {isPlayingVoice && <span className="text-[#4d7c0f] animate-pulse">STREAMING...</span>}
                   </div>
                   <p className="text-neutral-900 font-medium leading-relaxed italic">
                     &ldquo;{voiceTranscript}&rdquo;
@@ -334,7 +334,7 @@ export default function HeroInventionDeck({
                     className={`w-full py-2.5 px-4 rounded-xl text-xs font-semibold flex items-center justify-center gap-2 transition-all ${
                       isPlayingVoice
                         ? "bg-rose-600 hover:bg-rose-700 text-white shadow-sm"
-                        : "bg-blue-600 hover:bg-blue-700 text-white shadow-sm"
+                        : "bg-[#0b0b0f] hover:bg-[#4d7c0f] text-white shadow-sm"
                     }`}
                   >
                     {isPlayingVoice ? (
@@ -558,7 +558,7 @@ export default function HeroInventionDeck({
         <div className="px-5 sm:px-7 py-3 border-t border-gray-100 bg-gray-50/60 flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
           <div className="flex items-center gap-3 text-neutral-600">
             <span className="flex items-center gap-1.5">
-              <Cpu className="w-3.5 h-3.5 text-blue-600" />
+              <Cpu className="w-3.5 h-3.5 text-[#4d7c0f]" />
               <span>LPU Memory: 16.4 GB</span>
             </span>
             <span className="text-gray-300">&bull;</span>
@@ -568,7 +568,7 @@ export default function HeroInventionDeck({
           <a
             href="#playground"
             onClick={() => soundFX.playClick()}
-            className="text-blue-700 hover:text-blue-900 font-bold flex items-center gap-1 group"
+            className="text-[#4d7c0f] hover:text-[#0b0b0f] font-bold flex items-center gap-1 group"
           >
             <span>Launch Full Interactive Sandbox</span>
             <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />

@@ -47,9 +47,9 @@ export default function Manifesto() {
           <>
             <span>We don&apos;t ship</span>
             <span>
-              features<span className="text-[#4d7c0f]">.</span> We birth
+              features. We birth{" "}
+              <span className="font-serif-it font-normal text-[#4d7c0f]">intelligence.</span>
             </span>
-            <span className="text-stroke">intelligence.</span>
           </>
         }
       />

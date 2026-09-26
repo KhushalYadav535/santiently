@@ -63,6 +63,16 @@ export default function HeroCanvas({ activeMode = "ACOUSTIC" }: HeroCanvasProps)
           className="absolute top-[24%] left-1/2 -translate-x-1/2 w-[420px] h-[220px] blur-[90px] rounded-full opacity-30"
           style={{ background: "radial-gradient(closest-side, rgba(11,11,15,0.25), transparent 70%)" }}
         />
+        {/* violet daydream wash — right depth */}
+        <div
+          className="absolute top-[48%] -right-32 w-[480px] h-[480px] blur-[120px] rounded-full opacity-50 animate-blob animation-delay-4000"
+          style={{ background: "radial-gradient(closest-side, rgba(139,92,246,0.22), transparent 70%)" }}
+        />
+        {/* lime kiss — left of headline */}
+        <div
+          className="absolute bottom-[18%] -left-32 w-[420px] h-[420px] blur-[110px] rounded-full opacity-50"
+          style={{ background: "radial-gradient(closest-side, rgba(216,255,62,0.4), transparent 70%)" }}
+        />
       </div>
 
       {/* 2. Paper grid */}

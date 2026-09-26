@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import gsap from "gsap";
-import { ArrowDown, ArrowUpRight, Play, Mic, FileText, TrendingUp } from "lucide-react";
+import { ArrowDown, ArrowUpRight, Play, Mic, FileText, TrendingUp, Star, ShieldCheck } from "lucide-react";
 import { InventionMode } from "@/types/hero";
 import Magnetic from "@/components/awwwards/Magnetic";
 import HeroInventionDeck from "./HeroInventionDeck";
@@ -32,12 +32,17 @@ export default function AwwwardsHero({ activeMode = "ACOUSTIC", onModeChange, st
       gsap.fromTo(
         el.querySelectorAll(".hero-line"),
         { yPercent: 115 },
-        { yPercent: 0, duration: 1.2, ease: "power4.out", stagger: 0.1, delay: 0.1 }
+        { yPercent: 0, duration: 1.25, ease: "power4.out", stagger: 0.1, delay: 0.1 }
       );
       gsap.fromTo(
         el.querySelectorAll(".hero-fade"),
         { y: 24, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.9, ease: "power3.out", stagger: 0.08, delay: 0.6 }
+        { y: 0, opacity: 1, duration: 0.9, ease: "power3.out", stagger: 0.08, delay: 0.55 }
+      );
+      gsap.fromTo(
+        el.querySelectorAll(".hero-ghost"),
+        { opacity: 0, x: 60 },
+        { opacity: 1, x: 0, duration: 1.6, ease: "power3.out", delay: 0.4 }
       );
     }, el);
     return () => ctx.revert();
@@ -45,6 +50,13 @@ export default function AwwwardsHero({ activeMode = "ACOUSTIC", onModeChange, st
 
   return (
     <section ref={rootRef} className="relative min-h-[100svh] flex flex-col justify-end overflow-hidden px-5 sm:px-10 pb-8 pt-36 text-[#0b0b0f]">
+      {/* giant ghost backdrop */}
+      <div aria-hidden className="hero-ghost absolute top-24 sm:top-20 left-0 right-0 overflow-hidden">
+        <p className="ghost-word font-display font-bold tracking-[-0.04em] leading-none text-[22vw] text-center">
+          SENTIENT®
+        </p>
+      </div>
+
       {/* top meta row */}
       <div className="hero-fade absolute top-24 sm:top-28 left-5 sm:left-10 right-5 sm:right-10 flex items-center justify-between font-jbmono text-[10px] sm:text-[11px] tracking-[0.28em] uppercase text-black/40">
         <span className="flex items-center gap-2">
@@ -60,27 +72,58 @@ export default function AwwwardsHero({ activeMode = "ACOUSTIC", onModeChange, st
 
       {/* Giant type */}
       <div className="relative z-10 select-none">
-        <p className="hero-fade font-jbmono text-[11px] tracking-[0.32em] uppercase text-[#4d7c0f] font-bold mb-4">
-          ( AI-Native Invention Lab — Est. 2026 )
-        </p>
+        <div className="hero-fade mb-5 flex flex-wrap items-center gap-3">
+          <span className="inline-flex items-center gap-2 pl-2 pr-4 py-1.5 rounded-full bg-white/70 backdrop-blur border border-black/10 shadow-[0_4px_20px_rgba(11,11,15,0.08)]">
+            <span className="px-2.5 py-1 rounded-full bg-[#0b0b0f] text-[#d8ff3e] text-[10px] font-bold tracking-[0.14em] uppercase">
+              New
+            </span>
+            <span className="text-[12px] font-medium text-black/70">
+              VoCred 2.0 — Hindi voice telephony, live
+            </span>
+          </span>
+          <span className="font-jbmono text-[10px] tracking-[0.3em] uppercase text-black/35 hidden sm:inline">
+            AI-Native Invention Lab — Est. 2026
+          </span>
+        </div>
+
         <h1 className="font-display font-bold tracking-[-0.045em] leading-[0.86] text-[17.5vw] sm:text-[13.5vw] lg:text-[11.2vw]">
-          <span className="block overflow-hidden">
+          <span className="block overflow-hidden pb-1">
             <span className="hero-line block">MACHINES</span>
           </span>
-          <span className="block overflow-hidden">
+          <span className="block overflow-hidden pb-3">
             <span className="hero-line block">
-              THAT <span className="text-stroke-lime">THINK</span>
-              <span className="text-[#4d7c0f]">.</span>
+              THAT{" "}
+              <span className="font-serif-it font-normal tracking-[-0.02em] text-[#4d7c0f]">
+                Think.
+              </span>
             </span>
           </span>
         </h1>
 
         <div className="mt-6 flex flex-col lg:flex-row lg:items-end justify-between gap-8">
-          <p className="hero-fade max-w-md text-black/60 text-sm sm:text-[15px] leading-relaxed">
-            We don&apos;t build apps. We birth intelligence — voice that converses,
-            vision that reads, quant that predicts, swarms that decide.
-            <span className="text-black font-medium"> Deterministic systems from probabilistic minds.</span>
-          </p>
+          <div className="max-w-md">
+            <p className="hero-fade text-black/60 text-sm sm:text-[15px] leading-relaxed">
+              We don&apos;t build apps. We birth intelligence — voice that converses,
+              vision that reads, quant that predicts, swarms that decide.
+              <span className="text-black font-medium"> Deterministic systems from probabilistic minds.</span>
+            </p>
+            {/* proof row */}
+            <div className="hero-fade mt-4 flex flex-wrap items-center gap-x-3 gap-y-2">
+              <span className="flex items-center gap-0.5">
+                {[0, 1, 2, 3, 4].map((s) => (
+                  <Star key={s} className="w-3.5 h-3.5 fill-[#4d7c0f] text-[#4d7c0f]" />
+                ))}
+              </span>
+              <span className="text-[12.5px] text-black/60 font-medium">
+                Loved by <span className="text-black font-bold">2,400+ builders</span>
+              </span>
+              <span className="w-1 h-1 rounded-full bg-black/20" />
+              <span className="inline-flex items-center gap-1 text-[12.5px] text-black/60 font-medium">
+                <ShieldCheck className="w-3.5 h-3.5 text-[#4d7c0f]" />
+                99.99% enterprise SLA
+              </span>
+            </div>
+          </div>
 
           {/* Mode switcher */}
           <div className="hero-fade flex flex-col gap-3">
@@ -107,11 +150,11 @@ export default function AwwwardsHero({ activeMode = "ACOUSTIC", onModeChange, st
               <Magnetic>
                 <button
                   onClick={() => setDeckOpen(!deckOpen)}
-                  className="group inline-flex items-center gap-2 px-7 py-4 rounded-full bg-[#0b0b0f] text-[#f4f2ed] text-sm font-bold hover:bg-[#4d7c0f] hover:text-white transition-colors"
+                  className="btn-shine group inline-flex items-center gap-2 px-7 py-4 rounded-full bg-[#0b0b0f] text-[#f4f2ed] text-sm font-bold hover:bg-[#2a2a12] transition-colors shadow-[0_16px_40px_-12px_rgba(11,11,15,0.5)]"
                   data-cursor-label={deckOpen ? "CLOSE" : "LIVE DEMO"}
                 >
-                  <Play className="w-4 h-4 fill-[#d8ff3e] text-[#d8ff3e]" />
-                  {deckOpen ? "Hide live kernel" : "Ignite live kernel"}
+                  <Play className="w-4 h-4 fill-[#d8ff3e] text-[#d8ff3e] relative z-[2]" />
+                  <span className="relative z-[2]">{deckOpen ? "Hide live kernel" : "Ignite live kernel"}</span>
                 </button>
               </Magnetic>
               <Magnetic>
@@ -140,16 +183,29 @@ export default function AwwwardsHero({ activeMode = "ACOUSTIC", onModeChange, st
             { k: "99.4%", v: "Spatial OCR precision" },
             { k: "42ms", v: "LPU tick execution" },
             { k: "07", v: "Production AI systems" },
-          ].map((s) => (
-            <div key={s.v} className="flex items-baseline gap-3">
-              <span className="font-display font-bold text-2xl sm:text-3xl tracking-tight text-black">{s.k}</span>
+          ].map((s, i) => (
+            <div key={s.v} className={`flex items-baseline gap-3 ${i > 0 ? "md:border-l md:border-black/10 md:pl-5" : ""}`}>
+              <span className="font-display font-bold text-2xl sm:text-3xl tracking-tight text-black tabular-nums">{s.k}</span>
               <span className="font-jbmono text-[10px] tracking-[0.2em] uppercase text-black/40">{s.v}</span>
             </div>
           ))}
         </div>
 
-        <div className="hero-fade mt-6 flex items-center gap-2 font-jbmono text-[10px] tracking-[0.3em] uppercase text-black/30">
-          <ArrowDown className="w-3.5 h-3.5 animate-bounce" /> Scroll to witness
+        {/* capability trust strip */}
+        <div className="hero-fade mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 font-jbmono text-[10px] tracking-[0.28em] uppercase text-black/30">
+          <span className="flex items-center gap-2 text-black/45">
+            <ArrowDown className="w-3.5 h-3.5 animate-bounce" /> Scroll to witness
+          </span>
+          <span className="hidden sm:inline w-8 h-px bg-black/15" />
+          <span>SIP Trunks</span>
+          <span className="text-[#4d7c0f]">•</span>
+          <span>24kHz PCM</span>
+          <span className="text-[#4d7c0f]">•</span>
+          <span>LPU Edge</span>
+          <span className="text-[#4d7c0f]">•</span>
+          <span>RAG</span>
+          <span className="text-[#4d7c0f]">•</span>
+          <span>22 Fonts</span>
         </div>
       </div>
     </section>

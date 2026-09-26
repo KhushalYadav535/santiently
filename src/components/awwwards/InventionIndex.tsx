@@ -65,7 +65,7 @@ export default function InventionIndex() {
             <span>
               One <span className="text-[#4d7c0f]">sentient</span>
             </span>
-            <span className="text-stroke">doctrine.</span>
+            <span className="font-serif-it text-[#4d7c0f]">doctrine.</span>
           </>
         }
         accent="Every invention below is live and interrogable — click through to run the real kernel, not a marketing video."

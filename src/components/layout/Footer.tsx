@@ -48,7 +48,8 @@ export default function Footer() {
           <h2 className="mt-6 font-display font-bold tracking-[-0.04em] leading-[0.9] text-[15vw] sm:text-[10vw]">
             LET&apos;S BUILD
             <br />
-            <span className="text-stroke footer-giant">SENTIENCE<span className="text-[#4d7c0f]" style={{ WebkitTextStroke: "0" }}>↗</span></span>
+            <span className="font-serif-it font-normal tracking-[-0.02em] text-[#4d7c0f]">Sentience</span>
+            <span className="text-[#4d7c0f]">↗</span>
           </h2>
         </Link>
 

@@ -118,7 +118,7 @@ export default function LabGallery({ isFullPage = false }: { isFullPage?: boolea
       {/* Modal / Inspector Drawer for Experiment - Google Labs Light Dialog */}
       {selectedExp && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-fade-in">
-          <div className="relative w-full max-w-2xl bg-white border border-gray-200 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
+          <div className="relative w-full max-w-2xl bg-white border border-black/10 rounded-[24px] p-6 sm:p-8 shadow-2xl space-y-6">
             <button
               onClick={() => setSelectedExp(null)}
               className="absolute top-6 right-6 p-2 rounded-full bg-gray-100 hover:bg-gray-200 text-neutral-500 hover:text-neutral-900 transition-colors"
@@ -126,26 +126,26 @@ export default function LabGallery({ isFullPage = false }: { isFullPage?: boolea
               <X className="w-5 h-5" />
             </button>
 
-            <div className="flex items-center gap-2 text-xs font-mono text-blue-700">
+            <div className="flex items-center gap-2 text-xs font-mono text-[#4d7c0f] font-bold">
               <Terminal className="w-4 h-4" />
               <span className="font-semibold">{selectedExp.code} // RESEARCH ARTIFACT</span>
             </div>
 
             <div>
-              <h3 className="text-2xl font-black text-neutral-900">
+              <h3 className="font-display text-2xl font-bold tracking-tight text-neutral-900">
                 {selectedExp.title}
               </h3>
-              <p className="text-xs font-mono text-blue-600 mt-1">
+              <p className="text-xs font-mono text-[#4d7c0f] font-bold mt-1">
                 CATEGORY: {selectedExp.category} &bull; {selectedExp.status}
               </p>
             </div>
 
             <div className="space-y-4 text-xs sm:text-sm text-neutral-700">
-              <div className="p-4 rounded-xl bg-blue-50/70 border border-blue-200/80 space-y-1">
-                <span className="text-[11px] font-mono text-blue-800 uppercase tracking-wider font-semibold">
+              <div className="p-4 rounded-xl bg-[#d8ff3e]/15 border border-[#4d7c0f]/30 space-y-1">
+                <span className="text-[11px] font-mono text-[#4d7c0f] uppercase tracking-wider font-bold">
                   WORKING HYPOTHESIS
                 </span>
-                <p className="italic text-blue-950 font-medium">
+                <p className="italic text-black/80 font-medium">
                   &ldquo;{selectedExp.hypothesis}&rdquo;
                 </p>
               </div>
@@ -183,7 +183,7 @@ export default function LabGallery({ isFullPage = false }: { isFullPage?: boolea
             <div className="pt-2 flex justify-end">
               <button
                 onClick={() => setSelectedExp(null)}
-                className="px-5 py-2.5 rounded-full text-xs font-semibold bg-neutral-900 hover:bg-black text-white shadow-xs"
+                className="px-5 py-2.5 rounded-full text-xs font-bold bg-[#0b0b0f] hover:bg-[#4d7c0f] hover:text-white text-[#d8ff3e] shadow-xs"
               >
                 Close Inspector
               </button>

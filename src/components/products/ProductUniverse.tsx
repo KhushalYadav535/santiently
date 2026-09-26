@@ -146,7 +146,7 @@ export default function ProductUniverse() {
     switch (status) {
       case "LIVE":
         return (
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200 shadow-[0_0_14px_rgba(16,185,129,0.35)]">
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
             LIVE
           </span>
@@ -173,6 +173,14 @@ export default function ProductUniverse() {
           </span>
         );
     }
+  };
+
+  const handleSpotlight = (e: React.MouseEvent<HTMLDivElement>) => {
+    const t = (e.target as HTMLElement).closest?.(".spotlight-card") as HTMLElement | null;
+    if (!t) return;
+    const r = t.getBoundingClientRect();
+    t.style.setProperty("--mx", `${e.clientX - r.left}px`);
+    t.style.setProperty("--my", `${e.clientY - r.top}px`);
   };
 
   return (
@@ -218,8 +226,8 @@ export default function ProductUniverse() {
         </div>
       </div>
 
-      {/* Product Cards Grid - Google Labs Style with Live Preview Banners */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* Product Cards Grid — premium spotlight cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" onMouseMove={handleSpotlight}>
         {filteredProducts.map((product, idx) => (
           <Tilt3DCard
             key={product.id}
@@ -228,27 +236,32 @@ export default function ProductUniverse() {
             className="rounded-2xl"
           >
             <div
-              style={{ animationDelay: `${idx * 80}ms` }}
-              className="animate-reveal-2 group relative flex flex-col justify-between rounded-2xl bg-white border border-black/10 p-5 shadow-xs transition-all duration-300 hover:border-black/30 hover:shadow-xl overflow-hidden text-left h-full"
+              data-cursor-label="OPEN"
+              style={{ animationDelay: `${idx * 80}ms`, ["--spot" as any]: product.highlightColor }}
+              className="animate-reveal-2 spotlight-card group relative flex flex-col justify-between rounded-[22px] bg-white border border-black/10 p-5 shadow-[0_2px_16px_-6px_rgba(11,11,15,0.1)] transition-all duration-400 hover:border-black/25 hover:shadow-[0_28px_64px_-20px_rgba(11,11,15,0.28)] hover:-translate-y-1.5 overflow-hidden text-left h-full"
               onMouseEnter={() => soundFX.playHover()}
             >
-              {/* Ambient card top border gradient */}
+              {/* Glowing accent bar */}
               <div
-                className="absolute top-0 left-0 right-0 h-1 opacity-80 group-hover:opacity-100 transition-opacity"
-                style={{ backgroundColor: product.highlightColor }}
+                className="absolute top-0 left-0 right-0 h-[3px] opacity-90 group-hover:opacity-100 transition-opacity"
+                style={{
+                  background: `linear-gradient(90deg, ${product.highlightColor}, ${product.highlightColor}66)`,
+                  boxShadow: `0 1px 14px ${product.highlightColor}88`,
+                }}
               />
 
               <div>
                 {/* Category & Status */}
                 <div className="flex items-center justify-between gap-2 pb-3">
-                  <span className="text-[11px] font-mono tracking-wider uppercase text-neutral-500 font-semibold">
+                  <span className="flex items-center gap-2 text-[11px] font-mono tracking-wider uppercase text-neutral-500 font-semibold">
+                    <span className="text-black/25 font-bold">{String(idx + 1).padStart(2, "0")}</span>
                     {product.category}
                   </span>
                   {getStatusBadge(product.status)}
                 </div>
 
                 {/* Animated Interactive Visual Preview Header */}
-                <div className="mb-4">
+                <div className="mb-4 preview-sheen rounded-xl">
                   <CardMediaPreview slug={product.slug} />
                 </div>
 
@@ -269,13 +282,13 @@ export default function ProductUniverse() {
                 </p>
 
                 {/* Key Metrics Grid */}
-                <div className="grid grid-cols-2 gap-2 py-2.5 px-3 rounded-xl bg-gray-50 border border-gray-100 mb-4">
+                <div className="grid grid-cols-2 gap-2 py-3 px-3.5 rounded-xl bg-black/[0.03] border border-black/10 mb-4">
                   {product.metrics.slice(0, 2).map((metric) => (
                     <div key={metric.label}>
-                      <div className="text-[10px] text-neutral-500 font-mono uppercase">
+                      <div className="text-[10px] text-black/40 font-jbmono uppercase tracking-[0.12em]">
                         {metric.label}
                       </div>
-                      <div className="text-sm font-bold text-neutral-900 font-mono mt-0.5">
+                      <div className="font-display text-[16px] font-bold text-neutral-900 mt-0.5 tabular-nums">
                         {metric.value}
                       </div>
                     </div>
@@ -296,15 +309,15 @@ export default function ProductUniverse() {
               </div>
 
               {/* Bottom CTA Action */}
-              <div className="pt-3 border-t border-gray-100">
+              <div className="pt-3 border-t border-black/10">
                 <Link
                   href={product.href}
-                  className="w-full inline-flex items-center justify-between text-xs font-semibold text-neutral-800 group-hover:text-[#4d7c0f] py-1 transition-colors"
+                  className="w-full inline-flex items-center justify-between py-1 transition-colors"
                   onClick={() => soundFX.playClick()}
                 >
-                  <span>{product.ctaText}</span>
-                  <span className="text-[#4d7c0f] font-mono text-[11px] group-hover:translate-x-1 transition-transform">
-                    EXPLORE &rarr;
+                  <span className="text-[13px] font-bold text-neutral-900">{product.ctaText}</span>
+                  <span className="w-9 h-9 rounded-full bg-[#0b0b0f] text-[#d8ff3e] flex items-center justify-center transition-all duration-300 group-hover:bg-[#4d7c0f] group-hover:text-white group-hover:shadow-[0_0_20px_rgba(77,124,15,0.5)]">
+                    <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:rotate-45" />
                   </span>
                 </Link>
               </div>
