@@ -25,7 +25,7 @@ export default function TradingPage() {
             onClick={() => soundFX.playClick()}
           >
             <ArrowLeft className="w-3.5 h-3.5" />
-            <span>&larr; BACK TO SENTIENTLY HOMEPAGE</span>
+            <span>&larr; BACK TO SANTIENTLY HOMEPAGE</span>
           </Link>
         </div>
 
@@ -123,7 +123,7 @@ export default function TradingPage() {
             &bull; RESPONSIBLE AI NOTICE &bull;
           </p>
           <p>
-            Sentiently Trading Intelligence provides deterministic computational tools, real-time data parsing, and execution routing for financial institutions and hedge desks. We do not provide retail investment advice or promise speculative returns.
+            Santiently Trading Intelligence provides deterministic computational tools, real-time data parsing, and execution routing for financial institutions and hedge desks. We do not provide retail investment advice or promise speculative returns.
           </p>
         </div>
       </main>

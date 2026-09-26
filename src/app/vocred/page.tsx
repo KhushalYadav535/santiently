@@ -74,7 +74,7 @@ export default function VocredPage() {
             onClick={() => soundFX.playClick()}
           >
             <ArrowLeft className="w-3.5 h-3.5" />
-            <span>&larr; BACK TO SENTIENTLY HOMEPAGE</span>
+            <span>&larr; BACK TO SANTIENTLY HOMEPAGE</span>
           </Link>
         </div>
 

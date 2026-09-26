@@ -60,7 +60,7 @@ export default function Navbar() {
             </div>
             <div className="leading-none">
               <p className="font-display font-bold tracking-tight text-[15px] text-[#0b0b0f]">
-                Sentiently<sup className="text-[#4d7c0f] text-[10px] ml-0.5">®</sup>
+                Santiently<sup className="text-[#4d7c0f] text-[10px] ml-0.5">®</sup>
               </p>
               <p className="font-jbmono text-[9px] tracking-[0.3em] uppercase text-black/40">
                 AI-Native Lab

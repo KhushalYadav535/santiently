@@ -62,7 +62,7 @@ export const LAB_EXPERIMENTS: Experiment[] = [
     details: "Replaces naive vector similarity search with a hybrid time-weighted knowledge graph, ensuring agents remember a user's preference without being trapped by outdated edge-case requests.",
     hypothesis: "Logarithmic time-decay combined with entity centrality prevents context drift in lifelong agent conversations.",
     metricsObserved: "40% reduction in irrelevant context retrieval during multi-session dialogues",
-    nextMilestone: "Publish open benchmark and package into the Sentiently Intelligence Stack.",
+    nextMilestone: "Publish open benchmark and package into the Santiently Intelligence Stack.",
     tags: ["MEMORY", "RAG", "KNOWLEDGE GRAPH", "EPISODIC"]
   }
 ];

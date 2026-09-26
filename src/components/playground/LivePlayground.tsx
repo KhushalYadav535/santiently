@@ -148,8 +148,8 @@ export default function LivePlayground() {
 
     const sampleText =
       voiceLang === "hi-IN"
-        ? "Namaste Vikram! Main Sentiently VoCred hoon. Aapki invoice INV-904 verify ho chuki hai."
-        : "Hello Vikram! I am Sentiently VoCred. Your real-time telephony stream is live at 240 milliseconds.";
+        ? "Namaste Vikram! Main Santiently VoCred hoon. Aapki invoice INV-904 verify ho chuki hai."
+        : "Hello Vikram! I am Santiently VoCred. Your real-time telephony stream is live at 240 milliseconds.";
 
     soundFX.speakText(
       sampleText,

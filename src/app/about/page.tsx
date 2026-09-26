@@ -25,7 +25,7 @@ export default function AboutPage() {
             onClick={() => soundFX.playClick()}
           >
             <ArrowLeft className="w-3.5 h-3.5" />
-            <span>&larr; BACK TO SENTIENTLY HOMEPAGE</span>
+            <span>&larr; BACK TO SANTIENTLY HOMEPAGE</span>
           </Link>
         </div>
 
@@ -33,7 +33,7 @@ export default function AboutPage() {
         <div className="space-y-6 pt-6 pb-16 text-left">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0b0b0f] text-[#d8ff3e] text-xs font-jbmono font-bold">
             <Cpu className="w-3.5 h-3.5 text-[#d8ff3e]" />
-            <span>SENTIENTLY LABS // MANIFESTO</span>
+            <span>SANTIENTLY LABS // MANIFESTO</span>
           </div>
 
           <h1 className="font-display text-4xl sm:text-6xl md:text-7xl font-bold tracking-[-0.035em] text-neutral-900 leading-[1.02]">
@@ -43,7 +43,7 @@ export default function AboutPage() {
           </h1>
 
           <p className="text-lg sm:text-2xl text-neutral-600 font-light leading-relaxed">
-            Sentiently Innovations is an AI-native product company focused on building intelligent software for the real world.
+            Santiently Innovation is an AI-native product company focused on building intelligent software for the real world.
           </p>
 
           <div className="flex flex-wrap gap-2 pt-2 font-jbmono text-[11px] font-bold">
@@ -64,7 +64,7 @@ export default function AboutPage() {
               Most software in the world is dumb. It waits passively for a human to click a button, type into a field, or navigate a confusing menu. Even when companies add AI, they usually just paste a chatbot widget into the bottom right corner of their existing legacy screens.
             </p>
             <p>
-              At Sentiently Innovations, we reject the superficial chat widget. We believe intelligence is an architectural primitive. It should listen to phone calls with natural acoustic prosody. It should parse crumpled invoices with spatial reasoning. It should automate workforce compliance and execute financial workflows with deterministic safety rails.
+              At Santiently Innovation, we reject the superficial chat widget. We believe intelligence is an architectural primitive. It should listen to phone calls with natural acoustic prosody. It should parse crumpled invoices with spatial reasoning. It should automate workforce compliance and execute financial workflows with deterministic safety rails.
             </p>
           </div>
 
@@ -76,7 +76,7 @@ export default function AboutPage() {
               Silicon Valley is full of viral AI demos that fall apart the moment they encounter real-world noise: a caller speaking Hinglish on a moving bus, a coffee-stained receipt, or an HR query about a complex regional labor statute.
             </p>
             <p>
-              Every product in the Sentiently ecosystem—from <strong className="text-neutral-900">VoCred</strong> and <strong className="text-neutral-900">TextMitra</strong> to our <strong className="text-neutral-900">AI-Native HRMS</strong> and <strong className="text-neutral-900">Trading Intelligence</strong>—is stress-tested against the chaotic realities of real business operations.
+              Every product in the Santiently ecosystem—from <strong className="text-neutral-900">VoCred</strong> and <strong className="text-neutral-900">TextMitra</strong> to our <strong className="text-neutral-900">AI-Native HRMS</strong> and <strong className="text-neutral-900">Trading Intelligence</strong>—is stress-tested against the chaotic realities of real business operations.
             </p>
           </div>
 

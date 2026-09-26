@@ -62,7 +62,7 @@ export default function Footer() {
             <Magnetic>
               <a
                 href="mailto:hello@sentiently.ai"
-                className="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-[#0b0b0f] text-[#d8ff3e] text-sm font-bold hover:bg-[#4d7c0f] hover:text-white transition-colors"
+                className="btn-shine inline-flex items-center gap-2 px-7 py-4 rounded-full bg-[#0b0b0f] text-[#d8ff3e] text-sm font-bold hover:bg-[#4d7c0f] hover:text-white transition-colors"
               >
                 hello@sentiently.ai <ArrowUpRight className="w-4 h-4" />
               </a>
@@ -93,7 +93,7 @@ export default function Footer() {
         <div>
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-lg bg-[#0b0b0f] flex items-center justify-center font-display font-bold text-[#d8ff3e] text-sm">S</div>
-            <p className="font-display font-bold">Sentiently®</p>
+            <p className="font-display font-bold">Santiently®</p>
           </div>
           <p className="mt-4 font-jbmono text-[10px] tracking-[0.25em] uppercase text-black/35 leading-loose">
             AI-Native
@@ -124,7 +124,7 @@ export default function Footer() {
       </div>
 
       <div className="px-5 sm:px-10 pb-8 max-w-[1600px] mx-auto flex flex-col sm:flex-row justify-between gap-3 font-jbmono text-[10px] tracking-[0.25em] uppercase text-black/30">
-        <span>© 2026 Sentiently Innovations</span>
+        <span>© 2026 Santiently Innovation</span>
         <span>
           Perceive <span className="text-[#4d7c0f]">→</span> Reason <span className="text-[#4d7c0f]">→</span> Act
         </span>

@@ -232,7 +232,7 @@ export default function HeroSection({
         </h1>
 
         <p className="animate-reveal-3 text-[15px] sm:text-lg text-neutral-600 max-w-2xl mx-auto font-normal leading-relaxed tracking-tight">
-          Sentiently is an invention laboratory. We engineer probabilistic
+          Santiently is an invention laboratory. We engineer probabilistic
           reasoning, real-time voice telephony, and autonomous agent swarms
           into{" "}
           <span className="text-neutral-900 font-semibold">

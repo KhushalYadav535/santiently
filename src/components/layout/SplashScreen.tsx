@@ -33,7 +33,7 @@ export default function SplashScreen() {
           <div className="relative w-5 h-5 bg-[#d8ff3e] rounded-full z-10" />
         </div>
         <p className="mt-5 font-display font-bold tracking-tight text-[#0b0b0f]">
-          Sentiently<span className="text-[#4d7c0f]">®</span>
+          Santiently<span className="text-[#4d7c0f]">®</span>
         </p>
         <span className="font-jbmono text-[9px] tracking-[0.3em] uppercase text-black/30 mt-2">
           AI-Native Lab

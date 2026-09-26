@@ -75,7 +75,7 @@ export default function AwwwardsHero({ activeMode = "ACOUSTIC", onModeChange, st
       {/* giant ghost backdrop */}
       <div aria-hidden className="hero-ghost absolute top-24 sm:top-20 left-0 right-0 overflow-hidden">
         <p className="ghost-word font-display font-bold tracking-[-0.04em] leading-none text-[22vw] text-center">
-          SENTIENT®
+          SANTIENT®
         </p>
       </div>
 
@@ -90,6 +90,25 @@ export default function AwwwardsHero({ activeMode = "ACOUSTIC", onModeChange, st
         </span>
         <span className="hidden md:block">Perceive → Reason → Act</span>
         <span className="tabular-nums">SCROLL ↓ 001</span>
+      </div>
+
+      {/* rotating badge — desktop only */}
+      <div className="hero-fade absolute right-10 top-[30%] z-10 hidden xl:block">
+        <div className="relative w-32 h-32">
+          <svg viewBox="0 0 100 100" className="absolute inset-0 animate-spin-slow">
+            <defs>
+              <path id="badge-circle" d="M 50,50 m -38,0 a 38,38 0 1,1 76,0 a 38,38 0 1,1 -76,0" />
+            </defs>
+            <text className="font-jbmono" fontSize="9.5" letterSpacing="2.5" fill="rgba(11,11,15,0.55)">
+              <textPath href="#badge-circle">AI NATIVE • INVENTION LAB • EST 2026 •</textPath>
+            </text>
+          </svg>
+          <span className="absolute inset-0 flex items-center justify-center">
+            <span className="w-12 h-12 rounded-full bg-[#0b0b0f] text-[#d8ff3e] flex items-center justify-center shadow-[0_10px_30px_rgba(11,11,15,0.35)]">
+              <ArrowDown className="w-5 h-5 animate-bounce" />
+            </span>
+          </span>
+        </div>
       </div>
 
       {/* Giant type */}
@@ -247,6 +266,20 @@ export default function AwwwardsHero({ activeMode = "ACOUSTIC", onModeChange, st
           <span>RAG</span>
           <span className="text-[#4d7c0f]">•</span>
           <span>22 Fonts</span>
+        </div>
+
+        {/* trusted-by strip */}
+        <div className="hero-fade mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 font-jbmono text-[10px] tracking-[0.24em] uppercase">
+          <span className="text-black/30">Trusted by operators in</span>
+          <span className="text-black/60 font-bold">Fintech</span>
+          <span className="w-1 h-1 rounded-full bg-[#4d7c0f]" />
+          <span className="text-black/60 font-bold">Logistics</span>
+          <span className="w-1 h-1 rounded-full bg-[#4d7c0f]" />
+          <span className="text-black/60 font-bold">Healthcare</span>
+          <span className="w-1 h-1 rounded-full bg-[#4d7c0f]" />
+          <span className="text-black/60 font-bold">Retail</span>
+          <span className="w-1 h-1 rounded-full bg-[#4d7c0f]" />
+          <span className="text-black/60 font-bold">Automotive</span>
         </div>
       </div>
     </section>

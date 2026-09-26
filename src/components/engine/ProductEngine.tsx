@@ -18,7 +18,7 @@ const PIPELINE_STEPS = [
   {
     step: "02",
     title: "EXPERIMENT",
-    desc: "Spinning up rapid stress benchmarks in the Sentiently Lab to identify true signal vs vanity demos.",
+    desc: "Spinning up rapid stress benchmarks in the Santiently Lab to identify true signal vs vanity demos.",
     icon: FlaskConical,
     color: "#0284c7"
   },
@@ -46,6 +46,14 @@ const PIPELINE_STEPS = [
 ];
 
 export default function ProductEngine() {
+  const handleSpotlight = (e: React.MouseEvent<HTMLDivElement>) => {
+    const t = (e.target as HTMLElement).closest?.(".spotlight-card") as HTMLElement | null;
+    if (!t) return;
+    const r = t.getBoundingClientRect();
+    t.style.setProperty("--mx", `${e.clientX - r.left}px`);
+    t.style.setProperty("--my", `${e.clientY - r.top}px`);
+  };
+
   return (
     <section id="engine" className="relative py-24 sm:py-32 px-5 sm:px-10 max-w-[1600px] mx-auto">
       <div className="mb-16">
@@ -55,7 +63,7 @@ export default function ProductEngine() {
           label="Continuous delivery flywheel"
           title={
             <>
-              <span>The Sentiently</span>
+              <span>The Santiently</span>
               <span>
                 Product <span className="text-stroke">Engine</span>
               </span>
@@ -66,7 +74,7 @@ export default function ProductEngine() {
       </div>
 
       {/* 5-Step Pipeline Horizontal Ribbon */}
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-4 relative">
+      <div className="grid grid-cols-1 md:grid-cols-5 gap-4 relative" onMouseMove={handleSpotlight}>
         {PIPELINE_STEPS.map((item, index) => {
           const Icon = item.icon;
           return (
@@ -77,7 +85,7 @@ export default function ProductEngine() {
               className="rounded-2xl"
             >
               <div
-                className="relative p-5 rounded-2xl bg-white border border-black/10 shadow-xs hover:border-black/30 hover:shadow-md transition-all duration-300 group flex flex-col justify-between h-full"
+                className="spotlight-card relative p-5 rounded-2xl bg-white border border-black/10 shadow-xs hover:border-black/30 hover:shadow-[0_20px_48px_-20px_rgba(11,11,15,0.28)] hover:-translate-y-1 transition-all duration-300 group flex flex-col justify-between h-full"
                 onMouseEnter={() => soundFX.playHover()}
               >
                 <div>

@@ -31,12 +31,12 @@ const serifIt = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
-  title: "Sentiently — AI-Native Invention Lab",
-  description: "We don't build apps. We birth intelligence. Sentiently is an AI-native invention lab engineering voice, vision, quant and swarm systems into deterministic enterprise reality.",
-  keywords: ["AI Native", "AI Invention Lab", "VoCred", "TextMitra", "Voice AI", "Document AI", "Autonomous Agents", "Sentiently"],
-  authors: [{ name: "Sentiently Innovations" }],
+  title: "Santiently Innovation — AI-Native Invention Lab",
+  description: "We don't build apps. We birth intelligence. Santiently Innovation is an AI-native invention lab engineering voice, vision, quant and swarm systems into deterministic enterprise reality.",
+  keywords: ["AI Native", "AI Invention Lab", "VoCred", "TextMitra", "Voice AI", "Document AI", "Autonomous Agents", "Santiently Innovation"],
+  authors: [{ name: "Santiently Innovation" }],
   openGraph: {
-    title: "Sentiently — Machines That Think",
+    title: "Santiently Innovation — Machines That Think",
     description: "An AI-native invention lab. Voice. Vision. Quant. Swarms.",
     type: "website",
   },

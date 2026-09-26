@@ -82,7 +82,7 @@ export default function ContactSection() {
                 <CheckCircle2 className="w-12 h-12 text-emerald-600 mx-auto" />
                 <h4 className="text-lg font-bold text-neutral-900 font-mono">Inquiry Received</h4>
                 <p className="text-xs text-neutral-600 max-w-sm mx-auto leading-relaxed">
-                  Thank you, {formData.name}. An AI solutions architect from Sentiently Innovations will reach out within 4 business hours.
+                  Thank you, {formData.name}. An AI solutions architect from Santiently Innovation will reach out within 4 business hours.
                 </p>
                 <button
                   onClick={() => setSubmitted(false)}
@@ -160,7 +160,7 @@ export default function ContactSection() {
 
                 <button
                   type="submit"
-                  className="w-full py-3.5 rounded-full text-xs sm:text-sm font-bold text-[#f4f2ed] bg-[#0b0b0f] hover:bg-[#4d7c0f] hover:text-white shadow-xs flex items-center justify-center gap-2 transition-all hover:scale-[1.01] active:scale-[0.99]"
+                  className="btn-shine w-full py-3.5 rounded-full text-xs sm:text-sm font-bold text-[#f4f2ed] bg-[#0b0b0f] hover:bg-[#4d7c0f] hover:text-white shadow-xs flex items-center justify-center gap-2 transition-all hover:scale-[1.01] active:scale-[0.99]"
                 >
                   <Send className="w-4 h-4" />
                   <span>DISPATCH INQUIRY TO ARCHITECTURE TEAM</span>

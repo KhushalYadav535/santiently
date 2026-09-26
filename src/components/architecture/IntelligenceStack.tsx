@@ -210,7 +210,7 @@ export default function IntelligenceStack() {
           </div>
 
           <div className="p-3.5 rounded-xl bg-[#0b0b0f] text-[#f4f2ed] text-xs font-mono">
-            ◆ Powers live production across all Sentiently commercial instances.
+            ◆ Powers live production across all Santiently commercial instances.
           </div>
         </div>
 

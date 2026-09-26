@@ -8,6 +8,14 @@ import ArchitectureFlow from "./ArchitectureFlow";
 import SectionHeading from "@/components/awwwards/SectionHeading";
 
 export default function PerceiveReasonAct() {
+  const handleSpotlight = (e: React.MouseEvent<HTMLDivElement>) => {
+    const t = (e.target as HTMLElement).closest?.(".spotlight-card") as HTMLElement | null;
+    if (!t) return;
+    const r = t.getBoundingClientRect();
+    t.style.setProperty("--mx", `${e.clientX - r.left}px`);
+    t.style.setProperty("--my", `${e.clientY - r.top}px`);
+  };
+
   return (
     <section className="relative py-24 sm:py-32 px-5 sm:px-10 max-w-[1600px] mx-auto">
       <div className="mb-14">
@@ -25,7 +33,7 @@ export default function PerceiveReasonAct() {
         />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 relative" onMouseMove={handleSpotlight}>
         {/* Step 1: PERCEIVE */}
         <Tilt3DCard
           maxTilt={7}
@@ -33,7 +41,7 @@ export default function PerceiveReasonAct() {
           onMouseEnter={() => soundFX.playHover()}
           className="rounded-2xl"
         >
-          <div className="relative p-6 sm:p-8 rounded-2xl bg-white border border-black/10 hover:border-cyan-400 shadow-xs hover:shadow-md transition-all duration-300 group h-full flex flex-col justify-between">
+          <div className="relative p-6 sm:p-8 rounded-[20px] spotlight-card bg-white border border-black/10 hover:border-cyan-400 shadow-xs hover:shadow-md transition-all duration-300 group h-full flex flex-col justify-between">
             <div>
               <div className="w-12 h-12 rounded-xl bg-cyan-50 border border-cyan-200 flex items-center justify-center text-cyan-600 mb-6 group-hover:scale-105 transition-transform">
                 <Eye className="w-6 h-6" />
@@ -76,7 +84,7 @@ export default function PerceiveReasonAct() {
           onMouseEnter={() => soundFX.playHover()}
           className="rounded-2xl"
         >
-          <div className="relative p-6 sm:p-8 rounded-2xl bg-white border border-black/10 hover:border-purple-400 shadow-xs hover:shadow-md transition-all duration-300 group h-full flex flex-col justify-between">
+          <div className="relative p-6 sm:p-8 rounded-[20px] spotlight-card bg-white border border-black/10 hover:border-purple-400 shadow-xs hover:shadow-md transition-all duration-300 group h-full flex flex-col justify-between">
             <div>
               <div className="w-12 h-12 rounded-xl bg-purple-50 border border-purple-200 flex items-center justify-center text-purple-600 mb-6 group-hover:scale-105 transition-transform">
                 <Brain className="w-6 h-6" />
@@ -119,7 +127,7 @@ export default function PerceiveReasonAct() {
           onMouseEnter={() => soundFX.playHover()}
           className="rounded-2xl"
         >
-          <div className="relative p-6 sm:p-8 rounded-2xl bg-white border border-black/10 hover:border-emerald-400 shadow-xs hover:shadow-md transition-all duration-300 group h-full flex flex-col justify-between">
+          <div className="relative p-6 sm:p-8 rounded-[20px] spotlight-card bg-white border border-black/10 hover:border-emerald-400 shadow-xs hover:shadow-md transition-all duration-300 group h-full flex flex-col justify-between">
             <div>
               <div className="w-12 h-12 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 mb-6 group-hover:scale-105 transition-transform">
                 <Zap className="w-6 h-6" />

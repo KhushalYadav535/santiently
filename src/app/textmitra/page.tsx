@@ -21,7 +21,7 @@ export default function TextMitraPage() {
       address: "DLF Cyber City, Tower 4, Gurugram"
     },
     buyer: {
-      company: "Sentiently Enterprise Client",
+      company: "Santiently Enterprise Client",
       po_number: "PO-99104"
     },
     line_items: [
@@ -61,7 +61,7 @@ export default function TextMitraPage() {
             onClick={() => soundFX.playClick()}
           >
             <ArrowLeft className="w-3.5 h-3.5" />
-            <span>&larr; BACK TO SENTIENTLY HOMEPAGE</span>
+            <span>&larr; BACK TO SANTIENTLY HOMEPAGE</span>
           </Link>
         </div>
 
@@ -144,7 +144,7 @@ export default function TextMitraPage() {
               </div>
 
               <div className="py-2 space-y-1.5 text-neutral-600 text-[11px]">
-                <p>Buyer: Sentiently Enterprise Client | GSTIN: 27AABCA1234F1Z5</p>
+                <p>Buyer: Santiently Enterprise Client | GSTIN: 27AABCA1234F1Z5</p>
                 <p>PO Number: PO-99104 | Issue Date: 14 Oct 2026</p>
               </div>
 

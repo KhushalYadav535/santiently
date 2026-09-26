@@ -26,7 +26,7 @@ export default function LabPage() {
             onClick={() => soundFX.playClick()}
           >
             <ArrowLeft className="w-3.5 h-3.5" />
-            <span>&larr; BACK TO SENTIENTLY HOMEPAGE</span>
+            <span>&larr; BACK TO SANTIENTLY HOMEPAGE</span>
           </Link>
         </div>
 
@@ -34,7 +34,7 @@ export default function LabPage() {
         <div className="text-center max-w-4xl mx-auto space-y-6 pt-6 pb-12">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0b0b0f] text-[#d8ff3e] text-xs font-jbmono font-bold">
             <FlaskConical className="w-3.5 h-3.5 text-[#d8ff3e]" />
-            <span>THE SENTIENTLY LAB // APPLIED AI RESEARCH</span>
+            <span>THE SANTIENTLY LAB // APPLIED AI RESEARCH</span>
           </div>
 
           <h1 className="font-display text-4xl sm:text-6xl md:text-7xl font-bold tracking-[-0.035em] text-neutral-900 leading-[1.0]">
@@ -74,7 +74,7 @@ export default function LabPage() {
             From Experiment to Production System
           </h3>
           <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed">
-            In traditional research divisions, prototypes gather dust. In Sentiently Innovations, every experiment that crosses our benchmark thresholds is compiled directly into a commercial product:
+            In traditional research divisions, prototypes gather dust. In Santiently Innovation, every experiment that crosses our benchmark thresholds is compiled directly into a commercial product:
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">

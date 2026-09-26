@@ -21,10 +21,19 @@ export default function SectionHeading({
 }) {
   const alignCls = align === "center" ? "items-center text-center" : "items-start text-left";
   return (
-    <div className={`flex flex-col gap-5 ${alignCls}`}>
+    <div className={`relative flex flex-col gap-5 ${alignCls}`}>
+      <span
+        aria-hidden
+        className="ghost-word pointer-events-none absolute -top-12 sm:-top-16 right-0 font-display font-bold leading-none text-[26vw] sm:text-[10rem] select-none"
+      >
+        {index}
+      </span>
       <FadeUp>
-        <div className="flex items-center gap-3 font-jbmono text-[11px] tracking-[0.3em] uppercase text-black/40">
-          <span className="text-[#4d7c0f] font-bold">{index}</span>
+        <div className="relative flex items-center gap-3 font-jbmono text-[11px] tracking-[0.3em] uppercase text-black/40">
+          <span className="flex items-center gap-1.5 text-[#4d7c0f] font-bold">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#4d7c0f] animate-pulse" />
+            {index}
+          </span>
           <span className="h-px w-10 bg-black/20" />
           <span>{label}</span>
         </div>

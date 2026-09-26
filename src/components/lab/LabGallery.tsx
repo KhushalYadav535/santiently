@@ -24,6 +24,14 @@ export default function LabGallery({ isFullPage = false }: { isFullPage?: boolea
     }
   };
 
+  const handleSpotlight = (e: React.MouseEvent<HTMLDivElement>) => {
+    const t = (e.target as HTMLElement).closest?.(".spotlight-card") as HTMLElement | null;
+    if (!t) return;
+    const r = t.getBoundingClientRect();
+    t.style.setProperty("--mx", `${e.clientX - r.left}px`);
+    t.style.setProperty("--my", `${e.clientY - r.top}px`);
+  };
+
   return (
     <section id="lab" className="relative py-24 sm:py-32 px-5 sm:px-10 max-w-[1600px] mx-auto">
       {/* Header */}
@@ -57,7 +65,7 @@ export default function LabGallery({ isFullPage = false }: { isFullPage?: boolea
       {(isFullPage) && <div className="mt-10 mb-12" />}
 
       {/* Experiments Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5" onMouseMove={handleSpotlight}>
         {displayedExperiments.map((exp) => (
           <Tilt3DCard
             key={exp.id}
@@ -71,7 +79,7 @@ export default function LabGallery({ isFullPage = false }: { isFullPage?: boolea
                 soundFX.playClick();
               }}
               onMouseEnter={() => soundFX.playHover()}
-              className="group relative rounded-2xl bg-white border border-black/10 p-6 sm:p-8 shadow-xs transition-all duration-300 hover:border-black/30 hover:shadow-lg cursor-pointer overflow-hidden h-full flex flex-col justify-between"
+              className="group spotlight-card relative rounded-[20px] bg-white border border-black/10 p-6 sm:p-8 shadow-xs transition-all duration-300 hover:border-black/30 hover:shadow-[0_24px_56px_-20px_rgba(11,11,15,0.25)] hover:-translate-y-1 cursor-pointer overflow-hidden h-full flex flex-col justify-between"
             >
               {/* Top Code & Status */}
               <div>

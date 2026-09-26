@@ -70,9 +70,9 @@ export default function HeroInventionDeck({
     setBargeInStatus(null);
 
     const phrases = {
-      HINDI_ENG: "नमस्ते, Sentiently VoCred telephony engine active hai. Sub-280ms latency ke saath natural Indian conversational speech ready.",
-      ENG: "Hello, this is Sentiently VoCred 2.0 streaming via direct SIP trunking with sub-45ms zero-tail barge-in capability.",
-      BENGALI: "নমস্কার, Sentiently VoCred ভয়েস প্ল্যাটফর্ম সক্রিয় রয়েছে। রিয়েল-টাইম কথোপকথন শুরু করার জন্য প্রস্তুত।",
+      HINDI_ENG: "नमस्ते, Santiently VoCred telephony engine active hai. Sub-280ms latency ke saath natural Indian conversational speech ready.",
+      ENG: "Hello, this is Santiently VoCred 2.0 streaming via direct SIP trunking with sub-45ms zero-tail barge-in capability.",
+      BENGALI: "নমস্কার, Santiently VoCred ভয়েস প্ল্যাটফর্ম সক্রিয় রয়েছে। রিয়েল-টাইম কথোপকথন শুরু করার জন্য প্রস্তুত।",
     };
 
     const textToSpeak = phrases[selectedLanguage];
