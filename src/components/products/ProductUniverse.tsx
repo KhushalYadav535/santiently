@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowUpRight, Sparkles, Activity, FileText, CheckCircle2, Mic, TrendingUp, Layers } from "lucide-react";
 import { PRODUCTS, Product } from "@/data/products";
 import { soundFX } from "@/utils/audio";
+import Tilt3DCard from "@/components/ui/Tilt3DCard";
 
 const CATEGORIES = ["ALL", "VOICE AI", "DOCUMENT AI", "ENTERPRISE", "FINTECH", "OPERATIONS", "COMMUNITY"];
 
@@ -217,89 +218,95 @@ export default function ProductUniverse() {
       {/* Product Cards Grid - Google Labs Style with Live Preview Banners */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredProducts.map((product, idx) => (
-          <div
+          <Tilt3DCard
             key={product.id}
-            style={{ animationDelay: `${idx * 80}ms` }}
-            className="animate-reveal-2 group relative flex flex-col justify-between rounded-2xl bg-white border border-gray-200/90 p-5 shadow-xs transition-all duration-300 hover:-translate-y-2 hover:border-gray-300 hover:shadow-xl overflow-hidden text-left"
-            onMouseEnter={() => soundFX.playHover()}
+            maxTilt={6}
+            scale={1.02}
+            className="rounded-2xl"
           >
-            {/* Ambient card top border gradient */}
             <div
-              className="absolute top-0 left-0 right-0 h-1 opacity-80 group-hover:opacity-100 transition-opacity"
-              style={{ backgroundColor: product.highlightColor }}
-            />
+              style={{ animationDelay: `${idx * 80}ms` }}
+              className="animate-reveal-2 group relative flex flex-col justify-between rounded-2xl bg-white border border-gray-200/90 p-5 shadow-xs transition-all duration-300 hover:border-gray-300 hover:shadow-xl overflow-hidden text-left h-full"
+              onMouseEnter={() => soundFX.playHover()}
+            >
+              {/* Ambient card top border gradient */}
+              <div
+                className="absolute top-0 left-0 right-0 h-1 opacity-80 group-hover:opacity-100 transition-opacity"
+                style={{ backgroundColor: product.highlightColor }}
+              />
 
-            <div>
-              {/* Category & Status */}
-              <div className="flex items-center justify-between gap-2 pb-3">
-                <span className="text-[11px] font-mono tracking-wider uppercase text-neutral-500 font-semibold">
-                  {product.category}
-                </span>
-                {getStatusBadge(product.status)}
-              </div>
-
-              {/* Animated Interactive Visual Preview Header */}
-              <div className="mb-4">
-                <CardMediaPreview slug={product.slug} />
-              </div>
-
-              {/* Product Name & Tagline */}
-              <div className="space-y-1 mb-2.5">
-                <h3 className="text-xl font-bold text-neutral-900 group-hover:text-blue-600 transition-colors flex items-center justify-between">
-                  <span>{product.name}</span>
-                  <ArrowUpRight className="w-4 h-4 text-neutral-400 group-hover:text-blue-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                </h3>
-                <p className="text-xs font-mono font-medium text-blue-700">
-                  {product.tagline}
-                </p>
-              </div>
-
-              {/* Description */}
-              <p className="text-xs text-neutral-600 leading-relaxed line-clamp-2 mb-4">
-                {product.description}
-              </p>
-
-              {/* Key Metrics Grid */}
-              <div className="grid grid-cols-2 gap-2 py-2.5 px-3 rounded-xl bg-gray-50 border border-gray-100 mb-4">
-                {product.metrics.slice(0, 2).map((metric) => (
-                  <div key={metric.label}>
-                    <div className="text-[10px] text-neutral-500 font-mono uppercase">
-                      {metric.label}
-                    </div>
-                    <div className="text-sm font-bold text-neutral-900 font-mono mt-0.5">
-                      {metric.value}
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              {/* Tags */}
-              <div className="flex flex-wrap gap-1.5 mb-4">
-                {product.tags.slice(0, 3).map((tag) => (
-                  <span
-                    key={tag}
-                    className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-gray-100 text-neutral-600 border border-gray-200/60"
-                  >
-                    {tag}
+              <div>
+                {/* Category & Status */}
+                <div className="flex items-center justify-between gap-2 pb-3">
+                  <span className="text-[11px] font-mono tracking-wider uppercase text-neutral-500 font-semibold">
+                    {product.category}
                   </span>
-                ))}
+                  {getStatusBadge(product.status)}
+                </div>
+
+                {/* Animated Interactive Visual Preview Header */}
+                <div className="mb-4">
+                  <CardMediaPreview slug={product.slug} />
+                </div>
+
+                {/* Product Name & Tagline */}
+                <div className="space-y-1 mb-2.5">
+                  <h3 className="text-xl font-bold text-neutral-900 group-hover:text-blue-600 transition-colors flex items-center justify-between">
+                    <span>{product.name}</span>
+                    <ArrowUpRight className="w-4 h-4 text-neutral-400 group-hover:text-blue-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  </h3>
+                  <p className="text-xs font-mono font-medium text-blue-700">
+                    {product.tagline}
+                  </p>
+                </div>
+
+                {/* Description */}
+                <p className="text-xs text-neutral-600 leading-relaxed line-clamp-2 mb-4">
+                  {product.description}
+                </p>
+
+                {/* Key Metrics Grid */}
+                <div className="grid grid-cols-2 gap-2 py-2.5 px-3 rounded-xl bg-gray-50 border border-gray-100 mb-4">
+                  {product.metrics.slice(0, 2).map((metric) => (
+                    <div key={metric.label}>
+                      <div className="text-[10px] text-neutral-500 font-mono uppercase">
+                        {metric.label}
+                      </div>
+                      <div className="text-sm font-bold text-neutral-900 font-mono mt-0.5">
+                        {metric.value}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Tags */}
+                <div className="flex flex-wrap gap-1.5 mb-4">
+                  {product.tags.slice(0, 3).map((tag) => (
+                    <span
+                      key={tag}
+                      className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-gray-100 text-neutral-600 border border-gray-200/60"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Bottom CTA Action */}
+              <div className="pt-3 border-t border-gray-100">
+                <Link
+                  href={product.href}
+                  className="w-full inline-flex items-center justify-between text-xs font-semibold text-neutral-800 group-hover:text-blue-600 py-1 transition-colors"
+                  onClick={() => soundFX.playClick()}
+                >
+                  <span>{product.ctaText}</span>
+                  <span className="text-blue-600 font-mono text-[11px] group-hover:translate-x-1 transition-transform">
+                    EXPLORE &rarr;
+                  </span>
+                </Link>
               </div>
             </div>
-
-            {/* Bottom CTA Action */}
-            <div className="pt-3 border-t border-gray-100">
-              <Link
-                href={product.href}
-                className="w-full inline-flex items-center justify-between text-xs font-semibold text-neutral-800 group-hover:text-blue-600 py-1 transition-colors"
-                onClick={() => soundFX.playClick()}
-              >
-                <span>{product.ctaText}</span>
-                <span className="text-blue-600 font-mono text-[11px] group-hover:translate-x-1 transition-transform">
-                  EXPLORE &rarr;
-                </span>
-              </Link>
-            </div>
-          </div>
+          </Tilt3DCard>
         ))}
       </div>
     </section>

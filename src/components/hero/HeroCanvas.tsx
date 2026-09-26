@@ -2,6 +2,8 @@
 
 import React, { useEffect, useRef } from "react";
 
+import HeroThreeCanvas from "./HeroThreeCanvas";
+
 interface BlobOrb {
   x: number;
   y: number;
@@ -173,14 +175,16 @@ export default function HeroCanvas() {
   }, []);
 
   return (
-    <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
-      {/* Canvas with CSS blur and opening bloom animation */}
+    <div className="absolute inset-0 z-0 overflow-hidden">
+      {/* 1. Ambient fluid bloom background */}
       <canvas
         ref={canvasRef}
-        className="w-full h-full opacity-85 animate-bloom"
-        style={{ filter: "blur(40px)" }}
+        className="w-full h-full opacity-65 animate-bloom pointer-events-none"
+        style={{ filter: "blur(46px)" }}
       />
-      {/* Subtle overlay gradient to ensure high text contrast */}
+      {/* 2. Interactive Three.js WebGL 3D Holographic Core */}
+      <HeroThreeCanvas />
+      {/* 3. Subtle overlay gradient to ensure high text contrast */}
       <div className="absolute inset-0 bg-gradient-to-b from-white/30 via-transparent to-[#f8f9fa] pointer-events-none" />
     </div>
   );

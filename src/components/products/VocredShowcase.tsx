@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { PhoneCall, ArrowRight, CheckCircle2, Cpu, RefreshCw, Sparkles, Mic, Volume2, Square } from "lucide-react";
 import { soundFX } from "@/utils/audio";
+import Tilt3DCard from "@/components/ui/Tilt3DCard";
 
 const DEMO_CONVERSATIONS = [
   {
@@ -248,7 +249,12 @@ export default function VocredShowcase() {
           </div>
 
           {/* Right Column: Google Gemini-Style Voice Sandbox with Real Audio */}
-          <div className="lg:col-span-6 bg-gray-50/90 border border-gray-200 rounded-2xl p-6 sm:p-7 space-y-5 shadow-xs">
+          <Tilt3DCard
+            maxTilt={4}
+            scale={1.01}
+            className="lg:col-span-6 rounded-2xl"
+          >
+            <div data-cursor-label="AUDIO CUE" className="bg-gray-50/90 border border-gray-200 rounded-2xl p-6 sm:p-7 space-y-5 shadow-xs">
             {/* Top Sandbox Header & Scenario Tabs */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-gray-200">
               <div className="flex items-center gap-2">
@@ -410,8 +416,9 @@ export default function VocredShowcase() {
               </button>
             </div>
           </div>
-        </div>
+        </Tilt3DCard>
       </div>
+    </div>
     </section>
   );
 }
