@@ -2,16 +2,18 @@
 
 import React, { useEffect, useRef } from "react";
 
-interface Node {
+interface BlobOrb {
   x: number;
   y: number;
+  baseX: number;
+  baseY: number;
   vx: number;
   vy: number;
-  baseRadius: number;
   radius: number;
-  pulseSpeed: number;
-  pulsePhase: number;
+  baseRadius: number;
   color: string;
+  speed: number;
+  angle: number;
 }
 
 export default function HeroCanvas() {
@@ -23,17 +25,17 @@ export default function HeroCanvas() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    let animationFrameId: number;
+    let animId: number;
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
 
-    // Mouse coordinates
+    // Mouse coordinates with spring inertia
     const mouse = {
       x: width / 2,
       y: height / 2,
       targetX: width / 2,
       targetY: height / 2,
-      radius: 160,
+      radius: 220,
       active: false,
     };
 
@@ -59,132 +61,111 @@ export default function HeroCanvas() {
     window.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("mouseleave", handleMouseLeave);
 
-    // Create neural network nodes
-    const nodeCount = Math.min(Math.floor((width * height) / 16000), 75);
-    const nodes: Node[] = [];
-    const colors = ["#a855f7", "#8b5cf6", "#06b6d4", "#38bdf8", "#ec4899"];
+    // Google Labs iconic fluid palette
+    const blobColors = [
+      "rgba(66, 133, 244, 0.28)",  // Google Blue
+      "rgba(147, 51, 234, 0.24)",  // Gemini Violet
+      "rgba(236, 72, 153, 0.22)",  // Rose Pink
+      "rgba(6, 182, 212, 0.22)",   // Soft Cyan
+      "rgba(251, 188, 5, 0.20)",   // Google Warm Amber
+      "rgba(52, 168, 83, 0.18)",   // Google Emerald
+    ];
 
-    for (let i = 0; i < nodeCount; i++) {
-      nodes.push({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.45,
-        vy: (Math.random() - 0.5) * 0.45,
-        baseRadius: Math.random() * 2 + 1,
-        radius: Math.random() * 2 + 1,
-        pulseSpeed: 0.02 + Math.random() * 0.03,
-        pulsePhase: Math.random() * Math.PI * 2,
-        color: colors[Math.floor(Math.random() * colors.length)],
-      });
-    }
+    // Create 6 organic liquid blobs that rotate and undulate
+    const blobs: BlobOrb[] = [
+      { x: width * 0.35, y: height * 0.35, baseX: width * 0.35, baseY: height * 0.35, vx: 0, vy: 0, radius: 240, baseRadius: 240, color: blobColors[0], speed: 0.008, angle: 0 },
+      { x: width * 0.65, y: height * 0.32, baseX: width * 0.65, baseY: height * 0.32, vx: 0, vy: 0, radius: 280, baseRadius: 280, color: blobColors[1], speed: 0.006, angle: Math.PI * 0.6 },
+      { x: width * 0.50, y: height * 0.55, baseX: width * 0.50, baseY: height * 0.55, vx: 0, vy: 0, radius: 260, baseRadius: 260, color: blobColors[2], speed: 0.009, angle: Math.PI * 1.2 },
+      { x: width * 0.25, y: height * 0.65, baseX: width * 0.25, baseY: height * 0.65, vx: 0, vy: 0, radius: 210, baseRadius: 210, color: blobColors[3], speed: 0.007, angle: Math.PI * 0.4 },
+      { x: width * 0.75, y: height * 0.60, baseX: width * 0.75, baseY: height * 0.60, vx: 0, vy: 0, radius: 230, baseRadius: 230, color: blobColors[4], speed: 0.005, angle: Math.PI * 1.5 },
+      { x: width * 0.52, y: height * 0.25, baseX: width * 0.52, baseY: height * 0.25, vx: 0, vy: 0, radius: 200, baseRadius: 200, color: blobColors[5], speed: 0.007, angle: Math.PI * 0.9 },
+    ];
 
-    // Render loop
+    // Floating subtle sparkle dust particles
+    const sparks = Array.from({ length: 24 }, () => ({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      r: Math.random() * 2 + 1,
+      vy: -(0.2 + Math.random() * 0.3),
+      alpha: Math.random() * 0.4 + 0.2,
+      color: ["#4285F4", "#9333EA", "#06B6D4", "#FBBC05"][Math.floor(Math.random() * 4)],
+    }));
+
     let tick = 0;
+
     const render = () => {
-      tick += 0.015;
+      tick += 0.01;
 
       // Smooth mouse interpolation
-      mouse.x += (mouse.targetX - mouse.x) * 0.08;
-      mouse.y += (mouse.targetY - mouse.y) * 0.08;
+      mouse.x += (mouse.targetX - mouse.x) * 0.06;
+      mouse.y += (mouse.targetY - mouse.y) * 0.06;
 
       ctx.clearRect(0, 0, width, height);
 
-      // Ambient background glow in center
-      const centerGlow = ctx.createRadialGradient(
-        width / 2,
-        height * 0.42,
-        20,
-        width / 2,
-        height * 0.42,
-        width * 0.45
-      );
-      centerGlow.addColorStop(0, "rgba(168, 85, 247, 0.07)");
-      centerGlow.addColorStop(0.5, "rgba(6, 182, 212, 0.03)");
-      centerGlow.addColorStop(1, "rgba(5, 5, 7, 0)");
-      ctx.fillStyle = centerGlow;
-      ctx.fillRect(0, 0, width, height);
-
-      // Subtle mouse spotlight
-      if (mouse.active) {
-        const mouseGlow = ctx.createRadialGradient(
-          mouse.x,
-          mouse.y,
-          0,
-          mouse.x,
-          mouse.y,
-          mouse.radius * 1.5
-        );
-        mouseGlow.addColorStop(0, "rgba(168, 85, 247, 0.06)");
-        mouseGlow.addColorStop(1, "rgba(0, 0, 0, 0)");
-        ctx.fillStyle = mouseGlow;
-        ctx.beginPath();
-        ctx.arc(mouse.x, mouse.y, mouse.radius * 1.5, 0, Math.PI * 2);
-        ctx.fill();
-      }
-
-      // Update and connect nodes
-      for (let i = 0; i < nodes.length; i++) {
-        const n = nodes[i];
-
-        // Move
-        n.x += n.vx;
-        n.y += n.vy;
-
-        // Bounce from boundaries
-        if (n.x < 0 || n.x > width) n.vx *= -1;
-        if (n.y < 0 || n.y > height) n.vy *= -1;
+      // Render fluid organic blobs
+      blobs.forEach((b, i) => {
+        b.angle += b.speed;
+        const orbitX = Math.sin(b.angle + tick * 0.5) * 80;
+        const orbitY = Math.cos(b.angle * 0.8 + tick * 0.4) * 60;
+        const targetX = b.baseX + orbitX;
+        const targetY = b.baseY + orbitY;
 
         // Mouse repulsion
-        const dx = mouse.x - n.x;
-        const dy = mouse.y - n.y;
+        const dx = mouse.x - b.x;
+        const dy = mouse.y - b.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
         if (dist < mouse.radius && mouse.active) {
-          const force = (1 - dist / mouse.radius) * 1.2;
-          n.x -= (dx / dist) * force;
-          n.y -= (dy / dist) * force;
+          const force = (1 - dist / mouse.radius) * 70;
+          b.x -= (dx / dist) * force * 0.08;
+          b.y -= (dy / dist) * force * 0.08;
         }
 
-        // Pulse radius
-        n.pulsePhase += n.pulseSpeed;
-        n.radius = n.baseRadius + Math.sin(n.pulsePhase) * 0.8;
+        b.x += (targetX - b.x) * 0.03;
+        b.y += (targetY - b.y) * 0.03;
+        b.radius = b.baseRadius + Math.sin(tick * 1.5 + i) * 20;
 
-        // Connect with nearby nodes
-        for (let j = i + 1; j < nodes.length; j++) {
-          const n2 = nodes[j];
-          const distNodes = Math.hypot(n.x - n2.x, n.y - n2.y);
-          const maxDist = 135;
+        // Draw soft radial blur blob
+        const grad = ctx.createRadialGradient(
+          b.x,
+          b.y,
+          0,
+          b.x,
+          b.y,
+          b.radius
+        );
+        grad.addColorStop(0, b.color);
+        grad.addColorStop(0.5, b.color.replace(/[\d\.]+\)$/, "0.12)"));
+        grad.addColorStop(1, "rgba(248, 249, 250, 0)");
 
-          if (distNodes < maxDist) {
-            const alpha = (1 - distNodes / maxDist) * 0.22;
-            ctx.strokeStyle = `rgba(168, 85, 247, ${alpha})`;
-            ctx.lineWidth = 0.75;
-            ctx.beginPath();
-            ctx.moveTo(n.x, n.y);
-            ctx.lineTo(n2.x, n2.y);
-            ctx.stroke();
-          }
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(b.x, b.y, b.radius, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      // Update and draw subtle upward floating sparkle dust
+      sparks.forEach((s) => {
+        s.y += s.vy;
+        if (s.y < -10) {
+          s.y = height + 10;
+          s.x = Math.random() * width;
         }
 
-        // Draw node
-        ctx.fillStyle = n.color;
+        ctx.fillStyle = s.color;
+        ctx.globalAlpha = s.alpha * (0.6 + Math.sin(tick * 2 + s.x) * 0.4);
         ctx.beginPath();
-        ctx.arc(n.x, n.y, Math.max(0.5, n.radius), 0, Math.PI * 2);
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
         ctx.fill();
+        ctx.globalAlpha = 1;
+      });
 
-        // Node halo
-        ctx.fillStyle = n.color.replace(")", ", 0.15)").replace("rgb", "rgba");
-        ctx.beginPath();
-        ctx.arc(n.x, n.y, Math.max(1, n.radius * 2.5), 0, Math.PI * 2);
-        ctx.fill();
-      }
-
-      animationFrameId = requestAnimationFrame(render);
+      animId = requestAnimationFrame(render);
     };
 
     render();
 
     return () => {
-      cancelAnimationFrame(animationFrameId);
+      cancelAnimationFrame(animId);
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseleave", handleMouseLeave);
@@ -192,10 +173,15 @@ export default function HeroCanvas() {
   }, []);
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="absolute inset-0 pointer-events-none z-0 opacity-80"
-      style={{ width: "100%", height: "100%" }}
-    />
+    <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+      {/* Canvas with CSS blur and opening bloom animation */}
+      <canvas
+        ref={canvasRef}
+        className="w-full h-full opacity-85 animate-bloom"
+        style={{ filter: "blur(40px)" }}
+      />
+      {/* Subtle overlay gradient to ensure high text contrast */}
+      <div className="absolute inset-0 bg-gradient-to-b from-white/30 via-transparent to-[#f8f9fa] pointer-events-none" />
+    </div>
   );
 }

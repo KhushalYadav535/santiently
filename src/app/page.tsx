@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import SplashScreen from "@/components/layout/SplashScreen";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import CustomCursor from "@/components/layout/CustomCursor";
@@ -16,11 +17,14 @@ import ContactSection from "@/components/common/ContactSection";
 
 export default function Home() {
   return (
-    <div className="relative min-h-screen bg-[#050507] text-[#f4f4f5] overflow-x-hidden selection:bg-purple-500/30 selection:text-white">
+    <div className="relative min-h-screen bg-[#f8f9fa] text-[#111827] overflow-x-hidden selection:bg-blue-500/20 selection:text-blue-900">
+      {/* Splash Screen - Google Labs Intro */}
+      <SplashScreen />
+
       {/* Dynamic Cursor */}
       <CustomCursor />
 
-      {/* Floating Glassmorphism Navbar */}
+      {/* Floating Glassmorphism Navbar - Google Labs */}
       <Navbar />
 
       {/* Hero with Living Neural Canvas */}
@@ -29,7 +33,7 @@ export default function Home() {
         <HeroSection />
       </div>
 
-      {/* Flagship VoCred Interactive Voice Playground */}
+      {/* Flagship VoCred Interactive Voice Spotlight */}
       <VocredShowcase />
 
       {/* Google Labs Inspired Product Universe */}
@@ -50,7 +54,7 @@ export default function Home() {
       {/* Enterprise Consultation / Contact */}
       <ContactSection />
 
-      {/* Futuristic 2026 Footer */}
+      {/* Google Labs Style Light Footer */}
       <Footer />
     </div>
   );

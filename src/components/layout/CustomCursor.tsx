@@ -50,18 +50,18 @@ export default function CustomCursor() {
     <div className="pointer-events-none fixed inset-0 z-50 overflow-hidden transition-opacity duration-300">
       {/* Outer fluid halo */}
       <div
-        className="fixed rounded-full border border-purple-400/40 pointer-events-none -translate-x-1/2 -translate-y-1/2 transition-transform duration-100 ease-out"
+        className="fixed rounded-full border border-blue-500/40 pointer-events-none -translate-x-1/2 -translate-y-1/2 transition-transform duration-100 ease-out"
         style={{
           left: `${pos.x}px`,
           top: `${pos.y}px`,
           width: isPointer ? "42px" : "24px",
           height: isPointer ? "42px" : "24px",
-          backgroundColor: isPointer ? "rgba(168, 85, 247, 0.1)" : "transparent",
+          backgroundColor: isPointer ? "rgba(37, 99, 235, 0.08)" : "transparent",
         }}
       />
       {/* Center glowing dot */}
       <div
-        className="fixed rounded-full bg-cyan-400 pointer-events-none -translate-x-1/2 -translate-y-1/2 shadow-sm shadow-cyan-400/80"
+        className="fixed rounded-full bg-blue-600 pointer-events-none -translate-x-1/2 -translate-y-1/2 shadow-xs shadow-blue-500/50"
         style={{
           left: `${pos.x}px`,
           top: `${pos.y}px`,
