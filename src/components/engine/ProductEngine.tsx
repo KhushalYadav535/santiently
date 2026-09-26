@@ -4,6 +4,8 @@ import React from "react";
 import { Search, FlaskConical, Code2, Rocket, TrendingUp, CheckCircle, ShieldCheck } from "lucide-react";
 import { soundFX } from "@/utils/audio";
 import Tilt3DCard from "@/components/ui/Tilt3DCard";
+import SectionHeading from "@/components/awwwards/SectionHeading";
+import { FadeUp } from "@/components/awwwards/Reveal";
 
 const PIPELINE_STEPS = [
   {
@@ -45,18 +47,22 @@ const PIPELINE_STEPS = [
 
 export default function ProductEngine() {
   return (
-    <section id="engine" className="relative py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto z-10">
-      <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-gray-200 text-blue-700 text-xs font-mono shadow-2xs">
-          <ShieldCheck className="w-3.5 h-3.5 text-blue-600" />
-          <span>THE CONTINUOUS DELIVERY FLYWHEEL</span>
-        </div>
-        <h2 className="text-3xl sm:text-5xl font-black text-neutral-900 tracking-tight">
-          The Sentiently Product Engine
-        </h2>
-        <p className="text-sm sm:text-base text-neutral-600">
-          We don&apos;t keep AI trapped in research notebooks. We operate a continuous pipeline that transforms experimental capabilities into battle-tested commercial software.
-        </p>
+    <section id="engine" className="relative py-24 sm:py-32 px-5 sm:px-10 max-w-[1600px] mx-auto">
+      <div className="mb-16">
+        <SectionHeading
+          align="center"
+          index="10"
+          label="Continuous delivery flywheel"
+          title={
+            <>
+              <span>The Sentiently</span>
+              <span>
+                Product <span className="text-stroke">Engine</span>
+              </span>
+            </>
+          }
+          accent="We don't keep AI trapped in research notebooks. A continuous pipeline turns experimental capabilities into battle-tested commercial software."
+        />
       </div>
 
       {/* 5-Step Pipeline Horizontal Ribbon */}
@@ -71,7 +77,7 @@ export default function ProductEngine() {
               className="rounded-2xl"
             >
               <div
-                className="relative p-5 rounded-2xl bg-white border border-gray-200 shadow-xs hover:border-blue-400 hover:shadow-md transition-all duration-300 group flex flex-col justify-between h-full"
+                className="relative p-5 rounded-2xl bg-white border border-black/10 shadow-xs hover:border-black/30 hover:shadow-md transition-all duration-300 group flex flex-col justify-between h-full"
                 onMouseEnter={() => soundFX.playHover()}
               >
                 <div>
@@ -95,7 +101,7 @@ export default function ProductEngine() {
                   </p>
                 </div>
 
-                <div className="mt-4 pt-3 border-t border-gray-100 flex items-center gap-1.5 text-[10px] font-mono text-neutral-500">
+                <div className="mt-4 pt-3 border-t border-black/10 flex items-center gap-1.5 text-[10px] font-mono text-neutral-500">
                   <span>GATEWAY {index + 1} VERIFIED</span>
                   <CheckCircle className="w-3 h-3 text-emerald-600" />
                 </div>
@@ -106,28 +112,30 @@ export default function ProductEngine() {
       </div>
 
       {/* Callout Box: Real World Proof */}
-      <div className="mt-12 p-6 sm:p-8 rounded-3xl bg-blue-50/70 border border-blue-200/80 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xs">
+      <FadeUp>
+      <div className="mt-12 p-6 sm:p-8 rounded-[24px] bg-[#0b0b0f] text-[#f4f2ed] flex flex-col md:flex-row items-center justify-between gap-6 shadow-[0_24px_64px_-24px_rgba(11,11,15,0.5)]">
         <div className="space-y-2 text-left">
-          <div className="inline-flex items-center gap-2 text-xs font-mono text-blue-700 font-semibold">
-            <ShieldCheck className="w-4 h-4 text-blue-600" />
+          <div className="inline-flex items-center gap-2 text-xs font-mono text-[#d8ff3e] font-bold">
+            <ShieldCheck className="w-4 h-4 text-[#d8ff3e]" />
             <span>COMMERCIAL REALITY CHECK</span>
           </div>
-          <h4 className="text-lg sm:text-xl font-bold text-neutral-900">
+          <h4 className="font-display text-lg sm:text-2xl font-bold tracking-tight">
             Not AI for demos. AI for real work.
           </h4>
-          <p className="text-xs sm:text-sm text-neutral-600 max-w-2xl leading-relaxed">
+          <p className="text-xs sm:text-sm text-white/60 max-w-2xl leading-relaxed">
             Our products operate under real-world conditions: handling messy telephone audio, noisy background environments, imperfect document scans, high-frequency financial volatility, and complex corporate payroll regulations.
           </p>
         </div>
 
         <a
           href="#products"
-          className="flex-shrink-0 px-6 py-3 rounded-full text-xs font-semibold bg-neutral-900 text-white hover:bg-black transition-all shadow-xs"
+          className="flex-shrink-0 px-6 py-3 rounded-full text-xs font-bold bg-[#d8ff3e] text-black hover:bg-white transition-all"
           onClick={() => soundFX.playClick()}
         >
           Explore All Deployed Systems
         </a>
       </div>
+      </FadeUp>
     </section>
   );
 }

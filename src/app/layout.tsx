@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -12,15 +12,32 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const display = Space_Grotesk({
+  variable: "--font-display",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+});
+
+const mono2 = JetBrains_Mono({
+  variable: "--font-jbmono",
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+});
+
 export const metadata: Metadata = {
-  title: "Sentiently Labs | AI Experiments & Native Systems",
-  description: "Where AI experiments take shape. Sentiently Innovations is an AI-native incubator and engineering company building intelligent systems across voice, multimodal documents, enterprise workflows, and finance.",
-  keywords: ["AI Voice Agents", "VoCred", "TextMitra", "Document AI", "AI-Native HRMS", "Trading Intelligence", "Sentiently Labs", "Autonomous AI Agents", "Google Labs"],
+  title: "Sentiently — AI-Native Invention Lab",
+  description: "We don't build apps. We birth intelligence. Sentiently is an AI-native invention lab engineering voice, vision, quant and swarm systems into deterministic enterprise reality.",
+  keywords: ["AI Native", "AI Invention Lab", "VoCred", "TextMitra", "Voice AI", "Document AI", "Autonomous Agents", "Sentiently"],
   authors: [{ name: "Sentiently Innovations" }],
+  openGraph: {
+    title: "Sentiently — Machines That Think",
+    description: "An AI-native invention lab. Voice. Vision. Quant. Swarms.",
+    type: "website",
+  },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#ffffff",
+  themeColor: "#f4f2ed",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
@@ -34,9 +51,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} light h-full antialiased scroll-smooth`}
+      className={`${geistSans.variable} ${geistMono.variable} ${display.variable} ${mono2.variable} light h-full antialiased scroll-smooth`}
     >
-      <body className="min-h-full flex flex-col bg-[#f8f9fa] text-[#111827]">
+      <body className="min-h-full flex flex-col bg-[#f4f2ed] text-[#0b0b0f]">
         {children}
       </body>
     </html>

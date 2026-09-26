@@ -6,6 +6,8 @@ import { ArrowUpRight, Sparkles, Activity, FileText, CheckCircle2, Mic, Trending
 import { PRODUCTS, Product } from "@/data/products";
 import { soundFX } from "@/utils/audio";
 import Tilt3DCard from "@/components/ui/Tilt3DCard";
+import SectionHeading from "@/components/awwwards/SectionHeading";
+import { FadeUp } from "@/components/awwwards/Reveal";
 
 const CATEGORIES = ["ALL", "VOICE AI", "DOCUMENT AI", "ENTERPRISE", "FINTECH", "OPERATIONS", "COMMUNITY"];
 
@@ -174,23 +176,24 @@ export default function ProductUniverse() {
   };
 
   return (
-    <section id="products" className="relative py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto z-10">
-      {/* Section Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-        <div className="space-y-3 max-w-2xl text-left">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-gray-200 text-neutral-700 text-xs font-mono shadow-2xs">
-            <Sparkles className="w-3.5 h-3.5 text-blue-600" />
-            <span>PRODUCT UNIVERSE</span>
-          </div>
-          <h2 className="text-3xl sm:text-5xl font-black text-neutral-900 tracking-tight">
-            Designed for real work. Built to think.
-          </h2>
-          <p className="text-sm sm:text-base text-neutral-600">
-            From streaming voice agents to document comprehension and autonomous enterprise operations, explore our suite of AI-native platforms.
-          </p>
-        </div>
-
-        {/* Category Filters (Google Labs Style Smooth Pill Bar) */}
+    <section id="products" className="relative py-24 sm:py-32 px-5 sm:px-10 max-w-[1600px] mx-auto">
+      <SectionHeading
+        index="06"
+        label="Product universe"
+        title={
+          <>
+            <span>Designed for real work.</span>
+            <span>
+              Built to <span className="text-[#4d7c0f]">think.</span>
+            </span>
+          </>
+        }
+        accent="From streaming voice agents to document comprehension and autonomous enterprise operations — our suite of AI-native platforms."
+      />
+      {/* Category Filters */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between mb-12 mt-10 gap-6">
+        <p className="font-jbmono text-[11px] tracking-[0.25em] uppercase text-black/40">Filter by capability →</p>
+        {/* Category Filters (Smooth Pill Bar) */}
         <div className="flex items-center gap-1.5 flex-wrap">
           {CATEGORIES.map((cat) => {
             const isSelected = selectedCategory === cat;
@@ -204,8 +207,8 @@ export default function ProductUniverse() {
                 onMouseEnter={() => soundFX.playHover()}
                 className={`px-3.5 py-1.5 rounded-full text-xs font-mono font-medium transition-all ${
                   isSelected
-                    ? "bg-neutral-900 text-white shadow-xs scale-105"
-                    : "bg-white text-neutral-600 hover:text-neutral-900 hover:bg-gray-100 border border-gray-200"
+                    ? "bg-[#0b0b0f] text-[#d8ff3e] shadow-xs scale-105"
+                    : "bg-white text-neutral-600 hover:text-neutral-900 hover:bg-black/[0.03] border border-black/10"
                 }`}
               >
                 {cat}
@@ -226,7 +229,7 @@ export default function ProductUniverse() {
           >
             <div
               style={{ animationDelay: `${idx * 80}ms` }}
-              className="animate-reveal-2 group relative flex flex-col justify-between rounded-2xl bg-white border border-gray-200/90 p-5 shadow-xs transition-all duration-300 hover:border-gray-300 hover:shadow-xl overflow-hidden text-left h-full"
+              className="animate-reveal-2 group relative flex flex-col justify-between rounded-2xl bg-white border border-black/10 p-5 shadow-xs transition-all duration-300 hover:border-black/30 hover:shadow-xl overflow-hidden text-left h-full"
               onMouseEnter={() => soundFX.playHover()}
             >
               {/* Ambient card top border gradient */}
@@ -251,11 +254,11 @@ export default function ProductUniverse() {
 
                 {/* Product Name & Tagline */}
                 <div className="space-y-1 mb-2.5">
-                  <h3 className="text-xl font-bold text-neutral-900 group-hover:text-blue-600 transition-colors flex items-center justify-between">
+                  <h3 className="font-display text-xl font-bold text-neutral-900 group-hover:text-[#4d7c0f] transition-colors flex items-center justify-between">
                     <span>{product.name}</span>
-                    <ArrowUpRight className="w-4 h-4 text-neutral-400 group-hover:text-blue-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                    <ArrowUpRight className="w-4 h-4 text-neutral-400 group-hover:text-[#4d7c0f] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                   </h3>
-                  <p className="text-xs font-mono font-medium text-blue-700">
+                  <p className="text-xs font-mono font-medium text-[#4d7c0f]">
                     {product.tagline}
                   </p>
                 </div>
@@ -296,11 +299,11 @@ export default function ProductUniverse() {
               <div className="pt-3 border-t border-gray-100">
                 <Link
                   href={product.href}
-                  className="w-full inline-flex items-center justify-between text-xs font-semibold text-neutral-800 group-hover:text-blue-600 py-1 transition-colors"
+                  className="w-full inline-flex items-center justify-between text-xs font-semibold text-neutral-800 group-hover:text-[#4d7c0f] py-1 transition-colors"
                   onClick={() => soundFX.playClick()}
                 >
                   <span>{product.ctaText}</span>
-                  <span className="text-blue-600 font-mono text-[11px] group-hover:translate-x-1 transition-transform">
+                  <span className="text-[#4d7c0f] font-mono text-[11px] group-hover:translate-x-1 transition-transform">
                     EXPLORE &rarr;
                   </span>
                 </Link>

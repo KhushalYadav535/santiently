@@ -5,6 +5,8 @@ import Link from "next/link";
 import { PhoneCall, ArrowRight, CheckCircle2, Cpu, RefreshCw, Sparkles, Mic, Volume2, Square } from "lucide-react";
 import { soundFX } from "@/utils/audio";
 import Tilt3DCard from "@/components/ui/Tilt3DCard";
+import SectionHeading from "@/components/awwwards/SectionHeading";
+import { FadeUp } from "@/components/awwwards/Reveal";
 
 const DEMO_CONVERSATIONS = [
   {
@@ -176,18 +178,34 @@ export default function VocredShowcase() {
   };
 
   return (
-    <section id="vocred" className="relative py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto z-10">
-      {/* Featured Spotlight Card - Google Labs Style */}
-      <div className="rounded-3xl bg-white border border-gray-200/90 shadow-sm p-6 sm:p-10 lg:p-12 relative overflow-hidden transition-all duration-300 hover:shadow-md">
-        {/* Subtle accent gradient stroke at top */}
-        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500" />
+    <section id="vocred" className="relative py-24 sm:py-32 px-5 sm:px-10 max-w-[1600px] mx-auto">
+      <div className="mb-12">
+        <SectionHeading
+          index="04"
+          label="Voice spotlight"
+          title={
+            <>
+              <span>Voice that holds</span>
+              <span>
+                the <span className="text-[#4d7c0f]">line.</span>
+              </span>
+            </>
+          }
+          accent="Sub-280ms Hindi conversational telephony with 45ms barge-in — interrogate the live kernel below."
+        />
+      </div>
+      {/* Featured Spotlight Card */}
+      <FadeUp>
+      <div className="rounded-[24px] bg-white border border-black/10 shadow-[0_24px_64px_-24px_rgba(11,11,15,0.2)] p-6 sm:p-10 lg:p-12 relative overflow-hidden transition-all duration-300">
+        {/* Ink → lime → violet accent stroke at top */}
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#0b0b0f] via-[#4d7c0f] to-[#6d28d9]" />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           {/* Left Column: Product Info & Philosophy */}
           <div className="lg:col-span-6 space-y-6 text-left">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200">
-                <Sparkles className="w-3.5 h-3.5 text-blue-600" />
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#0b0b0f] text-[#d8ff3e] border border-[#0b0b0f]">
+                <Sparkles className="w-3.5 h-3.5 text-[#d8ff3e]" />
                 SPOTLIGHT EXPERIMENT
               </span>
               <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-mono font-medium bg-emerald-50 text-emerald-700 border border-emerald-200">
@@ -197,10 +215,10 @@ export default function VocredShowcase() {
             </div>
 
             <div>
-              <h2 className="text-3xl sm:text-5xl font-black text-neutral-900 tracking-tight leading-tight">
+              <h2 className="font-display text-4xl sm:text-6xl font-bold text-neutral-900 tracking-[-0.03em] leading-none">
                 VoCred
               </h2>
-              <p className="text-base sm:text-lg font-medium text-blue-700 mt-1">
+              <p className="text-base sm:text-lg font-medium text-[#4d7c0f] mt-2">
                 Autonomous AI Voice Telephony Engine
               </p>
             </div>
@@ -232,7 +250,7 @@ export default function VocredShowcase() {
             <div className="pt-2 flex items-center gap-3">
               <Link
                 href="/vocred"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-xs font-semibold text-white bg-neutral-900 hover:bg-black transition-all shadow-xs"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-xs font-semibold text-[#f4f2ed] bg-[#0b0b0f] hover:bg-[#4d7c0f] hover:text-white transition-all shadow-xs"
                 onClick={() => soundFX.playClick()}
               >
                 <span>Launch Full VoCred Page</span>
@@ -399,7 +417,7 @@ export default function VocredShowcase() {
                 className={`w-full py-3.5 rounded-full text-xs font-semibold flex items-center justify-center gap-2 shadow-xs transition-all ${
                   isSimulating
                     ? "bg-rose-600 hover:bg-rose-700 text-white"
-                    : "bg-neutral-900 hover:bg-black text-white hover:scale-[1.01] active:scale-[0.99]"
+                    : "bg-[#0b0b0f] hover:bg-[#4d7c0f] text-white hover:scale-[1.01] active:scale-[0.99]"
                 }`}
               >
                 {isSimulating ? (
@@ -419,6 +437,7 @@ export default function VocredShowcase() {
         </Tilt3DCard>
       </div>
     </div>
+      </FadeUp>
     </section>
   );
 }

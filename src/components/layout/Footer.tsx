@@ -2,49 +2,131 @@
 
 import React from "react";
 import Link from "next/link";
-import { soundFX } from "@/utils/audio";
+import { ArrowUpRight, ArrowUp } from "lucide-react";
+import Magnetic from "@/components/awwwards/Magnetic";
+import Marquee from "@/components/awwwards/Marquee";
 
 export default function Footer() {
+  const cols = [
+    {
+      h: "Lab",
+      links: [
+        { n: "Invention Index", h: "/#index" },
+        { n: "Live Sandbox", h: "/#playground" },
+        { n: "Experiments", h: "/lab" },
+        { n: "Architecture", h: "/#architecture" },
+      ],
+    },
+    {
+      h: "Systems",
+      links: [
+        { n: "VoCred 2.0", h: "/vocred" },
+        { n: "TextMitra", h: "/textmitra" },
+        { n: "AlphaSentient", h: "/trading" },
+        { n: "AI-HRMS", h: "/ai-hrms" },
+      ],
+    },
+    {
+      h: "Company",
+      links: [
+        { n: "Manifesto", h: "/#manifesto" },
+        { n: "About", h: "/about" },
+        { n: "Contact", h: "/#contact" },
+      ],
+    },
+  ];
+
   return (
-    <footer className="bg-[#f2f1ec] text-[#202124] pt-20 pb-10 border-t border-gray-200">
-      <div className="max-w-[1600px] mx-auto px-6 sm:px-10 lg:px-16 flex flex-col">
-        
-        {/* Top Section */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-32 md:mb-48">
-          <span className="text-[15px] font-bold text-[#3c4043] mb-6 md:mb-0 tracking-tight">
-            Other divisions and product areas
-          </span>
-          <div className="flex flex-wrap gap-8 text-[15px] text-[#80868b] font-medium">
-            <Link href="#" className="hover:text-[#3c4043] transition-colors" onMouseEnter={() => soundFX.playHover()}>Sentiently AI</Link>
-            <Link href="#" className="hover:text-[#3c4043] transition-colors" onMouseEnter={() => soundFX.playHover()}>Sentiently Cloud</Link>
-            <Link href="#" className="hover:text-[#3c4043] transition-colors" onMouseEnter={() => soundFX.playHover()}>Sentiently Research</Link>
-            <Link href="#" className="hover:text-[#3c4043] transition-colors" onMouseEnter={() => soundFX.playHover()}>TextMitra</Link>
+    <footer id="finale" className="relative bg-[#f4f2ed] text-[#0b0b0f] overflow-hidden border-t border-black/10">
+      {/* CTA */}
+      <div className="px-5 sm:px-10 pt-24 sm:pt-32 pb-10 max-w-[1600px] mx-auto">
+        <p className="font-jbmono text-[11px] tracking-[0.3em] uppercase text-black/40">
+          <span className="text-[#4d7c0f] font-bold">12</span>
+          <span className="mx-3 text-black/20">—</span> Final transmission
+        </p>
+        <Link href="mailto:hello@sentiently.ai" data-cursor-label="SAY HELLO">
+          <h2 className="mt-6 font-display font-bold tracking-[-0.04em] leading-[0.9] text-[15vw] sm:text-[10vw]">
+            LET&apos;S BUILD
+            <br />
+            <span className="text-stroke footer-giant">SENTIENCE<span className="text-[#4d7c0f]" style={{ WebkitTextStroke: "0" }}>↗</span></span>
+          </h2>
+        </Link>
+
+        <div className="mt-10 flex flex-col sm:flex-row sm:items-center gap-5 justify-between">
+          <p className="max-w-md text-black/55 text-sm sm:text-base leading-relaxed">
+            Voice, vision, quant, swarms — one AI-native engineering team.
+            Tell us the impossible workflow. We&apos;ll ship the system.
+          </p>
+          <div className="flex items-center gap-3">
+            <Magnetic>
+              <a
+                href="mailto:hello@sentiently.ai"
+                className="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-[#0b0b0f] text-[#d8ff3e] text-sm font-bold hover:bg-[#4d7c0f] hover:text-white transition-colors"
+              >
+                hello@sentiently.ai <ArrowUpRight className="w-4 h-4" />
+              </a>
+            </Magnetic>
+            <Magnetic>
+              <button
+                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                aria-label="Back to top"
+                className="w-[52px] h-[52px] rounded-full border border-black/15 flex items-center justify-center hover:bg-black/[0.05] transition-colors"
+              >
+                <ArrowUp className="w-4 h-4" />
+              </button>
+            </Magnetic>
           </div>
         </div>
+      </div>
 
-        {/* Middle Section - HUGE Text */}
-        <div className="mb-16 flex justify-center">
-          <h1 className="text-[12vw] sm:text-[13vw] md:text-[10vw] lg:text-[9rem] xl:text-[11rem] leading-none font-bold tracking-[-0.04em] text-[#353638] text-center">
-            Sentiently Innovations
-          </h1>
-        </div>
+      {/* Marquee */}
+      <div className="border-y border-black/10 py-5 mt-6">
+        <Marquee
+          items={["AI-Native", "Voice", "Vision", "Quant", "Swarms", "Zero-Hallucination"]}
+          outline
+        />
+      </div>
 
-        {/* Separator */}
-        <div className="h-[1px] w-full bg-[#dadce0] mb-8"></div>
-
-        {/* Bottom Section */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-10">
-          <div className="text-2xl font-bold tracking-tight text-[#3c4043] font-sans">
-            Sentiently
+      {/* Link grid */}
+      <div className="px-5 sm:px-10 py-14 max-w-[1600px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-10">
+        <div>
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-lg bg-[#0b0b0f] flex items-center justify-center font-display font-bold text-[#d8ff3e] text-sm">S</div>
+            <p className="font-display font-bold">Sentiently®</p>
           </div>
-          
-          <div className="flex flex-wrap gap-x-12 gap-y-4 text-[10px] sm:text-[11px] font-medium text-[#5f6368] tracking-[0.15em] uppercase">
-            <Link href="/about" className="hover:text-[#202124] transition-colors" onMouseEnter={() => soundFX.playHover()}>About Sentiently</Link>
-            <Link href="/#products" className="hover:text-[#202124] transition-colors" onMouseEnter={() => soundFX.playHover()}>Sentiently Products</Link>
-            <Link href="/#contact" className="hover:text-[#202124] transition-colors" onMouseEnter={() => soundFX.playHover()}>Contact</Link>
-          </div>
+          <p className="mt-4 font-jbmono text-[10px] tracking-[0.25em] uppercase text-black/35 leading-loose">
+            AI-Native
+            <br />
+            Invention Lab
+            <br />
+            EST. 2026 — IND
+          </p>
         </div>
+        {cols.map((c) => (
+          <div key={c.h}>
+            <p className="font-jbmono text-[10px] tracking-[0.3em] uppercase text-black/35">{c.h}</p>
+            <ul className="mt-4 space-y-2.5">
+              {c.links.map((l) => (
+                <li key={l.n}>
+                  <Link
+                    href={l.h}
+                    className="group inline-flex items-center gap-1 text-sm text-black/70 hover:text-[#4d7c0f] transition-colors"
+                  >
+                    {l.n}
+                    <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
 
+      <div className="px-5 sm:px-10 pb-8 max-w-[1600px] mx-auto flex flex-col sm:flex-row justify-between gap-3 font-jbmono text-[10px] tracking-[0.25em] uppercase text-black/30">
+        <span>© 2026 Sentiently Innovations</span>
+        <span>
+          Perceive <span className="text-[#4d7c0f]">→</span> Reason <span className="text-[#4d7c0f]">→</span> Act
+        </span>
       </div>
     </footer>
   );

@@ -19,6 +19,8 @@ import {
 } from "lucide-react";
 import { soundFX } from "@/utils/audio";
 import confetti from "canvas-confetti";
+import SectionHeading from "@/components/awwwards/SectionHeading";
+import { FadeUp } from "@/components/awwwards/Reveal";
 
 type SandboxTab = "vocred" | "textmitra" | "hrms" | "trading";
 
@@ -179,28 +181,29 @@ export default function LivePlayground() {
   };
 
   return (
-    <section id="playground" className="relative py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto z-10">
+    <section id="playground" className="relative py-24 sm:py-32 px-5 sm:px-10 max-w-[1600px] mx-auto">
       {/* Section Header */}
-      <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-gray-200 text-blue-700 text-xs font-mono shadow-2xs">
-          <Terminal className="w-3.5 h-3.5 text-blue-600" />
-          <span>INTERACTIVE SANDBOX &bull; LIVE RUNTIME</span>
-        </div>
-        <h2 className="text-3xl sm:text-5xl font-black text-neutral-900 tracking-tight">
-          Test our engines in <br />
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600">
-            real time.
-          </span>
-        </h2>
-        <p className="text-sm sm:text-base text-neutral-600">
-          No mockups or static previews. Trigger genuine sub-280ms voice synthesis, coordinate OCR parsing, policy RAG, and quant execution directly in your browser.
-        </p>
+      <div className="mb-12">
+        <SectionHeading
+          index="05"
+          label="Live sandbox"
+          title={
+            <>
+              <span>Test our engines</span>
+              <span>
+                in <span className="text-stroke">real time.</span>
+              </span>
+            </>
+          }
+          accent="No mockups or static previews. Trigger genuine sub-280ms voice synthesis, coordinate OCR parsing, policy RAG and quant execution directly in your browser."
+        />
       </div>
 
       {/* Main Terminal Sandbox Shell */}
-      <div className="bg-white border border-gray-200/90 rounded-3xl shadow-lg overflow-hidden transition-all">
+      <FadeUp>
+      <div className="bg-white border border-black/10 rounded-[24px] shadow-[0_24px_64px_-24px_rgba(11,11,15,0.25)] overflow-hidden transition-all">
         {/* Navigation Tabs Bar */}
-        <div className="flex flex-wrap items-center justify-between border-b border-gray-200/80 bg-gray-50/70 px-4 py-3 gap-2">
+        <div className="flex flex-wrap items-center justify-between border-b border-black/10 bg-black/[0.03] px-4 py-3 gap-2">
           {/* Engine Selector Pills */}
           <div className="flex items-center gap-1.5 overflow-x-auto py-1">
             <button
@@ -664,6 +667,7 @@ export default function LivePlayground() {
           </div>
         )}
       </div>
+      </FadeUp>
     </section>
   );
 }

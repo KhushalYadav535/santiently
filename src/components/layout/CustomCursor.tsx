@@ -6,13 +6,12 @@ export default function CustomCursor() {
   const [cursorLabel, setCursorLabel] = useState<string | null>(null);
   const [isPointer, setIsPointer] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [pressed, setPressed] = useState(false);
 
   const dotRef = useRef<HTMLDivElement | null>(null);
   const ringRef = useRef<HTMLDivElement | null>(null);
-  const labelRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    // Disable on touch devices
     if (typeof window === "undefined" || window.matchMedia("(pointer: coarse)").matches) {
       return;
     }
@@ -21,6 +20,8 @@ export default function CustomCursor() {
     let mouseY = -100;
     let ringX = -100;
     let ringY = -100;
+    let scale = 1;
+    let targetScale = 1;
     let animId: number;
 
     const onMouseMove = (e: MouseEvent) => {
@@ -28,7 +29,6 @@ export default function CustomCursor() {
       mouseY = e.clientY;
       setIsVisible(true);
 
-      // Check for clickable / interactive elements and contextual labels
       const target = e.target as HTMLElement | null;
       if (target) {
         const isClickable =
@@ -36,51 +36,50 @@ export default function CustomCursor() {
           target.tagName === "A" ||
           target.closest("button") ||
           target.closest("a") ||
-          target.getAttribute("role") === "button" ||
-          target.classList.contains("cursor-pointer") ||
-          target.classList.contains("cursor-grab");
+          target.getAttribute("role") === "button";
 
         setIsPointer(!!isClickable);
 
-        // Find nearest element with data-cursor-label
         const labeledElem = target.closest("[data-cursor-label]") as HTMLElement | null;
-        if (labeledElem) {
-          setCursorLabel(labeledElem.getAttribute("data-cursor-label"));
-        } else {
-          setCursorLabel(null);
-        }
+        setCursorLabel(labeledElem ? labeledElem.getAttribute("data-cursor-label") : null);
       }
     };
 
-    const onMouseLeave = () => {
-      setIsVisible(false);
+    const onDown = () => {
+      targetScale = 0.8;
+      setPressed(true);
     };
+    const onUp = () => {
+      targetScale = 1;
+      setPressed(false);
+    };
+    const onMouseLeave = () => setIsVisible(false);
 
     window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mousedown", onDown);
+    window.addEventListener("mouseup", onUp);
     document.addEventListener("mouseleave", onMouseLeave);
 
-    // Smooth Lerp Render Loop
     const render = () => {
-      // 0.18 lerp interpolation for silky smooth trailing
-      ringX += (mouseX - ringX) * 0.18;
-      ringY += (mouseY - ringY) * 0.18;
+      ringX += (mouseX - ringX) * 0.16;
+      ringY += (mouseY - ringY) * 0.16;
+      scale += (targetScale - scale) * 0.2;
 
       if (dotRef.current) {
-        dotRef.current.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
+        dotRef.current.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%,-50%) scale(${scale})`;
       }
-
       if (ringRef.current) {
-        ringRef.current.style.transform = `translate3d(${ringX}px, ${ringY}px, 0)`;
+        ringRef.current.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%,-50%) scale(${scale})`;
       }
-
       animId = requestAnimationFrame(render);
     };
-
     render();
 
     return () => {
       cancelAnimationFrame(animId);
       window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mousedown", onDown);
+      window.removeEventListener("mouseup", onUp);
       document.removeEventListener("mouseleave", onMouseLeave);
     };
   }, []);
@@ -88,39 +87,34 @@ export default function CustomCursor() {
   if (!isVisible) return null;
 
   return (
-    <div className="pointer-events-none fixed inset-0 z-50 overflow-hidden transition-opacity duration-300">
-      {/* 1. Smooth Spring Trailing Ring */}
+    <div className="pointer-events-none fixed inset-0 z-[150] hidden md:block">
+      {/* trailing ring */}
       <div
         ref={ringRef}
-        className="fixed top-0 left-0 -translate-x-1/2 -translate-y-1/2 rounded-full border border-blue-500/35 pointer-events-none transition-[width,height,background-color] duration-200 ease-out flex items-center justify-center"
+        className="fixed top-0 left-0 flex items-center justify-center rounded-full pointer-events-none transition-[width,height,background-color,border-color] duration-200 ease-out"
         style={{
-          width: cursorLabel ? "100px" : isPointer ? "48px" : "28px",
-          height: cursorLabel ? "34px" : isPointer ? "48px" : "28px",
-          borderRadius: cursorLabel ? "9999px" : "9999px",
-          backgroundColor: cursorLabel
-            ? "rgba(17, 24, 39, 0.85)"
-            : isPointer
-            ? "rgba(37, 99, 235, 0.08)"
-            : "transparent",
-          backdropFilter: cursorLabel ? "blur(8px)" : "none",
-          borderColor: cursorLabel ? "rgba(255, 255, 255, 0.2)" : "rgba(37, 99, 235, 0.35)",
+          width: cursorLabel ? 104 : isPointer ? 56 : 32,
+          height: cursorLabel ? 36 : isPointer ? 56 : 32,
+          backgroundColor: cursorLabel ? "#0b0b0f" : isPointer ? "rgba(11,11,15,0.06)" : "transparent",
+          border: `1px solid ${cursorLabel ? "#0b0b0f" : "rgba(11,11,15,0.35)"}`,
         }}
       >
         {cursorLabel && (
-          <span className="text-[10px] font-mono font-bold tracking-wider text-white uppercase px-2 select-none">
+          <span className="text-[10px] font-jbmono font-bold tracking-widest text-[#d8ff3e] uppercase px-2 select-none whitespace-nowrap">
             {cursorLabel}
           </span>
         )}
       </div>
 
-      {/* 2. Precision Center Dot */}
+      {/* center dot */}
       <div
         ref={dotRef}
-        className="fixed top-0 left-0 -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-600 pointer-events-none shadow-xs shadow-blue-500/50 transition-[opacity] duration-150"
+        className="fixed top-0 left-0 rounded-full pointer-events-none bg-[#0b0b0f]"
         style={{
-          width: cursorLabel ? "0px" : isPointer ? "6px" : "4px",
-          height: cursorLabel ? "0px" : isPointer ? "6px" : "4px",
-          opacity: cursorLabel ? 0 : 1,
+          width: cursorLabel ? 0 : 5,
+          height: cursorLabel ? 0 : 5,
+          opacity: pressed ? 0.5 : 1,
+          boxShadow: "0 0 12px rgba(11,11,15,0.35)",
         }}
       />
     </div>

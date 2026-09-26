@@ -5,21 +5,24 @@ import { Eye, Brain, Zap, Sparkles } from "lucide-react";
 import { soundFX } from "@/utils/audio";
 import Tilt3DCard from "@/components/ui/Tilt3DCard";
 import ArchitectureFlow from "./ArchitectureFlow";
+import SectionHeading from "@/components/awwwards/SectionHeading";
 
 export default function PerceiveReasonAct() {
   return (
-    <section className="relative py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto z-10">
-      <div className="text-center max-w-2xl mx-auto mb-14 space-y-2">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-gray-200 text-blue-700 text-xs font-mono shadow-2xs">
-          <Sparkles className="w-3.5 h-3.5 text-blue-600" />
-          <span>THE COMMON AGENTIC LOOP</span>
-        </div>
-        <h2 className="text-3xl sm:text-4xl font-black text-neutral-900 tracking-tight">
-          Intelligence, Shipped.
-        </h2>
-        <p className="text-xs sm:text-sm text-neutral-600">
-          Every product we ship follows a rigorous, closed-loop triad: perceiving sensory input, synthesizing deep reasoning, and executing deterministically.
-        </p>
+    <section className="relative py-24 sm:py-32 px-5 sm:px-10 max-w-[1600px] mx-auto">
+      <div className="mb-14">
+        <SectionHeading
+          align="center"
+          index="08"
+          label="The common agentic loop"
+          title={
+            <>
+              <span>Intelligence,</span>
+              <span className="text-[#4d7c0f]">Shipped.</span>
+            </>
+          }
+          accent="Every product follows a rigorous closed loop: perceiving input, synthesising reasoning, executing deterministically."
+        />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
@@ -30,7 +33,7 @@ export default function PerceiveReasonAct() {
           onMouseEnter={() => soundFX.playHover()}
           className="rounded-2xl"
         >
-          <div className="relative p-6 sm:p-8 rounded-2xl bg-white border border-gray-200/90 hover:border-cyan-400 shadow-xs hover:shadow-md transition-all duration-300 group h-full flex flex-col justify-between">
+          <div className="relative p-6 sm:p-8 rounded-2xl bg-white border border-black/10 hover:border-cyan-400 shadow-xs hover:shadow-md transition-all duration-300 group h-full flex flex-col justify-between">
             <div>
               <div className="w-12 h-12 rounded-xl bg-cyan-50 border border-cyan-200 flex items-center justify-center text-cyan-600 mb-6 group-hover:scale-105 transition-transform">
                 <Eye className="w-6 h-6" />
@@ -49,7 +52,7 @@ export default function PerceiveReasonAct() {
               </p>
             </div>
 
-            <ul className="text-xs text-neutral-600 space-y-2 font-mono pt-4 border-t border-gray-100">
+            <ul className="text-xs text-neutral-600 space-y-2 font-mono pt-4 border-t border-black/10">
               <li className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-cyan-500" />
                 Streaming Speech Ingestion (24kHz)
@@ -73,7 +76,7 @@ export default function PerceiveReasonAct() {
           onMouseEnter={() => soundFX.playHover()}
           className="rounded-2xl"
         >
-          <div className="relative p-6 sm:p-8 rounded-2xl bg-white border border-gray-200/90 hover:border-purple-400 shadow-xs hover:shadow-md transition-all duration-300 group h-full flex flex-col justify-between">
+          <div className="relative p-6 sm:p-8 rounded-2xl bg-white border border-black/10 hover:border-purple-400 shadow-xs hover:shadow-md transition-all duration-300 group h-full flex flex-col justify-between">
             <div>
               <div className="w-12 h-12 rounded-xl bg-purple-50 border border-purple-200 flex items-center justify-center text-purple-600 mb-6 group-hover:scale-105 transition-transform">
                 <Brain className="w-6 h-6" />
@@ -92,7 +95,7 @@ export default function PerceiveReasonAct() {
               </p>
             </div>
 
-            <ul className="text-xs text-neutral-600 space-y-2 font-mono pt-4 border-t border-gray-100">
+            <ul className="text-xs text-neutral-600 space-y-2 font-mono pt-4 border-t border-black/10">
               <li className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-purple-500" />
                 Time-Decay Episodic Graphs
@@ -116,7 +119,7 @@ export default function PerceiveReasonAct() {
           onMouseEnter={() => soundFX.playHover()}
           className="rounded-2xl"
         >
-          <div className="relative p-6 sm:p-8 rounded-2xl bg-white border border-gray-200/90 hover:border-emerald-400 shadow-xs hover:shadow-md transition-all duration-300 group h-full flex flex-col justify-between">
+          <div className="relative p-6 sm:p-8 rounded-2xl bg-white border border-black/10 hover:border-emerald-400 shadow-xs hover:shadow-md transition-all duration-300 group h-full flex flex-col justify-between">
             <div>
               <div className="w-12 h-12 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 mb-6 group-hover:scale-105 transition-transform">
                 <Zap className="w-6 h-6" />
@@ -135,7 +138,7 @@ export default function PerceiveReasonAct() {
               </p>
             </div>
 
-            <ul className="text-xs text-neutral-600 space-y-2 font-mono pt-4 border-t border-gray-100">
+            <ul className="text-xs text-neutral-600 space-y-2 font-mono pt-4 border-t border-black/10">
               <li className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
                 Deterministic Database Mutators

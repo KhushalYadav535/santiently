@@ -1,12 +1,18 @@
 "use client";
 
 import React, { useState } from "react";
-import SplashScreen from "@/components/layout/SplashScreen";
+import Preloader from "@/components/awwwards/Preloader";
+import SmoothScroll from "@/components/awwwards/SmoothScroll";
+import Marquee from "@/components/awwwards/Marquee";
+import Manifesto from "@/components/awwwards/Manifesto";
+import InventionIndex from "@/components/awwwards/InventionIndex";
+import SectionHeading from "@/components/awwwards/SectionHeading";
+import { FadeUp } from "@/components/awwwards/Reveal";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import CustomCursor from "@/components/layout/CustomCursor";
 import HeroCanvas from "@/components/hero/HeroCanvas";
-import HeroSection from "@/components/hero/HeroSection";
+import AwwwardsHero from "@/components/hero/AwwwardsHero";
 import { InventionMode } from "@/types/hero";
 import VocredShowcase from "@/components/products/VocredShowcase";
 import LivePlayground from "@/components/playground/LivePlayground";
@@ -19,50 +25,72 @@ import ContactSection from "@/components/common/ContactSection";
 
 export default function Home() {
   const [heroMode, setHeroMode] = useState<InventionMode>("ACOUSTIC");
+  const [booted, setBooted] = useState(false);
 
   return (
-    <div className="relative min-h-screen bg-[#f8f9fa] text-[#111827] overflow-x-hidden selection:bg-blue-500/20 selection:text-blue-900">
-      {/* Splash Screen - Google Labs Intro */}
-      <SplashScreen />
+    <div className="relative min-h-screen bg-[#f4f2ed] text-[#0b0b0f] overflow-x-clip">
+      <Preloader onDone={() => setBooted(true)} />
 
-      {/* Dynamic Cursor */}
-      <CustomCursor />
+      <SmoothScroll>
+        <div className="noise-overlay" />
+        <CustomCursor />
+        <Navbar />
 
-      {/* Floating Glassmorphism Navbar */}
-      <Navbar />
+        {/* ── HERO PAPER ── */}
+        <div className="relative">
+          <HeroCanvas activeMode={heroMode} />
+          <AwwwardsHero activeMode={heroMode} onModeChange={setHeroMode} started={booted} />
+        </div>
 
-      {/* Light-Theme Spline-Inspired 3D Architectural Hero */}
-      <div className="relative bg-[#F8F9FA]">
-        <HeroCanvas activeMode={heroMode} />
-        <HeroSection activeMode={heroMode} onModeChange={setHeroMode} />
-      </div>
+        {/* ── MARQUEE DIVIDER ── */}
+        <div className="border-y border-black/10 py-5 bg-[#f4f2ed]">
+          <Marquee
+            items={["AI-Native", "Voice Kernels", "Spatial OCR", "Quant Engines", "Agent Swarms"]}
+            outline
+          />
+        </div>
 
-      {/* Flagship VoCred Interactive Voice Spotlight */}
-      <VocredShowcase />
+        {/* ── MANIFESTO + INDEX ── */}
+        <Manifesto />
+        <InventionIndex />
 
-      {/* Live Interactive Sandbox: VoCred, TextMitra, HRMS, Trading */}
-      <LivePlayground />
+        {/* ── INTERACTIVE PROOF ── */}
+        <section className="px-5 sm:px-10 max-w-[1600px] mx-auto pt-10 pb-6">
+          <SectionHeading
+            index="03"
+            label="Live proof"
+            title={
+              <>
+                <span>Don&apos;t believe.</span>
+                <span className="text-stroke">Interrogate.</span>
+              </>
+            }
+            accent="Every kernel below is runnable — speak to the voice engine, scan a ledger, shock the quant feed. No videos. No mocks."
+          />
+        </section>
 
-      {/* Google Labs Inspired Product Universe */}
-      <ProductUniverse />
+        <main className="relative">
+          <VocredShowcase />
+          <LivePlayground />
+          <ProductUniverse />
+          <IntelligenceStack />
+          <PerceiveReasonAct />
+          <LabGallery />
+          <ProductEngine />
+          <ContactSection />
+        </main>
 
-      {/* AI-Native Architecture & Intelligence Stack */}
-      <IntelligenceStack />
+        {/* ── OUTRO LINE ── */}
+        <div className="px-5 sm:px-10 max-w-[1600px] mx-auto py-20">
+          <FadeUp>
+            <p className="font-jbmono text-[11px] tracking-[0.3em] uppercase text-black/35 text-center">
+              End of transmission — <span className="text-[#4d7c0f] font-bold">begin your build</span>
+            </p>
+          </FadeUp>
+        </div>
 
-      {/* The 3-Pillars: Perceive -> Reason -> Act */}
-      <PerceiveReasonAct />
-
-      {/* The Sentiently Lab: Active Experiments & Prototypes */}
-      <LabGallery />
-
-      {/* The Sentiently Product Engine: Idea to Scale */}
-      <ProductEngine />
-
-      {/* Enterprise Consultation / Contact */}
-      <ContactSection />
-
-      {/* Google Labs Style Light Footer */}
-      <Footer />
+        <Footer />
+      </SmoothScroll>
     </div>
   );
 }

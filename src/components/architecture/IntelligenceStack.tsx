@@ -3,6 +3,8 @@
 import React, { useState } from "react";
 import { Layers, CheckCircle, Cpu, Network, Database, Radio, Shield, Sparkles } from "lucide-react";
 import { soundFX } from "@/utils/audio";
+import SectionHeading from "@/components/awwwards/SectionHeading";
+import { FadeUp } from "@/components/awwwards/Reveal";
 
 interface StackLayer {
   id: string;
@@ -87,22 +89,22 @@ export default function IntelligenceStack() {
   const IconComponent = selected.icon;
 
   return (
-    <section id="architecture" className="relative py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto z-10">
+    <section id="architecture" className="relative py-24 sm:py-32 px-5 sm:px-10 max-w-[1600px] mx-auto">
       {/* Header */}
-      <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-gray-200 text-blue-700 text-xs font-mono shadow-2xs">
-          <Layers className="w-3.5 h-3.5 text-blue-600" />
-          <span>FULL-STACK ARCHITECTURE</span>
-        </div>
-        <h2 className="text-3xl sm:text-5xl font-black text-neutral-900 tracking-tight">
-          AI isn&apos;t a feature. <br />
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-rose-600">
-            It&apos;s the architecture.
-          </span>
-        </h2>
-        <p className="text-sm sm:text-base text-neutral-600">
-          We don&apos;t bolt AI onto legacy software. We design our products from the silicon layer up around perception, reasoning, and verified execution.
-        </p>
+      <div className="mb-16">
+        <SectionHeading
+          index="07"
+          label="Full-stack architecture"
+          title={
+            <>
+              <span>AI isn&apos;t a feature.</span>
+              <span>
+                It&apos;s the <span className="text-stroke">architecture.</span>
+              </span>
+            </>
+          }
+          accent="We don't bolt AI onto legacy software. We design from the silicon layer up — perception, reasoning, verified execution."
+        />
       </div>
 
       {/* Stack Interactive Explorer */}
@@ -124,25 +126,25 @@ export default function IntelligenceStack() {
                 onMouseEnter={() => soundFX.playHover()}
                 className={`w-full p-4 rounded-xl border text-left transition-all cursor-pointer flex items-center justify-between gap-4 ${
                   isActive
-                    ? "bg-blue-50/60 border-blue-500 shadow-sm translate-x-1.5"
-                    : "bg-white border-gray-200/90 hover:border-gray-300 hover:bg-gray-50/80 shadow-2xs"
+                    ? "bg-[#0b0b0f] border-[#0b0b0f] shadow-md translate-x-1.5"
+                    : "bg-white border-black/10 hover:border-black/25 hover:bg-black/[0.02] shadow-2xs"
                 }`}
               >
                 <div className="flex items-center gap-3.5">
                   <div
                     className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
                     style={{
-                      backgroundColor: `${layer.color}15`,
-                      color: layer.color
+                      backgroundColor: isActive ? "rgba(216,255,62,0.15)" : `${layer.color}15`,
+                      color: isActive ? "#d8ff3e" : layer.color
                     }}
                   >
                     <LayerIcon className="w-4 h-4" />
                   </div>
                   <div>
-                    <h3 className="text-sm font-bold text-neutral-900 font-mono flex items-center gap-2">
+                    <h3 className={`text-sm font-bold font-mono flex items-center gap-2 ${isActive ? "text-[#f4f2ed]" : "text-neutral-900"}`}>
                       {layer.name}
                     </h3>
-                    <p className="text-xs text-neutral-500 line-clamp-1">
+                    <p className={`text-xs line-clamp-1 ${isActive ? "text-white/50" : "text-neutral-500"}`}>
                       {layer.subtitle}
                     </p>
                   </div>
@@ -152,8 +154,8 @@ export default function IntelligenceStack() {
                   <span
                     className={`text-[10px] font-mono px-2 py-0.5 rounded font-semibold ${
                       isActive
-                        ? "bg-blue-600 text-white"
-                        : "bg-gray-100 text-neutral-600"
+                        ? "bg-[#d8ff3e] text-black"
+                        : "bg-black/[0.05] text-neutral-600"
                     }`}
                   >
                     INSPECT
@@ -165,7 +167,7 @@ export default function IntelligenceStack() {
         </div>
 
         {/* Right: Layer Inspector Detail Box */}
-        <div className="lg:col-span-5 sticky top-28 bg-white border border-gray-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-5">
+        <div className="lg:col-span-5 sticky top-28 bg-white border border-black/10 rounded-[20px] p-6 sm:p-8 shadow-[0_16px_48px_-16px_rgba(11,11,15,0.18)] space-y-5">
           <div className="flex items-center gap-3">
             <div
               className="w-12 h-12 rounded-xl flex items-center justify-center"
@@ -191,7 +193,7 @@ export default function IntelligenceStack() {
           </p>
 
           <div className="space-y-2 pt-3 border-t border-gray-100">
-            <span className="text-[11px] font-mono text-blue-700 tracking-wider uppercase font-semibold">
+            <span className="text-[11px] font-mono text-[#4d7c0f] tracking-wider uppercase font-bold">
               ACTIVE TECHNOLOGIES & RUNTIMES:
             </span>
             <div className="flex flex-wrap gap-1.5 pt-1">
@@ -207,8 +209,8 @@ export default function IntelligenceStack() {
             </div>
           </div>
 
-          <div className="p-3.5 rounded-xl bg-blue-50/70 border border-blue-200/70 text-xs text-blue-900 font-mono">
-            💡 Powers live production across all Sentiently commercial instances.
+          <div className="p-3.5 rounded-xl bg-[#0b0b0f] text-[#f4f2ed] text-xs font-mono">
+            ◆ Powers live production across all Sentiently commercial instances.
           </div>
         </div>
 

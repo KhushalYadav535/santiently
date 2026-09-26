@@ -259,3 +259,183 @@ body {
 .scanline-effect {
   animation: scanline 4s linear infinite;
 }
+
+/* Premium hero utilities */
+@keyframes gradient-x {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scan-line {
+  0% { top: 0%; opacity: 0; }
+  12% { opacity: 1; }
+  88% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+.animate-gradient-x {
+  animation: gradient-x 6s ease infinite;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-scan-line {
+  animation: scan-line 1.4s ease-in-out infinite;
+}
+
+/* ══════════════════════════════════════════════════════════
+   AWWARDS PAPER SYSTEM — AI-Native Invention Lab (Light)
+   ══════════════════════════════════════════════════════════ */
+:root {
+  --void: #f4f2ed;
+  --void-2: #ece9e0;
+  --bone: #0b0b0f;
+  --lime: #4d7c0f;
+  --lime-bright: #d8ff3e;
+  --violet-neon: #6d28d9;
+  --cyan-neon: #0e7490;
+  --font-display: var(--font-display);
+}
+
+html {
+  background: var(--void);
+}
+
+body {
+  background-color: var(--void) !important;
+  color: var(--bone);
+}
+
+/* Lenis smooth scroll */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+::selection {
+  background: #0b0b0f;
+  color: #d8ff3e;
+}
+
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #f4f2ed; }
+::-webkit-scrollbar-thumb {
+  background: #c9c5b8;
+  border-radius: 9999px;
+  border: 2px solid #f4f2ed;
+}
+::-webkit-scrollbar-thumb:hover { background: #0b0b0f; }
+
+.font-display {
+  font-family: var(--font-display), var(--font-geist-sans), system-ui, sans-serif;
+}
+.font-jbmono {
+  font-family: var(--font-jbmono), var(--font-geist-mono), monospace;
+}
+
+/* Outlined ghost type */
+.text-stroke {
+  -webkit-text-stroke: 1px rgba(11, 11, 15, 0.35);
+  color: transparent;
+}
+.text-stroke-lime {
+  -webkit-text-stroke: 1px rgba(77, 124, 15, 0.8);
+  color: transparent;
+}
+@media (min-width: 768px) {
+  .text-stroke, .text-stroke-lime { -webkit-text-stroke-width: 1.5px; }
+}
+
+/* Light glass */
+.glass-dark {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(11, 11, 15, 0.09);
+}
+
+/* Film grain overlay */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  pointer-events: none;
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Mask-reveal lines */
+.reveal-mask { overflow: hidden; display: block; }
+.reveal-line {
+  display: block;
+  transform: translateY(110%);
+}
+
+/* Marquee */
+@keyframes aww-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-aww-marquee {
+  display: flex;
+  width: max-content;
+  animation: aww-marquee 28s linear infinite;
+}
+.animate-aww-marquee-fast {
+  display: flex;
+  width: max-content;
+  animation: aww-marquee 16s linear infinite;
+}
+
+/* Spin slow (badge) */
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow { animation: spin-slow 14s linear infinite; }
+
+/* Pulse dot */
+@keyframes ping-soft {
+  0% { transform: scale(1); opacity: 0.9; }
+  80%, 100% { transform: scale(2.6); opacity: 0; }
+}
+.animate-ping-soft { animation: ping-soft 1.8s cubic-bezier(0, 0, 0.2, 1) infinite; }
+
+/* Scroll hint */
+@keyframes scroll-hint {
+  0% { transform: translateY(-100%); }
+  55% { transform: translateY(100%); }
+  100% { transform: translateY(100%); }
+}
+.animate-scroll-hint { animation: scroll-hint 2s cubic-bezier(0.65, 0, 0.35, 1) infinite; }
+
+/* Preloader counter */
+@keyframes preloader-bar {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+/* Giant footer hover fill */
+.footer-giant {
+  transition: color 0.4s ease, -webkit-text-stroke-color 0.4s ease;
+}
+.footer-giant:hover {
+  color: #4d7c0f;
+  -webkit-text-stroke-color: #4d7c0f;
+}
+
+/* Light-chapter reset: whole page is paper now, islands blend in */
+.light-chapter {
+  background: transparent;
+  color: inherit;
+  border-radius: 0;
+}
+@media (min-width: 768px) {
+  .light-chapter { border-radius: 0; }
+}

@@ -78,12 +78,13 @@ export default function HeroInventionDeck({
     const textToSpeak = phrases[selectedLanguage];
     setVoiceTranscript(textToSpeak);
 
-    soundFX.speakVoCredPhrase(
+    soundFX.speakText(
       textToSpeak,
+      selectedLanguage === "HINDI_ENG" ? "hi-IN" : "en-US",
+      undefined,
       () => {
         setIsPlayingVoice(false);
-      },
-      selectedLanguage === "HINDI_ENG" ? "hi-IN" : "en-US"
+      }
     );
   };
 
@@ -153,7 +154,7 @@ export default function HeroInventionDeck({
   return (
     <div className="w-full max-w-4xl mx-auto mt-8 mb-4">
       {/* Console Frame */}
-      <div className="relative bg-white/95 backdrop-blur-2xl rounded-3xl border border-gray-200/90 shadow-xl overflow-hidden transition-all duration-300 hover:border-blue-300/80">
+      <div className="relative bg-white/90 backdrop-blur-2xl rounded-[24px] border border-black/[0.06] shadow-[0_24px_64px_-16px_rgba(15,23,42,0.18),0_2px_8px_rgba(0,0,0,0.04)] ring-1 ring-white/60 overflow-hidden transition-all duration-300">
         {/* Top Hardware Bezel / Tab Switcher */}
         <div className="flex flex-wrap items-center justify-between gap-3 px-4 sm:px-6 py-3.5 border-b border-gray-100 bg-gray-50/70">
           {/* Status Indicator */}
@@ -450,7 +451,7 @@ export default function HeroInventionDeck({
 {`{
   "entity": "${boundingBoxes[activeBoxIndex].id}",
   "value": "${boundingBoxes[activeBoxIndex].val}",
-  "confidence": ${boundingBoxes[activeBoxIndex].conf.replace("%", "") / 100},
+  "confidence": ${Number(boundingBoxes[activeBoxIndex].conf.replace("%", "")) / 100},
   "coordinates": "${boundingBoxes[activeBoxIndex].coords}",
   "spatial_topology": "DETERMINISTIC_GRID",
   "ocr_engine": "TextMitra_v2.4"

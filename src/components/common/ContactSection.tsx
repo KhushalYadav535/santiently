@@ -33,20 +33,25 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="relative py-24 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto z-10">
-      <div className="bg-white border border-gray-200/90 rounded-3xl p-8 sm:p-12 shadow-sm relative overflow-hidden">
-        {/* Subtle top accent */}
-        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500" />
+    <section id="contact" className="relative py-24 sm:py-32 px-5 sm:px-10 max-w-6xl mx-auto">
+      <div className="flex items-center gap-3 font-jbmono text-[11px] tracking-[0.3em] uppercase text-black/40 mb-8">
+        <span className="text-[#4d7c0f] font-bold">11</span>
+        <span className="h-px w-10 bg-black/20" />
+        <span>Dispatch — let&apos;s build together</span>
+      </div>
+      <div className="bg-white border border-black/10 rounded-[24px] p-8 sm:p-12 shadow-[0_24px_64px_-24px_rgba(11,11,15,0.2)] relative overflow-hidden">
+        {/* Ink → lime → violet accent */}
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#0b0b0f] via-[#4d7c0f] to-[#6d28d9]" />
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-start">
           {/* Left Info */}
           <div className="md:col-span-5 space-y-4 text-left">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-mono">
-              <Sparkles className="w-3.5 h-3.5 text-blue-600" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0b0b0f] text-[#d8ff3e] text-xs font-jbmono font-bold">
+              <Sparkles className="w-3.5 h-3.5 text-[#d8ff3e]" />
               <span>LET&apos;S BUILD TOGETHER</span>
             </div>
 
-            <h3 className="text-3xl font-black text-neutral-900 tracking-tight">
+            <h3 className="font-display text-3xl sm:text-4xl font-bold text-neutral-900 tracking-[-0.03em] leading-tight">
               Ready to ship real AI into production?
             </h3>
 
@@ -81,7 +86,7 @@ export default function ContactSection() {
                 </p>
                 <button
                   onClick={() => setSubmitted(false)}
-                  className="text-xs text-blue-600 underline pt-2 font-medium"
+                  className="text-xs text-[#4d7c0f] underline pt-2 font-bold"
                 >
                   Send another inquiry
                 </button>
@@ -97,7 +102,7 @@ export default function ContactSection() {
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       placeholder="Vikram Malhotra"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-gray-50 border border-gray-200 text-neutral-900 text-xs focus:bg-white focus:outline-none focus:border-blue-500 transition-colors"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-gray-50 border border-gray-200 text-neutral-900 text-xs focus:bg-white focus:outline-none focus:border-[#4d7c0f] transition-colors"
                     />
                   </div>
                   <div>
@@ -108,7 +113,7 @@ export default function ContactSection() {
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       placeholder="vikram@enterprise.com"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-gray-50 border border-gray-200 text-neutral-900 text-xs focus:bg-white focus:outline-none focus:border-blue-500 transition-colors"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-gray-50 border border-gray-200 text-neutral-900 text-xs focus:bg-white focus:outline-none focus:border-[#4d7c0f] transition-colors"
                     />
                   </div>
                 </div>
@@ -122,7 +127,7 @@ export default function ContactSection() {
                       value={formData.company}
                       onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                       placeholder="Acme Corp"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-gray-50 border border-gray-200 text-neutral-900 text-xs focus:bg-white focus:outline-none focus:border-blue-500 transition-colors"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-gray-50 border border-gray-200 text-neutral-900 text-xs focus:bg-white focus:outline-none focus:border-[#4d7c0f] transition-colors"
                     />
                   </div>
                   <div>
@@ -130,7 +135,7 @@ export default function ContactSection() {
                     <select
                       value={formData.productInterest}
                       onChange={(e) => setFormData({ ...formData, productInterest: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-gray-50 border border-gray-200 text-neutral-900 text-xs focus:bg-white focus:outline-none focus:border-blue-500 transition-colors"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-gray-50 border border-gray-200 text-neutral-900 text-xs focus:bg-white focus:outline-none focus:border-[#4d7c0f] transition-colors"
                     >
                       <option value="VoCred (Voice AI)">VoCred (Real-time Voice AI)</option>
                       <option value="TextMitra (Document AI)">TextMitra (OCR & Document AI)</option>
@@ -149,13 +154,13 @@ export default function ContactSection() {
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     placeholder="We want to automate 50,000 monthly voice support calls with sub-300ms latency..."
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-gray-50 border border-gray-200 text-neutral-900 text-xs focus:bg-white focus:outline-none focus:border-blue-500 transition-colors"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-gray-50 border border-gray-200 text-neutral-900 text-xs focus:bg-white focus:outline-none focus:border-[#4d7c0f] transition-colors"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full py-3.5 rounded-full text-xs sm:text-sm font-semibold text-white bg-neutral-900 hover:bg-black shadow-xs flex items-center justify-center gap-2 transition-all hover:scale-[1.01] active:scale-[0.99]"
+                  className="w-full py-3.5 rounded-full text-xs sm:text-sm font-bold text-[#f4f2ed] bg-[#0b0b0f] hover:bg-[#4d7c0f] hover:text-white shadow-xs flex items-center justify-center gap-2 transition-all hover:scale-[1.01] active:scale-[0.99]"
                 >
                   <Send className="w-4 h-4" />
                   <span>DISPATCH INQUIRY TO ARCHITECTURE TEAM</span>

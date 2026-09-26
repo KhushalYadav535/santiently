@@ -6,6 +6,7 @@ import { FlaskConical, ArrowUpRight, X, ChevronRight, Terminal } from "lucide-re
 import { LAB_EXPERIMENTS, Experiment } from "@/data/experiments";
 import { soundFX } from "@/utils/audio";
 import Tilt3DCard from "@/components/ui/Tilt3DCard";
+import SectionHeading from "@/components/awwwards/SectionHeading";
 
 export default function LabGallery({ isFullPage = false }: { isFullPage?: boolean }) {
   const [selectedExp, setSelectedExp] = useState<Experiment | null>(null);
@@ -24,36 +25,36 @@ export default function LabGallery({ isFullPage = false }: { isFullPage?: boolea
   };
 
   return (
-    <section id="lab" className="relative py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto z-10">
+    <section id="lab" className="relative py-24 sm:py-32 px-5 sm:px-10 max-w-[1600px] mx-auto">
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-        <div className="space-y-3 max-w-2xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-gray-200 text-blue-700 text-xs font-mono shadow-2xs">
-            <FlaskConical className="w-3.5 h-3.5 text-blue-600" />
-            <span>THE SENTIENTLY LAB // R&amp;D DIVISION</span>
-          </div>
-          <h2 className="text-3xl sm:text-5xl font-black text-neutral-900 tracking-tight">
-            Frontier AI Experiments.
-          </h2>
-          <p className="text-sm sm:text-base text-neutral-600">
-            Google Labs inspired exploration: Where radical ideas in acoustic emotion, multi-agent swarms, and geometric document graphs are pressure-tested before entering commercial production.
-          </p>
-        </div>
+      <SectionHeading
+        index="09"
+        label="The lab — R&D division"
+        title={
+          <>
+            <span>Frontier AI</span>
+            <span>
+              experiments<span className="text-[#4d7c0f]">.</span>
+            </span>
+          </>
+        }
+        accent="Radical ideas in acoustic emotion, multi-agent swarms and geometric document graphs — pressure-tested before commercial production."
+      />
 
-        {!isFullPage && (
-          <div>
-            <Link
-              href="/lab"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold bg-white hover:bg-gray-50 text-neutral-800 border border-gray-200 shadow-xs transition-all duration-200"
-              onMouseEnter={() => soundFX.playHover()}
-              onClick={() => soundFX.playClick()}
-            >
-              <span>View All Research Projects</span>
-              <ArrowUpRight className="w-4 h-4 text-blue-600" />
-            </Link>
-          </div>
-        )}
-      </div>
+      {!isFullPage && (
+        <div className="flex justify-start mt-10 mb-12">
+          <Link
+            href="/lab"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-bold bg-[#0b0b0f] hover:bg-[#4d7c0f] hover:text-white text-[#d8ff3e] transition-all duration-200"
+            onMouseEnter={() => soundFX.playHover()}
+            onClick={() => soundFX.playClick()}
+          >
+            <span>View All Research Projects</span>
+            <ArrowUpRight className="w-4 h-4" />
+          </Link>
+        </div>
+      )}
+      {(isFullPage) && <div className="mt-10 mb-12" />}
 
       {/* Experiments Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -70,12 +71,12 @@ export default function LabGallery({ isFullPage = false }: { isFullPage?: boolea
                 soundFX.playClick();
               }}
               onMouseEnter={() => soundFX.playHover()}
-              className="group relative rounded-2xl bg-white border border-gray-200/90 p-6 sm:p-8 shadow-xs transition-all duration-300 hover:border-blue-400 hover:shadow-lg cursor-pointer overflow-hidden h-full flex flex-col justify-between"
+              className="group relative rounded-2xl bg-white border border-black/10 p-6 sm:p-8 shadow-xs transition-all duration-300 hover:border-black/30 hover:shadow-lg cursor-pointer overflow-hidden h-full flex flex-col justify-between"
             >
               {/* Top Code & Status */}
               <div>
-                <div className="flex items-center justify-between gap-2 pb-4 border-b border-gray-100">
-                  <div className="flex items-center gap-2 font-mono text-xs text-blue-700">
+                <div className="flex items-center justify-between gap-2 pb-4 border-b border-black/10">
+                  <div className="flex items-center gap-2 font-mono text-xs text-[#4d7c0f] font-bold">
                     <Terminal className="w-3.5 h-3.5" />
                     <span className="font-semibold">{exp.code}</span>
                     <span className="text-neutral-300">&bull;</span>
@@ -88,10 +89,10 @@ export default function LabGallery({ isFullPage = false }: { isFullPage?: boolea
 
                 {/* Title & Summary */}
                 <div className="pt-4 space-y-2">
-                  <h3 className="text-xl font-bold text-neutral-900 group-hover:text-blue-600 transition-colors flex items-center justify-between">
-                    <span>{exp.title}</span>
-                    <ChevronRight className="w-5 h-5 text-neutral-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-all" />
-                  </h3>
+                    <h3 className="font-display text-xl font-bold text-neutral-900 group-hover:text-[#4d7c0f] transition-colors flex items-center justify-between">
+                      <span>{exp.title}</span>
+                      <ChevronRight className="w-5 h-5 text-neutral-400 group-hover:text-[#4d7c0f] group-hover:translate-x-1 transition-all" />
+                    </h3>
                   <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed">
                     {exp.summary}
                   </p>

@@ -86,32 +86,32 @@ export default function HeroConstellationCanvas({
     window.addEventListener("mouseleave", handleMouseLeave);
     canvas.addEventListener("click", handleClick);
 
-    // Color definitions per mode (Clean Light Theme)
+    // Color definitions per mode (Ink on paper — light Awwwards)
     const getColors = (mode: InventionMode) => {
       switch (mode) {
         case "ACOUSTIC":
           return {
-            node: "rgba(37, 99, 235, 0.75)",      // Blue-600
-            nodeActive: "rgba(79, 70, 229, 0.95)", // Indigo-600
-            line: "rgba(37, 99, 235, 0.14)",      // Clean hairline blue
-            packet: "rgba(59, 130, 246, 0.9)",     // Blue-500
-            pulse: "rgba(37, 99, 235, 0.08)",
+            node: "rgba(77, 124, 15, 0.7)",       // Leaf green
+            nodeActive: "rgba(11, 11, 15, 0.9)",  // Ink
+            line: "rgba(77, 124, 15, 0.14)",
+            packet: "rgba(109, 40, 217, 0.9)",    // Violet packet
+            pulse: "rgba(77, 124, 15, 0.07)",
           };
         case "SPATIAL":
           return {
-            node: "rgba(8, 145, 178, 0.75)",      // Cyan-600
-            nodeActive: "rgba(13, 148, 136, 0.95)", // Teal-600
-            line: "rgba(8, 145, 178, 0.14)",
-            packet: "rgba(6, 182, 212, 0.9)",
-            pulse: "rgba(8, 145, 178, 0.08)",
+            node: "rgba(14, 116, 144, 0.7)",      // Deep cyan
+            nodeActive: "rgba(11, 11, 15, 0.9)",
+            line: "rgba(14, 116, 144, 0.14)",
+            packet: "rgba(14, 116, 144, 0.9)",
+            pulse: "rgba(14, 116, 144, 0.07)",
           };
         case "QUANTUM":
           return {
-            node: "rgba(217, 119, 6, 0.8)",       // Amber-600
-            nodeActive: "rgba(234, 88, 12, 0.95)", // Orange-600
-            line: "rgba(217, 119, 6, 0.15)",
-            packet: "rgba(245, 158, 11, 0.95)",
-            pulse: "rgba(217, 119, 6, 0.08)",
+            node: "rgba(109, 40, 217, 0.7)",      // Violet
+            nodeActive: "rgba(11, 11, 15, 0.9)",
+            line: "rgba(109, 40, 217, 0.14)",
+            packet: "rgba(77, 124, 15, 0.9)",
+            pulse: "rgba(109, 40, 217, 0.07)",
           };
       }
     };
